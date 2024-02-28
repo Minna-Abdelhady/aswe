@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping("profile/{userId}")
     public ModelAndView get1User(@PathVariable("userId") Integer userId){
-        ModelAndView mav = new ModelAndView("profile.html");
+        ModelAndView mav = new ModelAndView("/html/user/profile.html");
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
             if(user.getId() == userId){
