@@ -32,12 +32,14 @@ public class UserController {
         }
         // mav.addObject("error", "User not found");
         // return mav;
-        mav.setViewName("error.html");
-        mav.addObject("errorMessage", "User not found");
-        return mav;
+        // mav.setViewName("error.html");
+        // mav.addObject("errorMessage", "User not found");
+        // return mav;
+        return null;     // This is working 
     }
 
     // TRY as I can't find the html
+    // It is working
     // @GetMapping("profile/{userId}")
     // public ResponseEntity get1User(@PathVariable("userId") Integer userId){
     //     List<User> users = this.userRepository.findAll();
