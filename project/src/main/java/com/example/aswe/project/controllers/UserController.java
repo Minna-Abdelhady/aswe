@@ -20,30 +20,34 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    // @GetMapping("profile/{userId}")
-    // public ModelAndView get1User(@PathVariable("userId") Integer userId){
-    //     ModelAndView mav = new ModelAndView("profile.html");
-    //     List<User> users = this.userRepository.findAll();
-    //     for (User user : users) {
-    //         if(user.getId() == userId){
-    //             mav.addObject("users", users);
-    //             return mav;
-    //         }
-    //     }
-    //     mav.addObject("error", "User not found");
-    //     return mav;
-    // }
-
     @GetMapping("profile/{userId}")
-    public ResponseEntity get1User(@PathVariable("userId") Integer userId){
+    public ModelAndView get1User(@PathVariable("userId") Integer userId){
+        ModelAndView mav = new ModelAndView("profile.html");
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
             if(user.getId() == userId){
-                return new ResponseEntity<>(user, HttpStatus.OK);
+                mav.addObject("user", user);
+                return mav;
             }
         }
-        return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+        // mav.addObject("error", "User not found");
+        // return mav;
+        mav.setViewName("error.html");
+        mav.addObject("errorMessage", "User not found");
+        return mav;
     }
+
+    // TRY as I can't find the html
+    // @GetMapping("profile/{userId}")
+    // public ResponseEntity get1User(@PathVariable("userId") Integer userId){
+    //     List<User> users = this.userRepository.findAll();
+    //     for (User user : users) {
+    //         if(user.getId() == userId){
+    //             return new ResponseEntity<>(user, HttpStatus.OK);
+    //         }
+    //     }
+    //     return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+    // }
 
     
 }
