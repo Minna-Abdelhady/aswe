@@ -35,7 +35,10 @@ public class UserController {
         // mav.setViewName("error.html");
         // mav.addObject("errorMessage", "User not found");
         // return mav;
-        return null;     // This is working 
+        // return null;     // This is working 
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "User not found");
+        return errorMav;
     }
 
     // TRY as I can't find the html
