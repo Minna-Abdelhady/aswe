@@ -5,55 +5,9 @@
     <title>
         View Profile
     </title>
-    <!-- <link rel="stylesheet" href="../../../static/css/user/view-profile.css"> -->
-    <style>
-        .card1 {
-            border: 3px solid #484da0;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 25px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-info {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .profile-label {
-            font-weight: bold;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .profile-value {
-            margin-top: 5px;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        a {
-            margin-right: 10px;
-            text-decoration: none;
-            color: blue;
-        }
-
-        .button-link {
-            display: inline-block;
-            padding: 15px 23px;
-            background-color: #484da0;
-            border: none;
-            color: #fff;
-            text-decoration: none;
-            font-size: 20px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .button-link:hover {
-            background-color: #8b8ecb;
-        }
-    </style>
+    <!-- Both does'nt work I don't know why  -->
+    <link rel="stylesheet" href="../../../static/css/user/view-profile.css"> 
+    <link rel="stylesheet" href="/static/css/user/view-profile.css">
 </head>
 
 <body>
@@ -77,9 +31,10 @@
                             <p class="profile-value"> <span th:text="${user.Email}"></span></p>
 
                             <a href="" class="button-link">Edit Profile</a>
+                            <br>
                             <a href="" class="button-link">Sign out</a>
-                            <a href="" class="button-link">Delete Profile</a>
-                            
+                            <br>
+                            <a href="" class="button-link">Delete Account</a>
                         </div>
                     </div>
                 </form>
