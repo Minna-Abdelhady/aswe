@@ -20,24 +20,26 @@ import com.example.aswe.project.repositories.UserRepository;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
-    @GetMapping("")
-    public ModelAndView getUsers(){
-        ModelAndView mav=new ModelAndView("list-users.html");
-        List<User> users=this.userRepository.findAll();
-        mav.addObject("users",users);
-        return mav;
-    }
-    @GetMapping("Registration")
-    public ModelAndView addUser(){
-        ModelAndView mav=new ModelAndView("registartion.html");
-        User newUser=new User();
-        mav.addObject("user",newUser);
-        return mav;
 
+    @GetMapping("")
+    public ModelAndView getUsers() {
+        ModelAndView mav = new ModelAndView("list-users.html");
+        List<User> users = this.userRepository.findAll();
+        mav.addObject("users", users);
+        return mav;
     }
+
+    @GetMapping("Registration")
+    public ModelAndView addUser() {
+        ModelAndView mav = new ModelAndView("registartion.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
+
     @PostMapping("Registration")
-    public String saveFruit(@ModelAttribute User user){
-        String encoddedPassword=BCrypt.hashpw(user.getPassword(),BCrypt.gensalt(12));
+    public String saveUser(@ModelAttribute User user) {
+        String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encoddedPassword);
         this.userRepository.save(user);
         return "Added";
@@ -132,5 +134,5 @@ public class UserController {
         this.userRepository.save(user);
         return "Edited successfully";
     }
-    
+
 }

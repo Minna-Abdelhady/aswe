@@ -11,24 +11,21 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>UserName</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
                     <th>Password</th>
-                    <th>DOB</th>
-
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="user: ${users}">
                     <td th:text="${user.id}"/>
-                    <td th:text="${user.name}"/>
-                    <td th:text="${user.username}"/>
-                    <td th:text="${user.password}"/>
-                    <td th:text="${user.dob}"/>
-                    
+                    <td th:text="${user.FName}"/>
+                    <td th:text="${user.LName}"/>
+                    <td th:text="${user.Email}"/>
+                    <td th:text="${user.Password}"/>
                 </tr>
             </tbody>
         </table>
-        <a href="./User/Registration">Add</a>
     </body>
 </html>
