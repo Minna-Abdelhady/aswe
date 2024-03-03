@@ -47,15 +47,15 @@ public class UserController {
         return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }*/
 
-    @GetMapping("edit-profile/{userId}")
-    public ModelAndView editProfile(@PathVariable("userId") Integer userId){
-        ModelAndView mav = new ModelAndView("edit-profile.html");
+    @GetMapping("edit-profile")
+    public ModelAndView editProfile(){
+        ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;
     }
 
-    @PostMapping("edit-profile/{userId}")
+    @PostMapping("edit-profile")
     public String saveEditedUser(@ModelAttribute User user){
         String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encoddedPassword);
