@@ -22,11 +22,11 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("profile/{userId}")
-    public ModelAndView get1User(@PathVariable("userId") Integer userId){
+    public ModelAndView get1User(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/view-profile.html");
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
-            if(user.getId() == userId){
+            if (user.getId() == userId) {
                 mav.addObject("user", user);
                 return mav;
             }
@@ -36,24 +36,26 @@ public class UserController {
         return errorMav;
     }
 
-    /*@GetMapping("profile/{userId}")
-    public ResponseEntity get1User(@PathVariable("userId") Integer userId){
-        List<User> users = this.userRepository.findAll();
-        for (User user : users) {
-            if(user.getId() == userId){
-                return new ResponseEntity<>(user, HttpStatus.OK);
-            }
-        }
-        return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-    }*/
+    /*
+     * @GetMapping("profile/{userId}")
+     * public ResponseEntity get1User(@PathVariable("userId") Integer userId){
+     * List<User> users = this.userRepository.findAll();
+     * for (User user : users) {
+     * if(user.getId() == userId){
+     * return new ResponseEntity<>(user, HttpStatus.OK);
+     * }
+     * }
+     * return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+     * }
+     */
 
     @GetMapping("edit-profile/{userId}")
-    public ModelAndView editProfile(@PathVariable("userId") Integer userId){
+    public ModelAndView editProfile(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
         // User newUser = this.userRepository.findByUserID(userId);
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
-            if(user.getId() == userId){
+            if (user.getId() == userId) {
                 User newUser = user;
                 mav.addObject("user", newUser);
                 return mav;
@@ -66,30 +68,47 @@ public class UserController {
         // return mav;
     }
 
+    // @PostMapping("edit-profile/{userId}")
+    // public ModelAndView saveEditedUser(@PathVariable("userId") int userId,
+    // @ModelAttribute User editedUser){
+    // List<User> users = this.userRepository.findAll();
+    // User newUser = new User();
+    // for (User user : users) {
+    // if(user.getId() == userId){
+    // newUser = user;
+    // break;
+    // }
+    // }
+    // newUser.setFName(editedUser.getFName());
+    // newUser.setLName(editedUser.getLName());
+    // newUser.setEmail(editedUser.getEmail());
+    // String encoddedPassword = BCrypt.hashpw(editedUser.getPassword(),
+    // BCrypt.gensalt(12));
+    // newUser.setPassword(encoddedPassword);
+    // this.userRepository.save(newUser);
+    // ModelAndView mav = new ModelAndView("/html/user/view-profile.html");
+    // mav.addObject("user", newUser);
+    // return mav;
+
+    // }
+
     @PostMapping("edit-profile/{userId}")
-    public ModelAndView saveEditedUser(@PathVariable("userId") int userId, @ModelAttribute User editedUser){
-        // String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
-        // user.setPassword(encoddedPassword);
-        // this.userRepository.save(user);
-        // return "Edited successfully";
+    public String saveEditedUser(@PathVariable("userId") int userId, @ModelAttribute User editedUser) {
         List<User> users = this.userRepository.findAll();
-        User newUser = new User();
-        for (User user : users) {
-            if(user.getId() == userId){
-                newUser = user;
+        User user = new User();
+        for (User user1 : users) {
+            if (user1.getId() == userId) {
+                user = user1;
                 break;
             }
         }
-        newUser.setFName(editedUser.getFName());
-        newUser.setLName(editedUser.getLName());
-        newUser.setEmail(editedUser.getEmail());
+        user.setFName(editedUser.getFName());
+        user.setLName(editedUser.getLName());
+        user.setEmail(editedUser.getEmail());
         String encoddedPassword = BCrypt.hashpw(editedUser.getPassword(), BCrypt.gensalt(12));
-        newUser.setPassword(encoddedPassword);
-        this.userRepository.save(newUser);
-        ModelAndView mav = new ModelAndView("/html/user/view-profile.html");
-        mav.addObject("user", newUser);
-        return mav;
-        
+        user.setPassword(encoddedPassword);
+        this.userRepository.save(user);
+        return "Edited successfully";
     }
     
 }
