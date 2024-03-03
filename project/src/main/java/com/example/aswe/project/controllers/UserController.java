@@ -2,9 +2,12 @@ package com.example.aswe.project.controllers;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,5 +47,20 @@ public class UserController {
         return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }*/
 
+    @GetMapping("edit-profile/{userId}")
+    public ModelAndView editProfile(@PathVariable("userId") Integer userId){
+        ModelAndView mav = new ModelAndView("edit-profile.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
+
+    @PostMapping("edit-profile/{userId}")
+    public String saveEditedUser(@ModelAttribute User user){
+        String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+        user.setPassword(encoddedPassword);
+        this.userRepository.save(user);
+        return "Edited successfully";
+    }
     
 }

@@ -6,6 +6,14 @@
         <link rel="stylesheet" href="../../../static/css/user/view-profile2.css">
     </head>
     <body>
-        
+        <h2>Edit my profile</h2>
+        <form th:action="@{/User/edit-profile}" th:object="${user}" method="POST">
+            <input type="text" th:field="*{FName}" placeholder="Enter First Name">
+            <input type="text" th:field="*{LName}" placeholder="Enter Last Name">
+            <input type="text" th:field="*{Email}" placeholder="Enter Email">
+            <input type="password" th:field="*{Password}" placeholder="Enter Password">
+
+            <input type="submit">
+        </form>
     </body>
 </html>
