@@ -67,11 +67,29 @@ public class UserController {
     }
 
     @PostMapping("edit-profile/{userId}")
-    public String saveEditedUser(@ModelAttribute User user){
-        String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
-        user.setPassword(encoddedPassword);
-        this.userRepository.save(user);
-        return "Edited successfully";
+    public ModelAndView saveEditedUser(@PathVariable("userId") int userId, @ModelAttribute User editedUser){
+        // String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+        // user.setPassword(encoddedPassword);
+        // this.userRepository.save(user);
+        // return "Edited successfully";
+        List<User> users = this.userRepository.findAll();
+        User newUser = new User();
+        for (User user : users) {
+            if(user.getId() == userId){
+                newUser = user;
+                break;
+            }
+        }
+        newUser.setFName(editedUser.getFName());
+        newUser.setLName(editedUser.getLName());
+        newUser.setEmail(editedUser.getEmail());
+        String encoddedPassword = BCrypt.hashpw(editedUser.getPassword(), BCrypt.gensalt(12));
+        newUser.setPassword(encoddedPassword);
+        this.userRepository.save(newUser);
+        ModelAndView mav = new ModelAndView("/html/user/view-profile.html");
+        mav.addObject("user", newUser);
+        return mav;
+        
     }
     
 }
