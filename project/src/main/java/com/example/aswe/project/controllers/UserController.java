@@ -54,7 +54,7 @@ public class UserController {
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
             if(user.getId() == userId){
-                User newUser = new User();
+                User newUser = user;
                 mav.addObject("user", newUser);
                 return mav;
             }
