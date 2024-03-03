@@ -29,8 +29,8 @@
 
                             <label for="email" class="profile-label">Email:</label>
                             <p class="profile-value"> <span th:text="${user.Email}"></span></p>
-
-                            <a href="/User/edit-profile" class="button-link">Edit Profile</a>
+                            <br>
+                            <a th:href="@{/User/edit-profile/{userId}(userId=${user.getId()})}" class="button-link">Edit Profile</a>
                             <br>
                             <a href="" class="button-link">Sign out</a>
                             <br>

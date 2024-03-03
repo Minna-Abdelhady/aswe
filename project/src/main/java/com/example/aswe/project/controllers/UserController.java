@@ -47,15 +47,26 @@ public class UserController {
         return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }*/
 
-    @GetMapping("edit-profile")
-    public ModelAndView editProfile(){
+    @GetMapping("edit-profile/{userId}")
+    public ModelAndView editProfile(@PathVariable("userId") Integer userId){
         ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
-        User newUser = new User();
-        mav.addObject("user", newUser);
-        return mav;
+        // User newUser = this.userRepository.findByUserID(userId);
+        List<User> users = this.userRepository.findAll();
+        for (User user : users) {
+            if(user.getId() == userId){
+                User newUser = new User();
+                mav.addObject("user", newUser);
+                return mav;
+            }
+        }
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "User not found");
+        return errorMav;
+        // mav.addObject("user", newUser);
+        // return mav;
     }
 
-    @PostMapping("edit-profile")
+    @PostMapping("edit-profile/{userId}")
     public String saveEditedUser(@ModelAttribute User user){
         String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encoddedPassword);

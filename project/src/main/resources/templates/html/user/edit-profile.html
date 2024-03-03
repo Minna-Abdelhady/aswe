@@ -8,10 +8,20 @@
     <body>
         <h2>Edit my profile</h2>
         <form th:action="@{/User/edit-profile}" th:object="${user}" method="POST">
+            <span th:text="${user.getId()}"></span>
+            <br>
+            <span th:text="${user.getFName()}"></span>
             <input type="text" th:field="*{FName}" placeholder="Enter First Name">
+            <br>
+            <span th:text="${user.getLName()}"></span>
             <input type="text" th:field="*{LName}" placeholder="Enter Last Name">
+            <br>
+            <span th:text="${user.getEmail()}"></span>
             <input type="text" th:field="*{Email}" placeholder="Enter Email">
+            <br>
+            <span th:text="${user.getPassword()}"></span>
             <input type="password" th:field="*{Password}" placeholder="Enter Password">
+            <br>
 
             <input type="submit">
         </form>
