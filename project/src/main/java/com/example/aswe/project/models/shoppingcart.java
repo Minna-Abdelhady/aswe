@@ -1,6 +1,6 @@
 package com.example.aswe.project.models;
 
-import org.hibernate.mapping.Set;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -24,16 +24,16 @@ public class shoppingcart {
     @JoinColumn(name="User_id",referencedColumnName = "User_id")
      private User user;
      @OneToMany(cascade = CascadeType.ALL,mappedBy = "cart")
-     //private Set <CartItem> cartItem;
+     private Set <CartItem> cartItem;
     public long getUserID() {
         return this.userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 
-    public int getProductID() {
+    public long getProductID() {
         return this.productID;
     }
 

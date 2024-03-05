@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.aswe.project.models.shoppingcart;
 
-public interface cartRepository extends JpaRepository<shoppingcart,long> {
+public interface cartRepository extends JpaRepository<shoppingcart,Long> {
     
     
 }
