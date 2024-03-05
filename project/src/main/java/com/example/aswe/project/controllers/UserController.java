@@ -82,9 +82,9 @@ public class UserController {
         // User user = this.userRepository.findByUserID(userId);
         List<User> users = this.userRepository.findAll();
         User user = new User();
-        for (User user1 : users) {
-            if (user1.getId() == userId) {
-                user = user1;
+        for (User iterator : users) {
+            if (iterator.getId() == userId) {
+                user = iterator;
                 break;
             }
         }
@@ -103,6 +103,23 @@ public class UserController {
         }
         this.userRepository.save(user);
         return "Profile updated successfuly";
+    }
+
+    @GetMapping("delete-account/{userId}")
+    public ModelAndView deleteAccount(@PathVariable("userId") int userId) {
+        // User user = this.userRepository.findByUserId(userId);
+        List<User> users = this.userRepository.findAll();
+        User user = new User();
+        for (User iterator : users) {
+            if (iterator.getId() == userId) {
+                user = iterator;
+                break;
+            }
+        }
+        this.userRepository.delete(user);
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "Deleted successfully");
+        return errorMav;
     }
 
 }
