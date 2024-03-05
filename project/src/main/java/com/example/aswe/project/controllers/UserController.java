@@ -103,6 +103,7 @@ public class UserController {
 
     @PostMapping("edit-profile/{userId}")
     public String saveProfile(@PathVariable("userId") int userId, @ModelAttribute User updatedUser) {
+        // User user = this.userRepository.findByUserID(userId);
         List<User> users = this.userRepository.findAll();
         User user = new User();
         for (User user1 : users) {
