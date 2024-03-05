@@ -32,7 +32,7 @@
                             <br>
                             <a th:href="@{/User/edit-profile/{userId}(userId=${user.getId()})}" class="button-link">Edit Profile</a>
                             <br>
-                            <a href="" class="button-link">Sign out</a>
+                            <a th:href="@{/User/sign-out}" class="button-link">Sign out</a>
                             <br>
                             <a th:href="@{/User/delete-account/{userId}(userId=${user.getId()})}" class="button-link">Delete Account</a>
                         </div>

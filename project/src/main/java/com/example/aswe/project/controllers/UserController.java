@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.repositories.UserRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/User")
 public class UserController {
@@ -103,6 +106,15 @@ public class UserController {
         }
         this.userRepository.save(user);
         return "Profile updated successfuly";
+    }
+
+    @GetMapping("/sign-out")
+    public String signOut(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+        return "redirect:/";
     }
 
     @GetMapping("delete-account/{userId}")
