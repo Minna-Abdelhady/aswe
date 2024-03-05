@@ -77,30 +77,6 @@ public class UserController {
         return errorMav;
     }
 
-    // @PostMapping("edit-profile/{userId}")
-    // public ModelAndView saveEditedUser(@PathVariable("userId") int userId,
-    // @ModelAttribute User editedUser){
-    // List<User> users = this.userRepository.findAll();
-    // User newUser = new User();
-    // for (User user : users) {
-    // if(user.getId() == userId){
-    // newUser = user;
-    // break;
-    // }
-    // }
-    // newUser.setFName(editedUser.getFName());
-    // newUser.setLName(editedUser.getLName());
-    // newUser.setEmail(editedUser.getEmail());
-    // String encoddedPassword = BCrypt.hashpw(editedUser.getPassword(),
-    // BCrypt.gensalt(12));
-    // newUser.setPassword(encoddedPassword);
-    // this.userRepository.save(newUser);
-    // ModelAndView mav = new ModelAndView("/html/user/view-profile.html");
-    // mav.addObject("user", newUser);
-    // return mav;
-
-    // }
-
     @PostMapping("edit-profile/{userId}")
     public String saveProfile(@PathVariable("userId") int userId, @ModelAttribute User updatedUser) {
         // User user = this.userRepository.findByUserID(userId);
