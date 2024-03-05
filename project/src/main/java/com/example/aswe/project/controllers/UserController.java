@@ -60,19 +60,6 @@ public class UserController {
         return errorMav;
     }
 
-    /*
-     * @GetMapping("profile/{userId}")
-     * public ResponseEntity get1User(@PathVariable("userId") Integer userId){
-     * List<User> users = this.userRepository.findAll();
-     * for (User user : users) {
-     * if(user.getId() == userId){
-     * return new ResponseEntity<>(user, HttpStatus.OK);
-     * }
-     * }
-     * return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
-     * }
-     */
-
     @GetMapping("edit-profile/{userId}")
     public ModelAndView editProfile(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
@@ -88,8 +75,6 @@ public class UserController {
         ModelAndView errorMav = new ModelAndView("error.html");
         errorMav.addObject("errorMessage", "User not found");
         return errorMav;
-        // mav.addObject("user", newUser);
-        // return mav;
     }
 
     // @PostMapping("edit-profile/{userId}")
@@ -134,5 +119,4 @@ public class UserController {
         this.userRepository.save(user);
         return "Edited successfully";
     }
-
 }
