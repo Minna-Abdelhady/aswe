@@ -1,32 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymleaf.org">
+
 <head>
   <title>Registration</title>
   <link rel="stylesheet" type="text/css" href="registration.css" />
 </head>
+
 <body>
-  <div class="container">
     <h2>User Registration</h2>
     <form th:action="@{/User/Registration}" th:object="${user}" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" th:field="*{name}" placeholder="Enter Name" required />
+      <label for="FName">First Name:</label>
+      <input type="text" th:field="*{FName}" placeholder="Enter your First Name" required />
 
-      <label for="username">Username:</label>
-      <input type="text" th:field="*{username}" placeholder="Enter Username" required />
+      <label for="LName">Last Name:</label>
+      <input type="text" th:field="*{LName}" placeholder="Enter your Last Name" required />
 
-      <label for="password">Password:</label>
-      <input type="password" th:field="*{password}" placeholder="Enter Password" required />
+      <label for="Password">Password:</label>
+      <input type="password" th:field="*{Password}" placeholder="Enter your Password" required />
 
-      <label for="dob">Date of Birth:</label>
-      <input type="date" th:field="*{dob}" placeholder="Enter DOB" required />
-
-      <input type="submit" value="Register" />
+      <input type="submit"/>
     </form>
-  </div>
 </body>
+
 </html>
-
-            
-
-
-
