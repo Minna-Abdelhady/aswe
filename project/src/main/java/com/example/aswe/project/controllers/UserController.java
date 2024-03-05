@@ -35,7 +35,7 @@ public class UserController {
 
     @GetMapping("Registration")
     public ModelAndView addUser() {
-        ModelAndView mav = new ModelAndView("registartion.html");
+        ModelAndView mav = new ModelAndView("registration.html");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;

@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymleaf.org">
-
 <head>
   <title>Registration</title>
   <link rel="stylesheet" type="text/css" href="registration.css" />
 </head>
-
 <body>
     <h2>User Registration</h2>
     <form th:action="@{/User/Registration}" th:object="${user}" method="POST">
@@ -23,3 +21,22 @@
 </body>
 
 </html>
+
+<!-- <html xmlns:th="https://www.thymleaf.org">
+    <head>
+        <title>
+            Registration
+        </title>
+    </head>
+    <body>
+        <h2>User Registration</h2>
+        <form th:action="@{/User/Registration}" th:object="${user}" method="POST">
+            <input type="text" th:field="*{FName}" placeholder="Enter your first Name">
+            <input type="text" th:field="*{LName}" placeholder="Enter your Last Name">
+            <input type="email" th:field="*{Email}" placeholder="Enter your Email">
+            <input type="password" th:field="*{Password}" placeholder="Enter your Password">
+
+            <input type="submit">
+        </form>
+    </body>
+</html> -->
