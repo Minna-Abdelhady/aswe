@@ -1,5 +1,6 @@
 // package com.example.aswe.project.models;
 
+<<<<<<< Updated upstream
 // import java.util.Set;
 
 // import jakarta.persistence.CascadeType;
@@ -58,3 +59,41 @@
 //     }
 
 // }
+=======
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.google.gwt.user.server.rpc.core.java.util.HashSet_ServerCustomFieldSerializer;
+
+@Entity
+public class shoppingcart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userId;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItem> items = new HashSet_ServerCustomFieldSerializer<>();
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public Set<CartItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<CartItem> items) {
+        this.items = items;
+    }
+}
+>>>>>>> Stashed changes
