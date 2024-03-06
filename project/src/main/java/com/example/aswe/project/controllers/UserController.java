@@ -27,7 +27,7 @@ public class UserController {
     // NOT HERE (IN THE ADMIN CONTROLLER)
     @GetMapping("")
     public ModelAndView getUsers() {
-        ModelAndView mav = new ModelAndView("list-users.html");
+        ModelAndView mav = new ModelAndView("/html/user/list-users.html");
         List<User> users = this.userRepository.findAll();
         mav.addObject("users", users);
         return mav;
@@ -35,7 +35,7 @@ public class UserController {
 
     @GetMapping("Registration")
     public ModelAndView addUser() {
-        ModelAndView mav = new ModelAndView("registration.html");
+        ModelAndView mav = new ModelAndView("/html/user/registration.html");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;
