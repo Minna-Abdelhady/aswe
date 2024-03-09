@@ -156,7 +156,7 @@ UserFeedback newUserFeedback=new UserFeedback();
     @PostMapping("/feedback")
     public String addFeedbackP(@ModelAttribute UserFeedback feedback) {
         this.feedbackRepository.save(feedback); // save the new feedback record
-      return "added";
+      return "added successfully";
     }
 
 
