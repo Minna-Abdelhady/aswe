@@ -67,18 +67,20 @@ public class UserController {
     @GetMapping("edit-profile/{userId}")
     public ModelAndView editProfile(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
-        // User newUser = this.userRepository.findByUserID(userId);
-        List<User> users = this.userRepository.findAll();
-        for (User user : users) {
-            if (user.getId() == userId) {
-                User newUser = user;
-                mav.addObject("user", newUser);
-                return mav;
-            }
-        }
-        ModelAndView errorMav = new ModelAndView("error.html");
-        errorMav.addObject("errorMessage", "User not found");
-        return errorMav;
+        User newUser = this.userRepository.findByid(userId);
+        // List<User> users = this.userRepository.findAll();
+        // for (User user : users) {
+        //     if (user.getId() == userId) {
+        //         User newUser = user;
+        //         mav.addObject("user", newUser);
+        //         return mav;
+        //     }
+        // }
+        mav.addObject("user", newUser);
+         return mav;
+        // ModelAndView errorMav = new ModelAndView("error.html");
+        // errorMav.addObject("errorMessage", "User not found");
+        // return errorMav;
     }
 
     @PostMapping("edit-profile/{userId}")
