@@ -4,6 +4,12 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.aswe.project.models.User;
@@ -22,10 +28,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("")
-    public ModelAndView getUsers() {
-        ModelAndView mav = new ModelAndView("list-users.html");
-        List<User> users = this.userRepository.findAll();
-        mav.addObject("users", users);
+    public ModelAndView getUsers(){
+        ModelAndView mav=new ModelAndView("list-users.html");
+        List<User> users=this.userRepository.findAll();
+        mav.addObject("users",users);
         return mav;
     }
 
@@ -148,20 +154,7 @@ private FeedbackRepository feedbackRepository;
 UserFeedback newUserFeedback=new UserFeedback();
         mav.addObject("feedback", newUserFeedback);
         return mav;
+        
     }
-
-
-    @SuppressWarnings("null")
-    @PostMapping("/feedback")
-    public String addFeedbackP(@ModelAttribute UserFeedback feedback) {
-        this.feedbackRepository.save(feedback); // save the new feedback record
-      return "Feedback saved successfully" ;
-    }
-
-
-
-
-
-
-
+    
 }
