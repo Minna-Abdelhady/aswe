@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +36,7 @@ public class UserController {
 
     @GetMapping("Registration")
     public ModelAndView addUser() {
-        ModelAndView mav = new ModelAndView("/html/user/registration.html");
+        ModelAndView mav = new ModelAndView("registartion.html");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;
@@ -47,6 +48,25 @@ public class UserController {
         user.setPassword(encoddedPassword);
         this.userRepository.save(user);
         return "Added";
+    }
+
+    @GetMapping("Login")
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView("/html/user/login.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
+
+    @PostMapping("Login")
+    public String loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password) {
+        User dbUser = this.userRepository.findByemail(Email);
+        Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
+        if (isPasswordMatched) {
+            return "Welcome " + dbUser.getFName();
+        } else {
+            return "Failed to login";
+        }
     }
 
     @GetMapping("profile/{userId}")
@@ -70,14 +90,14 @@ public class UserController {
         User newUser = this.userRepository.findByid(userId);
         // List<User> users = this.userRepository.findAll();
         // for (User user : users) {
-        //     if (user.getId() == userId) {
-        //         User newUser = user;
-        //         mav.addObject("user", newUser);
-        //         return mav;
-        //     }
+        // if (user.getId() == userId) {
+        // User newUser = user;
+        // mav.addObject("user", newUser);
+        // return mav;
+        // }
         // }
         mav.addObject("user", newUser);
-         return mav;
+        return mav;
         // ModelAndView errorMav = new ModelAndView("error.html");
         // errorMav.addObject("errorMessage", "User not found");
         // return errorMav;
@@ -114,7 +134,7 @@ public class UserController {
     @GetMapping("/sign-out")
     public String signOut(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if(session != null){
+        if (session != null) {
             session.invalidate();
         }
         return "redirect:/";
