@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.aswe.project.models.User;
+import com.example.aswe.project.models.UserFeedback;
+import com.example.aswe.project.repositories.FeedbackRepository;
 import com.example.aswe.project.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -155,6 +157,25 @@ public class UserController {
         ModelAndView errorMav = new ModelAndView("error.html");
         errorMav.addObject("errorMessage", "Deleted successfully");
         return errorMav;
+    }
+
+    // --------------------------------------------------------------------------------------------------//
+    @Autowired
+    private FeedbackRepository feedbackRepository;
+
+    @GetMapping("/addfeedback")
+    public ModelAndView addFeedback() {
+        ModelAndView mav = new ModelAndView("feedback.html");
+        UserFeedback newUserFeedback = new UserFeedback();
+        mav.addObject("feedback", newUserFeedback);
+        return mav;
+    }
+
+    @SuppressWarnings("null")
+    @PostMapping("/feedback")
+    public String addFeedbackP(@ModelAttribute UserFeedback feedback) {
+        this.feedbackRepository.save(feedback); // save the new feedback record
+        return "Feedback saved successfully";
     }
 
 }
