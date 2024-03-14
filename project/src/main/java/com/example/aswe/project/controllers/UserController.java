@@ -4,12 +4,6 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.aswe.project.models.User;
@@ -50,6 +44,24 @@ public class UserController {
         this.userRepository.save(user);
         return "Added";
     }
+    @GetMapping("Login")
+    public ModelAndView login() {
+    ModelAndView mav = new ModelAndView("/html/user/login.html");
+    User newUser = new User();
+    mav.addObject( "user", newUser);
+    return mav;
+}
+
+@PostMapping("Login")
+public String loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password) {
+    User dbUser = this.userRepository.findByemail(Email);
+    Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
+    if (isPasswordMatched) {
+        return "Welcome " + dbUser.getFName();
+    } else {
+        return "Failed to login";
+    }
+}
 
     @GetMapping("profile/{userId}")
     public ModelAndView get1User(@PathVariable("userId") Integer userId) {
