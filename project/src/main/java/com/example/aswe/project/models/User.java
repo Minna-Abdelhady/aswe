@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -18,7 +19,7 @@ public class User {
     private String Password;
 
     @ManyToOne
-    private Type type;
+    private UserType type;
 
     public int getId() {
         return this.id;
@@ -60,11 +61,11 @@ public class User {
         this.Password = Password;
     }
 
-    public Type getType() {
+    public UserType getType() {
         return this.type;
     }
 
-    public void setType(Type type) {
+    public void setType(UserType type) {
         this.type = type;
     }
     

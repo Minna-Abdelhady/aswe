@@ -1,17 +1,12 @@
 package com.example.aswe.project.models;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-
-import com.example.aswe.project.repositories.TypeRepository;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Type {
+public class UserType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -37,19 +32,5 @@ public class Type {
     public void setName(String name) {
         this.name = name;
     }
-    
-}
-
-
-@Component
-public class TypeDataInitializer implements CommandLineRunner {
-
-    private final TypeRepository typeRepository;
-
-    public TypeDataInitializer(TypeRepository typeRepository){
-        this.typeRepository = typeRepository;
-    }
-
-    @Override
     
 }
