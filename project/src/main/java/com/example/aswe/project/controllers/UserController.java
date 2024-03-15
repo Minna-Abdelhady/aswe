@@ -36,7 +36,13 @@ public class UserController {
         mav.addObject("users", users);
         return mav;
     }
-
+    @GetMapping("Home")
+    public ModelAndView home() {
+        ModelAndView mav = new ModelAndView("/html/user/home.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
     @GetMapping("Registration")
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/html/user/registartion.html");
