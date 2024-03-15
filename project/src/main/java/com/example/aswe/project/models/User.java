@@ -18,10 +18,12 @@ public class User {
     private String LName;
     private String Email;
     private String Password;
+    // private List<CartItem> cart;
 
     @ManyToOne
     private UserType type;
-    private List<CartItem> cart;
+
+
     public int getId() {
         return this.id;
     }
@@ -70,13 +72,13 @@ public class User {
         this.type = type;
     }
 
-    public List<CartItem> getCart() {
-        return this.cart;
-    }
+    // public List<CartItem> getCart() {
+    //     return this.cart;
+    // }
 
-    public void setCart(List<CartItem> cart) {
-        this.cart = cart;
-    }
+    // public void setCart(List<CartItem> cart) {
+    //     this.cart = cart;
+    // }
  
 
 }

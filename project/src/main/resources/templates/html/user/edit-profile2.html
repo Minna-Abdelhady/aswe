@@ -46,17 +46,17 @@
                                         <div class="form-group login-page">
                                             <label for="">First Name <span>*</span></label>
                                             <input type="text" class="form-control" name="FName"
-                                                value="<?=$UserObject->FName?>">
+                                            th:field="*{FName}" >
                                         </div>
                                         <div class="form-group login-page">
                                             <label for="">Last Name <span>*</span></label>
                                             <input type="text" class="form-control" name="LName"
-                                                value="<?=$UserObject->LName?>">
+                                            th:field="*{LName}" >
                                         </div>
                                         <div class="form-group login-page">
                                             <label for="">Email <span>*</span></label>
                                             <input type="email" class="form-control" name="Email"
-                                                value="<?=$UserObject->Email?>">
+                                                th:field="*{Email}" >
                                         </div>
 
                                         <button type="submit" name="submit"
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="tab-pane" id="chnage_passwrd">
-                                <form method="POST">
+                                <form th:action="@{/User/edit-profile/{userId}(userId=${user.getId()})}" th:object="${user}" method="POST">
                                     <div class="form-group login-page">
                                         <label for="">Old Password<span>*</span></label>
                                         <input type="password" name="old_Password" class="form-control" id="">
