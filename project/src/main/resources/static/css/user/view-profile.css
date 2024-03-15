@@ -1,46 +1,44 @@
-.card1 {
-    border: 3px solid #484da0;
-    border-radius: 10px;
-    padding: 25px;
-    margin: 25px;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-info {
-    text-align: center;
-    margin-top: 20px;
+h2 {
+    color: #333;
 }
 
-.profile-label {
+label {
     font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    display: block;
 }
 
-.profile-value {
-    margin-top: 5px;
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-a {
-    margin-right: 10px;
-    text-decoration: none;
-    color: blue;
+p {
+    margin-top: 0;
 }
 
 .button-link {
     display: inline-block;
-    padding: 15px 23px;
-    background-color: #484da0;
-    border: none;
-    color: #fff;
+    margin-top: 10px;
     text-decoration: none;
-    font-size: 20px;
-    cursor: pointer;
+    color: #fff;
+    background-color: #007bff;
+    padding: 8px 16px;
     border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .button-link:hover {
-    background-color: #8b8ecb;
+    background-color: #0056b3;
 }
