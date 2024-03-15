@@ -11,15 +11,23 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>FName</th>
+                    <th>LName</th>
                     <th>Email</th>
                     <th>Password</th>
+                    
+
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="user: ${users}">
                     <td th:text="${user.id}"/>
+                    <td th:text="${user.FName}"/>
+                    <td th:text="${user.LName}"/>
+                    <td th:text="${user.Email}"/>
+                    <td th:text="${user.Password}"/>
+                    
+                    
                     <td th:text="${user.FName}"/>
                     <td th:text="${user.LName}"/>
                     <td th:text="${user.Email}"/>

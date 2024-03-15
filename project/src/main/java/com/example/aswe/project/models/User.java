@@ -1,19 +1,28 @@
 package com.example.aswe.project.models;
 
+// import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String FName;
     private String LName;
     private String Email;
     private String Password;
+    // private List<CartItem> cart;
+
+    @ManyToOne
+    private UserType type;
+
 
     public int getId() {
         return this.id;
@@ -55,5 +64,21 @@ public class User {
         this.Password = Password;
     }
 
+    public UserType getType() {
+        return this.type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
+    }
+
+    // public List<CartItem> getCart() {
+    //     return this.cart;
+    // }
+
+    // public void setCart(List<CartItem> cart) {
+    //     this.cart = cart;
+    // }
+ 
 
 }
