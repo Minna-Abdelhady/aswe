@@ -4,16 +4,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String FName;
     private String LName;
     private String Email;
     private String Password;
+
+    @ManyToOne
+    private Type type;
 
     public int getId() {
         return this.id;
@@ -55,5 +60,13 @@ public class User {
         this.Password = Password;
     }
 
+    public Type getType() {
+        return this.type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+    
 
 }
