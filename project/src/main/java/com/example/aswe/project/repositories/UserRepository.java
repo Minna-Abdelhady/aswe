@@ -7,4 +7,5 @@ import com.example.aswe.project.models.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByid(int id);
     // User findByEmail(String Email);
+   
 }

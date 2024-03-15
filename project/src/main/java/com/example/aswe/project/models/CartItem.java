@@ -71,4 +71,9 @@ public class CartItem {
     public void setShoppingCart(shoppingcart ShoppingCart) {
         this.ShoppingCart = ShoppingCart;
     }
+
+    public int getproduct_id() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getproduct_id'");
+    }
 }
