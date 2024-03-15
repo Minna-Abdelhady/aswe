@@ -1,9 +1,6 @@
 package com.example.aswe.project.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +16,6 @@ import com.example.aswe.project.repositories.cartRepository;
 @RequestMapping("/carts")
 public class CartController {
   private final cartRepository CartRepository;
-   @Autowired
    public CartController(cartRepository CartRepository){
     this.CartRepository=CartRepository;
    }
@@ -27,16 +23,19 @@ public class CartController {
    public List<shoppingcart>getAllCarts(){
     return CartRepository.findAll();
    }
-   @PostMapping
+   @SuppressWarnings("null")
+  @PostMapping
    public shoppingcart createCart(@RequestBody shoppingcart cart){
     return CartRepository.save(cart);
    }
-   @GetMapping("/{id}")
+   @SuppressWarnings("null")
+  @GetMapping("/{id}")
    public shoppingcart getCartById(@PathVariable Long id){
     return CartRepository.findById(id).orElseThrow(()-> new RuntimeException("Cart Not found"));
     
    }
-   @PostMapping("/{id}/items")
+   @SuppressWarnings("null")
+  @PostMapping("/{id}/items")
    public shoppingcart addItemToCart(@PathVariable Long id,@RequestBody CartItem item){
     shoppingcart cart= CartRepository.findById(id).orElseThrow(()->new RuntimeException("cart not found"));
 // cart.addItem(item);

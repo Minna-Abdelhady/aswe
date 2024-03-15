@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Jewelry Store</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/user/store.css}" />
+</head>
+
+<body>
+    <header
+        th:style="|position: absolute; top: 0; left: 0; width: 100%; padding: 10px 20px; background: white; display: flex; justify-content: space-between; align-items: center; z-index: 100;|">
+        <a th:href="@{/}" th:text="|Jewelry Store|"
+            th:style="|font-size: 24px; color: black; text-decoration: dotted; font-weight: 700;|"></a>
+        <nav>
+            <a th:href="@{/}" th:text="|Home|"
+                th:style="|text-decoration: none; color: black; font-weight: 500; font-size: 16px; margin-left: 20px; transition: color 0.3s;|"></a>
+            <a th:href="@{/shop}" th:text="|Shop|"
+                th:style="|text-decoration: none; color: black; font-weight: 500; font-size: 16px; margin-left: 20px; transition: color 0.3s;|"></a>
+            <a th:href="@{/contact}" th:text="|Contact|"
+                th:style="|text-decoration: none; color: black; font-weight: 500; font-size: 16px; margin-left: 20px; transition: color 0.3s;|"></a>
+            <a th:href="@{/cart}" th:text="|<i class='bx bx-cart'></i>|"
+                th:style="|text-decoration: none; color: black; font-weight: 500; font-size: 25px; margin-left: 20px; transition: color 0.3s;|"></a>
+            <a th:href="@{/signin}" th:text="|Sign In|"
+                th:style="|text-decoration: none; color: black; font-weight: 500; font-size: 16px; margin-left: 20px; margin-right: 30px; transition: color 0.3s;|"></a>
+        </nav>
+    </header>
+
+    <br>
+    <div class="search-container">
+        <form action="" method="GET">
+            <input type="text" placeholder="Search..." name="search_data">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <br><br><br><br>
+
+    <div class="small-container">
+        <div th:each="product : ${products}" class="product-item" width="200px">
+            <img th:src="@{/pages/img/ + ${product.productImg}}" width="100px" height="200px">
+            <h1 th:text="${product.productName}"></h1>
+            <p class="product-price">
+                <span th:text="${product.productDescription}"></span>
+                <br><br>
+                <span th:text="${product.productPrice}"></span>
+            </p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <footer
+        th:style="|display: -webkit-flex; display: -moz-flex; display: -ms-flex; display: -o-flex; display: flex; flex-flow: row wrap; padding: 50px; color: #fff; background-color: #25242a;|">
+
+        <div th:style="|flex: 1 100%;|" class="left-area">
+            <h2 th:text="|Jewelry Store|"
+                th:style="|font-size: 17px; font-weight: 600; text-transform: uppercase; color: cyan; letter-spacing: 3px;|">
+            </h2>
+            <ul th:style="|list-style: none; padding-left: 0;|">
+                <li><a th:href="@{/about}" th:text="|About Us|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+                <li><a th:href="@{/services}" th:text="|Our Services|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+                <li><a th:href="@{/privacy}" th:text="|Privacy Policy|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+            </ul>
+        </div>
+
+        <div th:style="|flex: 1 50%;|" class="footer-col">
+            <h4 th:text="|Get Help|"
+                th:style="|font-size: 17px; font-weight: 600; text-transform: uppercase; color: cyan; letter-spacing: 3px;|">
+            </h4>
+            <ul th:style="|list-style: none; padding-left: 0;|">
+                <li><a th:href="@{/faq}" th:text="|FAQ|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+                <li><a th:href="@{/shipping}" th:text="|Shipping|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+                <li><a th:href="@{/returns}" th:text="|Returns|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+                <li><a th:href="@{/payment}" th:text="|Payment Options|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+            </ul>
+        </div>
+
+        <div th:style="|flex: 1 50%;|" class="footer-col">
+            <h4 th:text="|Online Shopping|"
+                th:style="|font-size: 17px; font-weight: 600; text-transform: uppercase; color: cyan; letter-spacing: 3px;|">
+            </h4>
+            <ul th:style="|list-style: none; padding-left: 0;|">
+                <li><a th:href="@{/store}" th:text="|Necklaces|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+                <li><a th:href="@{/store}" th:text="|Earrings|"
+                        th:style="|text-decoration: none; color: #999; line-height: 2em;|"></a></li>
+                <!-- Add more categories here -->
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
