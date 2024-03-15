@@ -62,7 +62,15 @@ public class UserController {
 
     @PostMapping("Login")
     public String loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password) {
-        User dbUser = this.userRepository.findByemail(Email);
+        // User dbUser = this.userRepository.findByEmail(Email);
+        User dbUser = new User();
+        List<User> users = this.userRepository.findAll();
+        for (User user : users) {
+            if (user.getEmail() == Email) {
+                dbUser = user;
+                break;
+            }
+        }
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {
             return "Welcome " + dbUser.getFName();
