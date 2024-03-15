@@ -1,5 +1,7 @@
 package com.example.aswe.project.models;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +22,7 @@ public class User {
 
     @ManyToOne
     private UserType type;
-
+    private List<CartItem> cart;
     public int getId() {
         return this.id;
     }
@@ -68,6 +70,14 @@ public class User {
     public void setType(UserType type) {
         this.type = type;
     }
-    
+
+    public List<CartItem> getCart() {
+        return this.cart;
+    }
+
+    public void setCart(List<CartItem> cart) {
+        this.cart = cart;
+    }
+ 
 
 }
