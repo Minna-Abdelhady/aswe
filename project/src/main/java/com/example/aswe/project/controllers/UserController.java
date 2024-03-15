@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserFeedback;
@@ -82,12 +83,10 @@ public class UserController {
     @GetMapping("profile/{userId}")
     public ModelAndView get1User(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/view-profile.html");
-        List<User> users = this.userRepository.findAll();
-        for (User user : users) {
-            if (user.getId() == userId) {
-                mav.addObject("user", user);
-                return mav;
-            }
+        User user = this.userRepository.findByid(userId);
+        if (user != null) {
+            mav.addObject("user", user);
+            return mav;
         }
         ModelAndView errorMav = new ModelAndView("error.html");
         errorMav.addObject("errorMessage", "User not found");
@@ -98,32 +97,18 @@ public class UserController {
     public ModelAndView editProfile(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
         User newUser = this.userRepository.findByid(userId);
-        // List<User> users = this.userRepository.findAll();
-        // for (User user : users) {
-        // if (user.getId() == userId) {
-        // User newUser = user;
-        // mav.addObject("user", newUser);
-        // return mav;
-        // }
-        // }
-        mav.addObject("user", newUser);
-        return mav;
-        // ModelAndView errorMav = new ModelAndView("error.html");
-        // errorMav.addObject("errorMessage", "User not found");
-        // return errorMav;
+        if (newUser != null) {
+            mav.addObject("user", newUser);
+            return mav;
+        }
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "User not found");
+        return errorMav;
     }
 
     @PostMapping("edit-profile/{userId}")
-    public String saveProfile(@PathVariable("userId") int userId, @ModelAttribute User updatedUser) {
-        // User user = this.userRepository.findByUserID(userId);
-        List<User> users = this.userRepository.findAll();
-        User user = new User();
-        for (User iterator : users) {
-            if (iterator.getId() == userId) {
-                user = iterator;
-                break;
-            }
-        }
+    public RedirectView saveProfile(@PathVariable("userId") int userId, @ModelAttribute User updatedUser) {
+        User user = this.userRepository.findByid(userId);
         if (!user.getFName().equals(updatedUser.getFName())) {
             user.setFName(updatedUser.getFName());
         }
@@ -138,7 +123,7 @@ public class UserController {
             user.setPassword(encoddedPassword);
         }
         this.userRepository.save(user);
-        return "Profile updated successfuly";
+        return new RedirectView("/User/profile/" + userId);
     }
 
     @GetMapping("/sign-out")
@@ -152,18 +137,15 @@ public class UserController {
 
     @GetMapping("delete-account/{userId}")
     public ModelAndView deleteAccount(@PathVariable("userId") int userId) {
-        // User user = this.userRepository.findByUserId(userId);
-        List<User> users = this.userRepository.findAll();
-        User user = new User();
-        for (User iterator : users) {
-            if (iterator.getId() == userId) {
-                user = iterator;
-                break;
-            }
+        User user = this.userRepository.findByid(userId);
+        if (user != null) {
+            this.userRepository.delete(user);
+            ModelAndView errorMav = new ModelAndView("error.html");
+            errorMav.addObject("errorMessage", "Deleted successfully");
+            return errorMav;
         }
-        this.userRepository.delete(user);
         ModelAndView errorMav = new ModelAndView("error.html");
-        errorMav.addObject("errorMessage", "Deleted successfully");
+        errorMav.addObject("errorMessage", "User not found");
         return errorMav;
     }
 
