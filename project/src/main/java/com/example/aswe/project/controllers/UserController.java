@@ -29,7 +29,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    // NOT HERE (IN THE ADMIN CONTROLLER)
     @GetMapping("")
     public ModelAndView getUsers() {
         ModelAndView mav = new ModelAndView("/html/user/list-users.html");
