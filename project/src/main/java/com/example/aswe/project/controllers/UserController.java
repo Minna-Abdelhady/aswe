@@ -69,6 +69,7 @@ public class UserController {
 
     @PostMapping("Login")
     public RedirectView loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password,HttpSession session) {
+        System.out.println("Login");
         // User dbUser = this.userRepository.findByEmail(Email);
         User dbUser = new User();
         List<User> users = this.userRepository.findAll();
@@ -81,9 +82,9 @@ public class UserController {
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {
             session.setAttribute(Email,dbUser.getEmail() ); 
-            return new RedirectView("Home");
+            return new RedirectView("/User/Home");
         } else {
-            return new RedirectView("Login");
+            return new RedirectView("/User/Login");
         }
     }
 
