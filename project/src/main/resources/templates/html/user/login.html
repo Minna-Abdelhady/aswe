@@ -9,7 +9,7 @@
   <div class="container">
     <h2>User Login</h2>
     <form th:action="@{/User/Login}" th:object="${user}" method="POST">
-      <label for="username">Username:</label>
+      <label for="Email">Email:</label>
       <input type="text" th:field="*{Email}" placeholder="Enter Email" required />
 
       <label for="password">Password:</label>
