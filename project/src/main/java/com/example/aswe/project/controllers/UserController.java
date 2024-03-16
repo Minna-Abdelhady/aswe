@@ -25,6 +25,7 @@ import jakarta.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/User")
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -36,6 +37,7 @@ public class UserController {
         mav.addObject("users", users);
         return mav;
     }
+
     @GetMapping("Home")
     public ModelAndView home() {
         ModelAndView mav = new ModelAndView("/html/user/home.html");
@@ -43,6 +45,7 @@ public class UserController {
         mav.addObject("user", newUser);
         return mav;
     }
+
     @GetMapping("Registration")
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/html/user/registration.html");
@@ -68,13 +71,14 @@ public class UserController {
     }
 
     @PostMapping("Login")
-    public RedirectView loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password,HttpSession session) {
+    public RedirectView loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password,
+            HttpSession session) {
         System.out.println("Login");
         // User dbUser = this.userRepository.findByEmail(Email);
         User dbUser = new User();
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
-            if (user.getEmail().equals( Email)) {
+            if (user.getEmail().equals(Email)) {
                 dbUser = user;
                 break;
             }
@@ -84,7 +88,7 @@ public class UserController {
 
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {
-            session.setAttribute(Email,dbUser.getEmail() ); 
+            session.setAttribute(Email, dbUser.getEmail());
             return new RedirectView("/User/Home");
         } else {
             // Working password wrong
