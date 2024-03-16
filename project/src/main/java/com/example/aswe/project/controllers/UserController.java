@@ -74,18 +74,23 @@ public class UserController {
         User dbUser = new User();
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
-            if (user.getEmail() == Email) {
+            if (user.getEmail().equals( Email)) {
                 dbUser = user;
                 break;
             }
         }
+        System.out.println("Login");
+        System.out.println(dbUser.getEmail());
+
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {
             session.setAttribute(Email,dbUser.getEmail() ); 
             return new RedirectView("/User/Home");
         } else {
+            // Working password wrong
             return new RedirectView("/User/Login");
         }
+        // return new RedirectView("/User/Home");
     }
 
     @GetMapping("profile/{userId}")
