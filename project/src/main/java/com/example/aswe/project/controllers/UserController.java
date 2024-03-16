@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.ui.Model;
 
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserFeedback;
+import com.example.aswe.project.models.product;
 import com.example.aswe.project.repositories.FeedbackRepository;
 import com.example.aswe.project.repositories.UserRepository;
-
+import com.example.aswe.project.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -182,6 +184,18 @@ public class UserController {
     public String addFeedback(@ModelAttribute UserFeedback feedback) {
         this.feedbackRepository.save(feedback); // save the new feedback record
         return "Feedback saved successfully";
+    }
+
+    public class HomeController {
+        @Autowired
+        private ProductService productService;
+
+        @GetMapping("/")
+        public String home(Model model) {
+            List<product> products = productService.findAll();
+            model.addAttribute("products", products);
+            return "home";
+        }
     }
 
 }
