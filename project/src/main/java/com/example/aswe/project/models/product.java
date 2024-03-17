@@ -1,6 +1,7 @@
 package com.example.aswe.project.models;
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 
@@ -72,6 +73,11 @@ public class product {
 
     public void setProductImgUrl(String productImgUrl) {
         this.productImgUrl = productImgUrl;
+    }
+
+    public static List<product> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 
 }
