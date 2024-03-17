@@ -1,11 +1,12 @@
 package com.example.aswe.project.models;
+import jakarta.persistence.*;
+import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+
 
 @Entity
+@Table(name="product")
 public class product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

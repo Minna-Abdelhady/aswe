@@ -1,3 +1,4 @@
+
 package com.example.aswe.project.models;
 
 import jakarta.persistence.Entity;
@@ -11,14 +12,17 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String FirstName;
-    private String LastName;
-    private String email;
-    private String password;
+
+    
+    private String FName;
+    private String LName;
+    private String Email;
+    private String Password;
+    // private List<CartItem> cart;
 
     @ManyToOne
-    private UserType type;
-    
+    private UserType type = new UserType();
+
     public int getId() {
         return this.id;
     }
@@ -27,36 +31,44 @@ public class Admin {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return this.FirstName;
+    public String getFName() {
+        return this.FName;
     }
 
-    public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
+    public void setFName(String FName) {
+        this.FName = FName;
     }
 
-    public String getLastName() {
-        return this.LastName;
+    public String getLName() {
+        return this.LName;
     }
 
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
+    public void setLName(String LName) {
+        this.LName = LName;
     }
 
     public String getEmail() {
-        return this.email;
+        return this.Email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public String getPassword() {
-        return this.password;
+        return this.Password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String Password) {
+        this.Password = Password;
     }
-    
+
+    public UserType getType() {
+        return this.type;
+    }
+
+    // public void setType(UserType type) {
+    //     this.type = type;
+    // }
+
 }
