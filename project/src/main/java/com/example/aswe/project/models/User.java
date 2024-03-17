@@ -1,5 +1,7 @@
 package com.example.aswe.project.models;
 
+import javax.validation.constraints.NotBlank;
+
 // import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -10,13 +12,25 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotBlank(message = "First name is required")
+    @Size(min = 2, max = 30, message = "First name must be between 2 and 30 characters long")
     private String FName;
+
+    @NotBlank(message = "Last name is required")
+    @Size(min = 2, max = 30, message = "Last name must be between 2 and 30 characters long")
     private String LName;
+
+    @NotBlank(message = "Email is required")
+    @javax.validation.constraints.Email(message = "Email must be a valid email address")
     private String Email;
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, max = 30, message = "Password must be between 8 and 30 characters long")
     private String Password;
     // private List<CartItem> cart;
 

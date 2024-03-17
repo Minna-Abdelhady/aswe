@@ -2,8 +2,12 @@ package com.example.aswe.project.controllers;
 
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserFeedback;
@@ -47,9 +52,7 @@ public class UserController {
         return mav;
     }
 
-
-
-    @GetMapping("Registration")
+    @GetMapping("/Registration")
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/html/user/registration.html");
         User newUser = new User();
@@ -57,15 +60,18 @@ public class UserController {
         return mav;
     }
 
-    @PostMapping("Registration")
-    public String saveUser(@ModelAttribute User user) {
+    @PostMapping("/Registration")
+    public RedirectView saveUser(@Valid @ModelAttribute User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return new RedirectView("/User/Registration");
+        }
         String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encoddedPassword);
-        this.userRepository.save(user);
-        return "Added";
+        userRepository.save(user);
+        return new RedirectView("/User/Home");
     }
 
-    @GetMapping("Login")
+    @GetMapping("/Login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView("/html/user/login.html");
         User newUser = new User();
@@ -73,22 +79,23 @@ public class UserController {
         return mav;
     }
 
-    @PostMapping("Login")
-    public RedirectView loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password,
-            HttpSession session) {
+    @PostMapping("/Login")
+    public RedirectView loginProcess(@RequestParam("Email") @NotBlank(message = "Email is required") @Email(message = "Email must be a valid email address") String Email,
+                                  @RequestParam("Password") @NotBlank(message = "Password is required") String Password,
+                                  HttpSession session) {
         System.out.println("Login");
-        // User dbUser = this.userRepository.findByEmail(Email);
-        User dbUser = new User();
+        // User dbUser = userRepository.findByEmail(Email);
         List<User> users = this.userRepository.findAll();
+        User dbUser=new User();
         for (User user : users) {
             if (user.getEmail().equals(Email)) {
                 dbUser = user;
                 break;
             }
         }
-        System.out.println("Login");
-        System.out.println(dbUser.getEmail());
-
+        if (dbUser == null) {// User not found
+            return new RedirectView("/User/Login");
+        }
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {
             session.setAttribute(Email, dbUser.getEmail());
@@ -97,8 +104,60 @@ public class UserController {
             // Working password wrong
             return new RedirectView("/User/Login");
         }
-        // return new RedirectView("/User/Home");
     }
+
+
+    // @GetMapping("Registration")
+    // public ModelAndView addUser() {
+    //     ModelAndView mav = new ModelAndView("/html/user/registration.html");
+    //     User newUser = new User();
+    //     mav.addObject("user", newUser);
+    //     return mav;
+    // }
+
+    // @PostMapping("Registration")
+    // public String saveUser(@ModelAttribute User user) {
+    //     String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+    //     user.setPassword(encoddedPassword);
+    //     this.userRepository.save(user);
+    //     return "Added";
+    // }
+
+    // @GetMapping("Login")
+    // public ModelAndView login() {
+    //     ModelAndView mav = new ModelAndView("/html/user/login.html");
+    //     User newUser = new User();
+    //     mav.addObject("user", newUser);
+    //     return mav;
+    // }
+
+    // @PostMapping("Login")
+    // public RedirectView loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password,
+    //         HttpSession session) {
+    //     System.out.println("Login");
+    //     // User dbUser = this.userRepository.findByEmail(Email);
+    //     User dbUser = new User();
+    //     List<User> users = this.userRepository.findAll();
+    //     for (User user : users) {
+    //         if (user.getEmail().equals(Email)) {
+    //             dbUser = user;
+    //             break;
+    //         }
+    //     }
+    //     System.out.println("Login");
+    //     System.out.println(dbUser.getEmail());
+
+    //     Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
+    //     if (isPasswordMatched) {
+    //         session.setAttribute(Email, dbUser.getEmail());
+    //         return new RedirectView("/User/Home");
+    //     } else {
+    //         // Working password wrong
+    //         return new RedirectView("/User/Login");
+    //     }
+    //     // return new RedirectView("/User/Home");
+    // }
+    
 
     @GetMapping("profile/{userId}")
     public ModelAndView get1User(@PathVariable("userId") Integer userId) {
