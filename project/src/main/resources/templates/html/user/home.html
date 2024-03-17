@@ -1,4 +1,4 @@
-<!doctype html>
+{% comment %} <!doctype html>
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,8 @@
     <!--<link rel="icon" href="img/favicon.png" />
      Place favicon.ico in the root directory -->
      <link rel="stylesheet" type="text/css" href="../../../css/user/home.css" />
-     
+     <!--import the header-->
+     <object type="text/html" data="../header.html" width="100%" height="400px"></object>
 
 
 </head>
@@ -142,5 +143,67 @@
 <footer>
     <!-- Footer content goes here -->
 </footer>
+</body>
+</html> {% endcomment %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../../../css/user/home2.css" />
+    <link rel="stylesheet" type="text/css" href="../header.css">
+    <link rel="stylesheet" type="text/css" href="footer.css">
+</head>
+<body>
+    <header>
+        <!-- Header code here -->
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Welcome to our Jewelry Store</h1>
+            <p>Discover our unique collection of handcrafted jewelry</p>
+            <a href="#" class="cta-button">Shop Now</a>
+        </section>
+        <section class="categories">
+            <h2>Shop by Category</h2>
+            <ul>
+                <li><a href="#"><img src="necklaces.jpg" alt="Necklaces"></a></li>
+                <li><a href="#"><img src="bracelets.jpg" alt="Bracelets"></a></li>
+                <li><a href="#"><img src="earrings.jpg" alt="Earrings"></a></li>
+                <li><a href="#"><img src="rings.jpg" alt="Rings"></a></li>
+            </ul>
+        </section>
+        <section class="featured-products">
+            <h2>Featured Products</h2>
+            <ul>
+                <li>
+                    <a href="#">
+                        <img src="product1.jpg" alt="Product 1">
+                        <h3>Product 1</h3>
+                        <p>$100.00</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="product2.jpg" alt="Product 2">
+                        <h3>Product 2</h3>
+                <p>$150.00</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="product3.jpg" alt="Product 3">
+                        <h3>Product 3</h3>
+                        <p>$200.00</p>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer code here -->
+    </footer>
 </body>
 </html>

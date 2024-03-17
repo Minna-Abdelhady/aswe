@@ -47,6 +47,8 @@ public class UserController {
         return mav;
     }
 
+
+
     @GetMapping("Registration")
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/html/user/registration.html");
