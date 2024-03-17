@@ -41,7 +41,7 @@ public class UserController {
 
     @GetMapping("Home")
     public ModelAndView home() {
-        ModelAndView mav = new ModelAndView("/html/user/home.html");
+        ModelAndView mav = new ModelAndView("/html/user/index.html");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;
