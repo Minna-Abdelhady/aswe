@@ -86,8 +86,8 @@
                             <tr th:each="user: ${users}">
                                 <td th:text="${user.id}"/>
                                 <td th:text="${user.FName}"/>
-                                <td th:text="${user.LName}" />
-                                <td th:text="${user.Email}" />
+                                <td th:text="${user.LName}"/>
+                                <td th:text="${user.Email}"/>
                                 <td><a th:href="@{'/Admin/edit-user/' + ${user.id}}">Edit</a></td>
                             </tr>
                         </tbody>

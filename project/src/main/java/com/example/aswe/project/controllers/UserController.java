@@ -200,7 +200,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("store")
+    @GetMapping("/store")
     public String getstorePage() {
         return "  store";
     }
