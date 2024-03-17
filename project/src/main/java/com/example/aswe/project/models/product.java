@@ -10,115 +10,68 @@ import java.util.Date;
 public class product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-    private String brand;
-    private String category;
-    private double price;
-    @Column(columnDefinition = "TEXT")
-    private String description;
-    private Date createdAt;
-    private String ImgFileName;
+    private Long productId;
+    private String productName;
+    private String productDescription;
+    private Double productPrice;
+    private String status;
+    private byte[] productImg;
+    private String productImgUrl;
 
-        public product() {}
-
-
-
-    public product(int id, String name, String brand, String category, double price, String description, Date createdAt, String ImgFileName) {
-        this.id = id;
-        this.name = name;
-        this.brand = brand;
-        this.category = category;
-        this.price = price;
-        this.description = description;
-        this.createdAt = createdAt;
-        this.ImgFileName = ImgFileName;
+    public Long getProductId() {
+        return productId;
     }
 
-
-    public int getId() {
-        return this.id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getProductName() {
+        return productName;
     }
 
-    public String getName() {
-        return this.name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public String getBrand() {
-        return this.brand;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public Double getProductPrice() {
+        return productPrice;
     }
 
-    public String getCategory() {
-        return this.category;
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public String getStatus() {
+        return status;
     }
 
-    public double getPrice() {
-        return this.price;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public byte[] getProductImg() {
+        return productImg;
     }
 
-    public String getDescription() {
-        return this.description;
+    public void setProductImg(byte[] productImg) {
+        this.productImg = productImg;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getProductImgUrl() {
+        return productImgUrl;
     }
 
-    public Date getCreatedAt() {
-        return this.createdAt;
+    public void setProductImgUrl(String productImgUrl) {
+        this.productImgUrl = productImgUrl;
     }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getImgFileName() {
-        return this.ImgFileName;
-    }
-
-    public void setImgFileName(String ImgFileName) {
-        this.ImgFileName = ImgFileName;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", brand='" + getBrand() + "'" +
-            ", category='" + getCategory() + "'" +
-            ", price='" + getPrice() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            ", ImgFileName='" + getImgFileName() + "'" +
-            "}";
-    }
-
-
-    
-
-
-
-
 
 }
