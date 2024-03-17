@@ -13,22 +13,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.ui.Model;
 
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserFeedback;
+import com.example.aswe.project.models.product;
 import com.example.aswe.project.repositories.FeedbackRepository;
 import com.example.aswe.project.repositories.UserRepository;
-
+import com.example.aswe.project.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/User")
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
 
-    // NOT HERE (IN THE ADMIN CONTROLLER)
     @GetMapping("")
     public ModelAndView getUsers() {
         ModelAndView mav = new ModelAndView("/html/user/list-users.html");
@@ -36,6 +38,7 @@ public class UserController {
         mav.addObject("users", users);
         return mav;
     }
+
     @GetMapping("Home")
     public ModelAndView home() {
         ModelAndView mav = new ModelAndView("/html/user/home.html");
@@ -43,6 +46,7 @@ public class UserController {
         mav.addObject("user", newUser);
         return mav;
     }
+
     @GetMapping("Registration")
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/html/user/registration.html");
@@ -68,23 +72,30 @@ public class UserController {
     }
 
     @PostMapping("Login")
-    public RedirectView loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password,HttpSession session) {
+    public RedirectView loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password,
+            HttpSession session) {
+        System.out.println("Login");
         // User dbUser = this.userRepository.findByEmail(Email);
         User dbUser = new User();
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
-            if (user.getEmail() == Email) {
+            if (user.getEmail().equals(Email)) {
                 dbUser = user;
                 break;
             }
         }
+        System.out.println("Login");
+        System.out.println(dbUser.getEmail());
+
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {
-            session.setAttribute(Email,dbUser.getEmail() ); 
-            return new RedirectView("Home");
+            session.setAttribute(Email, dbUser.getEmail());
+            return new RedirectView("/User/Home");
         } else {
-            return new RedirectView("Login");
+            // Working password wrong
+            return new RedirectView("/User/Login");
         }
+        // return new RedirectView("/User/Home");
     }
 
     @GetMapping("profile/{userId}")
@@ -173,6 +184,18 @@ public class UserController {
     public String addFeedback(@ModelAttribute UserFeedback feedback) {
         this.feedbackRepository.save(feedback); // save the new feedback record
         return "Feedback saved successfully";
+    }
+
+    public class HomeController {
+        @Autowired
+        private ProductService productService;
+
+        @GetMapping("/")
+        public String home(Model model) {
+            List<product> products = productService.findAll();
+            model.addAttribute("products", products);
+            return "home";
+        }
     }
 
 }
