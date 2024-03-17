@@ -26,11 +26,12 @@ public class ProductController {
     }
 @PostMapping("/product")
 public String saveProduct(@ModelAttribute product newProduct, @RequestParam("productImg") MultipartFile productImg) throws IOException {
-    if (!productImg.isEmpty()) {
+    if (newProduct != null) {
         newProduct.setProductImg(productImg.getBytes());
+        productRepository.save(newProduct);
+        return "Product saved successfully";
     }
-    productRepository.save(newProduct);
-    return "Product saved successfully";
+    return "Fail";
 }
 
 @GetMapping("store")
