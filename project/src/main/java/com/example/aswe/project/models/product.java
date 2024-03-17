@@ -2,9 +2,6 @@ package com.example.aswe.project.models;
 import jakarta.persistence.*;
 import java.util.Date;
 
-
-
-
 @Entity
 @Table(name="product")
 public class product {
