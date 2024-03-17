@@ -34,7 +34,36 @@
 // @RequestMapping("/products")
 // public class ProductController {
 //     @Autowired
+//<<<<<<< HEAD
+//     private ProductRepository productRepository;
+//     @GetMapping("/insertproduct")
+//     public ModelAndView insertProduct() {
+//         ModelAndView mav = new ModelAndView("insertProduct.html");
+//         product newProduct = new product();
+//         mav.addObject("product", newProduct);
+//         return mav;
+//     }
+// @PostMapping("/product")
+// public String saveProduct(@ModelAttribute product newProduct, @RequestParam("productImg") MultipartFile productImg) throws IOException {
+//     if (newProduct != null) {
+//         newProduct.setProductImg(productImg.getBytes());
+//     //     productRepository.save(newProduct);
+    //     return "Product saved successfully";
+   // }
+   // return "Fail";
+// }
+
+// @GetMapping("store")
+// public ModelAndView getProducts() {
+//     ModelAndView mav = new ModelAndView("store.html"); // Assuming "store.html" is your store HTML page
+//     List<product> products = this.productRepository.findAll();
+//     mav.addObject("products", products);
+//     return mav;
+// }
+
+//=======
 //     private productRepository productService;
+//>>>>>>> 1d9c09559cae1a723bb136addb00c74956692351
     
 //     @GetMapping("")
 //     public String showAllproducts(Model model){

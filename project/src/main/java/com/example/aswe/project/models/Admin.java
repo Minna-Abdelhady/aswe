@@ -1,3 +1,4 @@
+
 package com.example.aswe.project.models;
 
 import jakarta.persistence.Entity;

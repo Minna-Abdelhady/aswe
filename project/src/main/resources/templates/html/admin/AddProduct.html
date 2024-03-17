@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title> Add product</title>
+        <link re="stylesheet" href="addproduct.css">
+    </head>
+    <body>
+        <h2>Add Product</h2>
+        <form th:action="@{/admin/add-product}" th:object="${Product}" method="POST">
+         <input type="text" th:field="*{productName}" placeholder="Enter the Product Name">
+         <br> <br>
+         <input type="text" th:field="*{productDescription}" placeholder="Enter Description for the product">
+         <br> <br>
+         <input type="text" th:field="*{productPrice}"  pkaceholder="Enter product price">
+         <br> <br>
+         <input type="text" th:field="*{status}" placeholder="Enter product Status">
+         <br> <br>
+        <input type="submit">
+        </form>
+        <a href="home.html">Go to Home</a>
+    </body>
+</html>
