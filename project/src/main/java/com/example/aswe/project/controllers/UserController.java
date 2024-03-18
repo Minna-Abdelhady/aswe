@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserFeedback;
+import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.models.product;
 import com.example.aswe.project.repositories.FeedbackRepository;
 import com.example.aswe.project.repositories.UserRepository;
@@ -67,6 +68,11 @@ public class UserController {
         }
         String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encoddedPassword);
+        // user.setType();
+        UserType userType = new UserType();
+        userType.setId(2); // Assuming id 2 corresponds to User type
+        userType.setName(UserType.TYPE_USER);
+        user.setType(userType);
         userRepository.save(user);
         return new RedirectView("/User/Home");
     }
@@ -93,7 +99,8 @@ public class UserController {
                 break;
             }
         }
-        if (dbUser == null) {// User not found
+        if (dbUser == null) {
+            // User not found
             return new RedirectView("/User/Login");
         }
         if (dbUser.getType().getId() == 1) {
