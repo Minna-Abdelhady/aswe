@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,6 +54,21 @@ public class adminController {
         Admin newAdmin = new Admin();
         mav.addObject("admin", newAdmin);
         return mav;
+    }
+   @GetMapping("/add-user")
+    public ModelAndView addUser() {
+        ModelAndView mav = new ModelAndView("/html/admin/add-user.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
+
+    @PostMapping("/add-user")
+    public RedirectView saveUser( @ModelAttribute User user) {
+
+        userRepository.save(user);
+        return new RedirectView("/Admin/Home");        
+        
     }
 
     @GetMapping("List-Users")
