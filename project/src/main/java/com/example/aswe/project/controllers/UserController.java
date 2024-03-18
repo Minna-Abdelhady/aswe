@@ -96,6 +96,9 @@ public class UserController {
         if (dbUser == null) {// User not found
             return new RedirectView("/User/Login");
         }
+        if (dbUser.getType().getId() == 1) {
+            return new RedirectView("/Admin/Dashboard");
+        }
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {
             session.setAttribute(Email, dbUser.getEmail());
