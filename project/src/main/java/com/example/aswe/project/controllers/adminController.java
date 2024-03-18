@@ -11,8 +11,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.project.models.Admin;
 import com.example.aswe.project.models.User;
+import com.example.aswe.project.models.product;
 import com.example.aswe.project.repositories.AdminRepository;
 import com.example.aswe.project.repositories.UserRepository;
+import com.example.aswe.project.repositories.productRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +31,9 @@ public class adminController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private productRepository ProductRepository;
 
     @GetMapping("Dashboard")
     public ModelAndView dashboard() {
@@ -79,7 +84,13 @@ public class adminController {
         return new RedirectView("/Admin/List-Users");
     }
 
-    // @GetMapping("Add-User")
-    // public ModelAndView 
+    @GetMapping("List-products")
+    public ModelAndView getproducts(){
+        ModelAndView mav = new ModelAndView("html/admin/list-products.html");
+        List<product> Products = this.ProductRepository.findAll();
+        mav.addObject("products",Products);
+        return mav;
+    }
+    
     
 }
