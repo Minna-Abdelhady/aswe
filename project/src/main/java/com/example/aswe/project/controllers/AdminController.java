@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 
 @RestController
@@ -91,6 +95,19 @@ public class adminController {
         mav.addObject("products",Products);
         return mav;
     }
-    
-    
+
+@GetMapping("add-product")
+public ModelAndView addproduct(){
+    ModelAndView mav=new ModelAndView("html/admin/AddProduct.html");
+    product newProduct= new product();
+    mav.addObject("Product",newProduct);
+    return mav;
+}
+@PostMapping("add-product")
+public String saveproduct(@ModelAttribute product newProduct){
+   this.ProductRepository.save(newProduct);
+   return "Product Added";
+}
+
+
 }
