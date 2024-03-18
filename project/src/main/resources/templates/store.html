@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jewelry Store</title>
-    <link rel="stylesheet" th:href="@{/css/user/Store.css}" />
-  </head>
+    <link rel="stylesheet" th:href="@{/css/user/store.css}" />
+</head>
 
 <body>
-  <header th:include="../templates/partials/header.html"></header>
+    <header th:include="../templates/partials/header.html"></header>
 
-    
     <main>
         <section class="product">
-            <img src="img/download.jpg" alt="Kundan Choker Necklace">
+            <img th:src="@{/images/download.jpg}" alt="Kundan Choker Necklace" />
             <h2>Kundan Choker Necklace</h2>
             <p>gold Necklace with green stones</p>
             <p>1000$</p>
@@ -21,7 +21,7 @@
         </section>
 
         <section class="product">
-            <img src="img/download1.jpg" alt="Kundan Choker Jewellery">
+            <img th:src="@{/images/download1.jpg}" alt="Kundan Choker Jewellery" />
             <h2>Kundan Choker Jewellery</h2>
             <p>gold Jewellery with green stones</p>
             <p>2000$</p>
@@ -29,7 +29,7 @@
         </section>
 
         <section class="product">
-            <img src="img/download2.jpg" alt="Kundan Choker Necklace">
+            <img th:src="@{/images/download2.jpg}" alt="Kundan Choker Necklace" />
             <h2>Kundan Choker Necklace</h2>
             <p>gold Necklace</p>
             <p>3000$</p>
@@ -37,36 +37,31 @@
         </section>
 
         <section class="product">
-            <img src="img/download3.jpg" alt="Diamond and Gold Jewellery">
+            <img th:src="@{/images/download3.jpg}" alt="Diamond and Gold Jewellery" />
             <h2>Diamond and Gold Jewellery</h2>
             <p>Diamond and Gold Jewellery</p>
             <p>1500$</p>
-
             <button>Add to Cart</button>
         </section>
 
         <section class="product">
-            <img src="img/download4.jpg" alt="Dimond Necklace">
+            <img th:src="@{/images/download4.jpg}" alt="Dimond Necklace" />
             <h2>Maria Designer Petal Necklace</h2>
             <p>Dimond Necklace</p>
             <p>2500$</p>
-
             <button>Add to Cart</button>
         </section>
+
         <section class="product">
-            <img src="img/download5.jpg" alt="Dimond Necklace">
+            <img th:src="@{/images/download5.jpg}" alt="Dimond Necklace" />
             <h2>Maria Designer Petal Necklace</h2>
             <p>Dimond Necklace</p>
             <p>3500$</p>
-
             <button>Add to Cart</button>
         </section>
-
-       
-
     </main>
 
     <footer th:include="../templates/partials/footer.html"></footer>
-
 </body>
+
 </html>
