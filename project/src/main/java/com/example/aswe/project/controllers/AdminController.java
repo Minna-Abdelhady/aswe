@@ -11,24 +11,33 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.project.models.Admin;
 import com.example.aswe.project.models.User;
+import com.example.aswe.project.models.product;
 import com.example.aswe.project.repositories.AdminRepository;
 import com.example.aswe.project.repositories.UserRepository;
+import com.example.aswe.project.repositories.productRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 
 @RestController
 @RequestMapping("/Admin")
-public class AdminController {
+public class adminController {
     
     @Autowired
-    private AdminRepository adminRepository;
+    private AdminRepository AdminRepository;
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private productRepository ProductRepository;
 
     @GetMapping("Dashboard")
     public ModelAndView dashboard() {
@@ -78,8 +87,41 @@ public class AdminController {
         this.userRepository.save(user);
         return new RedirectView("/Admin/List-Users");
     }
+  
+    @GetMapping("List-products")
+    public ModelAndView getproducts(){
+        ModelAndView mav = new ModelAndView("html/admin/list-products.html");
+        List<product> Products = this.ProductRepository.findAll();
+        mav.addObject("products",Products);
+        return mav;
+    }
 
-    // @GetMapping("Add-User")
-    // public ModelAndView 
-    
+@GetMapping("add-product")
+public ModelAndView addproduct(){
+    ModelAndView mav=new ModelAndView("html/admin/AddProduct.html");
+    product newProduct= new product();
+    mav.addObject("Product",newProduct);
+    return mav;
+}
+@PostMapping("add-product")
+public String saveproduct(@ModelAttribute product newProduct){
+   this.ProductRepository.save(newProduct);
+   return "Product Added";
+}
+
+@GetMapping("delete-product/{productId}")
+public ModelAndView deleteAccount(@PathVariable("productId") int ProductId) {
+    product Product = this.ProductRepository.findByProductId(ProductId);
+    if (ProductId !=0) {
+        this.ProductRepository.delete(Product);
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "Deleted successfully");
+        return errorMav;
+    }
+    ModelAndView errorMav = new ModelAndView("error.html");
+    errorMav.addObject("errorMessage", "User not found");
+    return errorMav;
+}
+
+
 }

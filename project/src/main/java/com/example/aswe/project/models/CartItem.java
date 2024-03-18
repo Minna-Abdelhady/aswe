@@ -24,6 +24,7 @@
 // // @Table(name="cart_item")
 
 // @Entity
+//<<<<<< Updated upstream
 // public class CartItem {
 //     @Id
 //     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +39,24 @@
 //    // @OneToOne(fetch = FetchType.EAGER)
 //    // @JoinColumn(name="product_id",referencedColumnName = "product_id")
 //     //private product Product;
+//=======
+// @Table(name="cart_item")
+
+//@Entity
+//public class CartItem {
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private long id;
+    //@Column(name="order_detailed_id")
+    //@ManyToOne
+    //private shoppingcart ShoppingCart;
+    //private Long productId;
+   // private int quantity;
+    //private double totalPrice;
+   // @OneToOne(fetch = FetchType.EAGER)
+   // @JoinColumn(name="product_id",referencedColumnName = "product_id")
+    //private product Product;
+//>>>>>>> Stashed changes
      
 
 //     public long getId() {

@@ -1,11 +1,78 @@
-<html xmlns:th="http://www.thymleaf.org">
-    <head>
-        <title> Add product</title>
-        <link re="stylesheet" href="addproduct.css">
-    </head>
-    <body>
-        <h2>Add Product</h2>
-        <form th:action="@{/admin/add-product}" th:object="${Product}" method="POST">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Users</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Custom styles -->
+    <style>
+        /* Add your custom styles here */
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class="fas fa-user"></i> Username <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- <object type="text/html" data="AdminNavBar.html"></object> -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/Admin/Dashboard">
+                                <i class="fas fa-home"></i>
+                                Dashboard <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/List-Users">
+                                <i class="fas fa-users"></i>
+                                List Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                Reports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <h1 class="mt-5">Add Product</h1>
+        
+        <form th:action="@{/Admin/add-product}" th:object="${Product}" method="POST">
          <input type="text" th:field="*{productName}" placeholder="Enter the Product Name">
          <br> <br>
          <input type="text" th:field="*{productDescription}" placeholder="Enter Description for the product">
@@ -16,6 +83,15 @@
          <br> <br>
         <input type="submit">
         </form>
+    </div>
+</main>
+</div>
+</div>
+       <!-- Bootstrap JS, jQuery, and Popper.js -->
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
         <a href="home.html">Go to Home</a>
     </body>
 </html>
