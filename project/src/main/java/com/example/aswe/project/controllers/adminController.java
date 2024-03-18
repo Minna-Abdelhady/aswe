@@ -39,35 +39,12 @@ public class AdminController {
     @Autowired
     private productRepository ProductRepository;
 
-    @GetMapping("Home")
-    public ModelAndView home() {
-        ModelAndView mav = new ModelAndView("/html/user/index.html");
-        Admin newAdmin = new Admin();
-        mav.addObject("admin", newAdmin);
-        return mav;
-    }
-
     @GetMapping("Dashboard")
     public ModelAndView dashboard() {
         ModelAndView mav = new ModelAndView("/html/admin/adminDashboard.html");
         Admin newAdmin = new Admin();
         mav.addObject("admin", newAdmin);
         return mav;
-    }
-   @GetMapping("/add-user")
-    public ModelAndView addUser() {
-        ModelAndView mav = new ModelAndView("/html/admin/add-user.html");
-        User newUser = new User();
-        mav.addObject("user", newUser);
-        return mav;
-    }
-
-    @PostMapping("/add-user")
-    public RedirectView saveUser( @ModelAttribute User user) {
-
-        userRepository.save(user);
-        return new RedirectView("/Admin/Home");        
-        
     }
 
     @GetMapping("List-Users")
