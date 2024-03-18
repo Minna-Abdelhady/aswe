@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/Admin")
-public class AdminController {
+public class adminController {
     
     @Autowired
     private AdminRepository AdminRepository;
