@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class adminController {
     
     @Autowired
-    private AdminRepository adminRepository;
+    private AdminRepository AdminRepository;
 
     @Autowired
     private UserRepository userRepository;

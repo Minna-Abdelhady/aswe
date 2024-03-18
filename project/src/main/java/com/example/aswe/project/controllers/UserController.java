@@ -201,8 +201,9 @@ public class UserController {
     }
 
     @GetMapping("/store")
-    public String getstorePage() {
-        return "  store";
+    public ModelAndView homePage() {
+        ModelAndView modelAndView = new ModelAndView("store.html"); 
+        return modelAndView;
     }
 
 }

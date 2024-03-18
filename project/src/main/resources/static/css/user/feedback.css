@@ -1,84 +1,63 @@
-/*style.css */
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 
 body {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #bde5d2;
-  font-family: "Poppins", sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* light grey background */
+  color: #333; /* dark grey text */
 }
 
-.textup {
+h3 {
   text-align: center;
-  color: rgb(11, 118, 11);
-  font-weight: 700;
-}
-
-i {
-  margin-right: 3px;
+  margin-top: 20px;
+  color: #333; /* dark grey heading text */
 }
 
 .form-box {
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(36, 67, 40, 0.8);
-  padding: 15px;
-  border-radius: 8px;
-  width: 500px;
-}
-
-form {
-  max-width: 400px;
+  width: 60%;
   margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #ccc; /* light grey border */
+  border-radius: 10px;
+  background-color: #fff; /* white background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
 }
 
-.radio-group {
-  display: flex;
-  margin-bottom: 16px;
+.form-box .textup {
+  margin-bottom: 15px;
+  color: #555; /* grey text */
 }
 
-input[type="radio"] {
-  margin-right: 8px;
-}
-
-label {
+.form-box label {
   display: block;
   margin-bottom: 8px;
-  font-size: 17px;
-  color: green;
-  font-weight: 600;
+  color: #333; /* dark grey label text */
 }
 
-input,
-textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 12px;
-  box-sizing: border-box;
-  border-radius: 10px;
-}
-
-button {
-  background-color: #368b44;
-  color: #fff;
+.form-box input[type="text"],
+.form-box input[type="email"],
+.form-box input[type="tel"],
+.form-box textarea {
+  width: calc(100% - 16px); /* adjust for padding */
   padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc; /* light grey border */
+  border-radius: 5px;
+}
+
+.form-box .radio-group input[type="radio"] {
+  margin-right: 10px;
+}
+
+.form-box button[type="submit"] {
+  background-color: #007bff; /* blue background */
+  color: #fff; /* white text */
   border: none;
-  border-radius: 25px;
+  padding: 12px 24px;
+  border-radius: 5px;
   cursor: pointer;
-  width: 100%;
-  font-size: 15px;
-  transition: 0.2s linear;
+  transition: background-color 0.3s ease; /* smooth hover effect */
 }
 
-button:hover {
-  background-color: #0a6808;
-  border: none;
-  transform: translateY(-10px);
-}
-
-h1 {
-  color: green;
+.form-box button[type="submit"]:hover {
+  background-color: #0056b3; /* darker blue on hover */
 }
