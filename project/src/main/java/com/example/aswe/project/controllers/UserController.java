@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +21,7 @@ import org.springframework.validation.BindingResult;
 
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserFeedback;
+import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.models.product;
 import com.example.aswe.project.repositories.FeedbackRepository;
 import com.example.aswe.project.repositories.UserRepository;
@@ -59,6 +59,14 @@ public class UserController {
         return mav;
     }
 
+    // @GetMapping("Homepage")
+    // public ModelAndView homepage(@PathVariable("userId") Integer userId){
+    //     ModelAndView mav = new ModelAndView("/html/user/index.html");
+    //     User user = this.userRepository.findByid(userId);
+    //     mav.addObject("user", user);
+    //     return mav;
+    // }
+
     @GetMapping("/Registration")
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/html/user/registration.html");
@@ -74,6 +82,11 @@ public class UserController {
         }
         String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encoddedPassword);
+        // user.setType();
+        UserType userType = new UserType();
+        userType.setId(2); // id 2 corresponds to User type
+        userType.setName(UserType.TYPE_USER);
+        user.setType(userType);
         userRepository.save(user);
         return new RedirectView("/User/Home");
     }
@@ -100,8 +113,12 @@ public class UserController {
                 break;
             }
         }
-        if (dbUser == null) {// User not found
+        if (dbUser == null) {
+            // User not found
             return new RedirectView("/User/Login");
+        }
+        if (dbUser.getType().getId() == 1) {
+            return new RedirectView("/Admin/Dashboard");
         }
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {

@@ -1,5 +1,6 @@
 package com.example.aswe.project.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -20,10 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 
 @RestController
@@ -50,7 +47,14 @@ public class adminController {
     @GetMapping("List-Users")
     public ModelAndView getUsers(){
         ModelAndView mav = new ModelAndView("html/admin/list-users.html");
-        List<User> users = this.userRepository.findAll();
+        List<User> persons = this.userRepository.findAll();
+        List<User> users = new ArrayList<>();
+
+        for (User person : persons) {
+            if (person.getType().getId() == 2) {
+                users.add(person);
+            }
+        }
         mav.addObject("users", users);
         return mav;
     }
