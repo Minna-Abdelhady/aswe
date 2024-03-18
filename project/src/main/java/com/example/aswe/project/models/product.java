@@ -7,7 +7,7 @@ import java.util.List;
 public class product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
+    private int productId;
     private String productName;
     private String productDescription;
     private Double productPrice;
@@ -15,11 +15,11 @@ public class product {
     private byte[] productImg;
     private String productImgUrl;
 
-    public Long getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 

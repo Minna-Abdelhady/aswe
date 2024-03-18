@@ -87,7 +87,7 @@ public class adminController {
         this.userRepository.save(user);
         return new RedirectView("/Admin/List-Users");
     }
-
+  
     @GetMapping("List-products")
     public ModelAndView getproducts(){
         ModelAndView mav = new ModelAndView("html/admin/list-products.html");
@@ -107,6 +107,20 @@ public ModelAndView addproduct(){
 public String saveproduct(@ModelAttribute product newProduct){
    this.ProductRepository.save(newProduct);
    return "Product Added";
+}
+
+@GetMapping("delete-product/{productId}")
+public ModelAndView deleteAccount(@PathVariable("productId") int ProductId) {
+    product Product = this.ProductRepository.findByProductId(ProductId);
+    if (ProductId !=0) {
+        this.ProductRepository.delete(Product);
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "Deleted successfully");
+        return errorMav;
+    }
+    ModelAndView errorMav = new ModelAndView("error.html");
+    errorMav.addObject("errorMessage", "User not found");
+    return errorMav;
 }
 
 
