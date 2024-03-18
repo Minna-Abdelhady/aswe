@@ -39,6 +39,14 @@ public class adminController {
     @Autowired
     private productRepository ProductRepository;
 
+    @GetMapping("Home")
+    public ModelAndView home() {
+        ModelAndView mav = new ModelAndView("/html/user/index.html");
+        Admin newAdmin = new Admin();
+        mav.addObject("admin", newAdmin);
+        return mav;
+    }
+
     @GetMapping("Dashboard")
     public ModelAndView dashboard() {
         ModelAndView mav = new ModelAndView("/html/admin/adminDashboard.html");
