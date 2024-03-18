@@ -44,6 +44,14 @@ public class adminController {
         return mav;
     }
 
+    @GetMapping("Reports")
+    public ModelAndView reports() {
+        ModelAndView mav = new ModelAndView("/html/admin/reports.html");
+        Admin newAdmin = new Admin();
+        mav.addObject("admin", newAdmin);
+        return mav;
+    }
+
     @GetMapping("List-Users")
     public ModelAndView getUsers(){
         ModelAndView mav = new ModelAndView("html/admin/list-users.html");
