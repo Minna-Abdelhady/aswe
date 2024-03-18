@@ -52,6 +52,14 @@ public class UserController {
         return mav;
     }
 
+    // @GetMapping("Homepage")
+    // public ModelAndView homepage(@PathVariable("userId") Integer userId){
+    //     ModelAndView mav = new ModelAndView("/html/user/index.html");
+    //     User user = this.userRepository.findByid(userId);
+    //     mav.addObject("user", user);
+    //     return mav;
+    // }
+
     @GetMapping("/Registration")
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/html/user/registration.html");
@@ -69,7 +77,7 @@ public class UserController {
         user.setPassword(encoddedPassword);
         // user.setType();
         UserType userType = new UserType();
-        userType.setId(2); // Assuming id 2 corresponds to User type
+        userType.setId(2); // id 2 corresponds to User type
         userType.setName(UserType.TYPE_USER);
         user.setType(userType);
         userRepository.save(user);
