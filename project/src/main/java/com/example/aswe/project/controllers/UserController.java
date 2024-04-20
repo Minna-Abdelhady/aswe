@@ -7,6 +7,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,7 @@ import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.models.product;
 import com.example.aswe.project.repositories.FeedbackRepository;
 import com.example.aswe.project.repositories.UserRepository;
+import com.example.aswe.project.repositories.productRepository;
 import com.example.aswe.project.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +38,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private productRepository ProductRepository;
 
     @GetMapping("")
     public ModelAndView getUsers() {
@@ -130,6 +136,19 @@ public class UserController {
         }
     }
 
+    @GetMapping("List-products")
+    public ModelAndView getproducts(){
+        ModelAndView mav = new ModelAndView("html/user/list-products.html");
+        List<product> Products = this.ProductRepository.findAll();
+        mav.addObject("products",Products);
+        return mav;
+    }
+
+    // @GetMapping("List-products")
+    // public ResponseEntity getproducts(){
+    //     List<product> Products = this.ProductRepository.findAll();
+    //     return new ResponseEntity<>(Products, HttpStatus.OK);
+    // }
 
     // @GetMapping("Registration")
     // public ModelAndView addUser() {
