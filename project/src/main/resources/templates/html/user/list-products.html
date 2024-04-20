@@ -1,31 +1,21 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymleaf.org">
-    <head>
-        <title>
-            List Products
-        </title>
-        <link rel="stylesheet" href="../../../css/user/tables.css">
-    </head>
-    <body>
-        <h2>List Products </h2>
-        <table id="users">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="product: ${products}">
-                    <td th:text="${product.productId}"/>
-                    <td th:text="${product.productName}"/>
-                    <td th:text="${product.productDescription}"/>
-                    <td th:text="${product.productPrice}"/>
-                    <td th:text="${product.status}"/>
-                </tr>
-            </tbody>
-        </table>
-    </body>
+<head>
+    <title>List Products</title>
+    <link rel="stylesheet" href="../../../css/user/cards.css">
+</head>
+<body>
+    <h2>List Products</h2>
+    <div class="product-container">
+        <div class="product-card" th:each="product: ${products}">
+            <!-- <img class="product-image" th:src="${product.imageUrl}" alt="Product Image"> -->
+            <div class="product-details">
+                <p class="product-name" th:text="${product.productName}"></p>
+                <p class="product-description" th:text="${product.productDescription}"></p>
+                <p class="product-price" th:text="'Price: ' + ${product.productPrice}"></p>
+                <p class="product-status" th:text="${product.status}"></p>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
