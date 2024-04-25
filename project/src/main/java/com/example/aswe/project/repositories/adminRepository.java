@@ -11,7 +11,7 @@ import com.example.aswe.project.models.Admin;
 import com.example.aswe.project.models.User;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Integer> {
+public interface adminRepository extends JpaRepository<Admin, Integer> {
     
     // @Query("SELECT u FROM User u WHERE u.type.id = :userTypeId")
     // List<User> findByUserTypeId(@Param("userTypeId") int userTypeId);

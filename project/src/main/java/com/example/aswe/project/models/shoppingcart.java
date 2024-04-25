@@ -1,78 +1,79 @@
-//package com.example.aswe.project.models;
+package com.example.aswe.project.models;
 
-//import jakarta.persistence.CascadeType;
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
-//import jakarta.persistence.Id;
-// import jakarta.persistence.OneToMany;
-// import java.util.HashSet;
-// import java.util.Set;
-// import java.util.Objects;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import java.util.Objects;
 
-//@Entity
-//public class shoppingcart {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private long userId;
-
-    // @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private Set<CartItem> items = new HashSet<>();
-
-    // public long getUserId() {
-    //     return userId;
-    // }
-
-    // public void setUserId(long userId) {
-    //     this.userId = userId;
-    // }
-
-    // public Set<CartItem> getItems() {
-    //     return items;
-    // }
-
-    // public void setItems(Set<CartItem> items) {
-    //     this.items = items;
-    // }
+@Entity
+public class shoppingCart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
 
 
-    //public shoppingcart() {
-    //}
+   
+    
+   
 
-    //public shoppingcart(long userId) {
-        //this.userId = userId;
-    //}
+    public shoppingCart() {
+    }
 
-   // public long getUserId() {
-      //  return this.userId;
-   // }
+    public shoppingCart(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-   // public void setUserId(long userId) {
-        //this.userId = userId;
-   // }
+    public int getId() {
+        return this.id;
+    }
 
-   // public shoppingcart userId(long userId) {
-       // setUserId(userId);
-       // return this;
-   // }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    //@Override
-   // public boolean equals(Object o) {
-       // if (o == this)
-          //  return true;
-       // if (!(o instanceof shoppingcart)) {
-        //    return false;
-       // }
-      //  shoppingcart shoppingcart = (shoppingcart) o;
-      //  return userId == shoppingcart.userId;
-   // }
+    public String getName() {
+        return this.name;
+    }
 
-  
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   // @Override
-   // public String toString() {
-       // return "{" +
-           // " userId='" + getUserId() + "'" +
-          //  "}";
-   // }
-     
+    public shoppingCart id(int id) {
+        setId(id);
+        return this;
+    }
+
+    public shoppingCart name(String name) {
+        setName(name);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof shoppingCart)) {
+            return false;
+        }
+        shoppingCart shoppingCart = (shoppingCart) o;
+        return id == shoppingCart.id && Objects.equals(name, shoppingCart.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            "}";
+    }
+    
+}

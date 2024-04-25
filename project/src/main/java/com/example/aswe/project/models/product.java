@@ -12,8 +12,8 @@ public class product {
     private String productDescription;
     private Double productPrice;
     private String status;
-    private byte[] productImg;
-    private String productImgUrl;
+    // private byte[] productImg;
+    // private String productImgUrl;
 
     public int getProductId() {
         return productId;
@@ -55,21 +55,21 @@ public class product {
         this.status = status;
     }
 
-    public byte[] getProductImg() {
-        return productImg;
-    }
+    // public byte[] getProductImg() {
+    //     return productImg;
+    // }
 
-    public void setProductImg(byte[] productImg) {
-        this.productImg = productImg;
-    }
+    // public void setProductImg(byte[] productImg) {
+    //     this.productImg = productImg;
+    // }
 
-    public String getProductImgUrl() {
-        return productImgUrl;
-    }
+    // public String getProductImgUrl() {
+    //     return productImgUrl;
+    // }
 
-    public void setProductImgUrl(String productImgUrl) {
-        this.productImgUrl = productImgUrl;
-    }
+    // public void setProductImgUrl(String productImgUrl) {
+    //     this.productImgUrl = productImgUrl;
+    // }
 
     public static List<product> findAll() {
         // TODO Auto-generated method stub

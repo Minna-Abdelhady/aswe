@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,8 +15,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.example.aswe.project.models.Admin;
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.product;
-import com.example.aswe.project.repositories.AdminRepository;
+import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.UserRepository;
+//import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.productRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class adminController {
     
     @Autowired
-    private AdminRepository AdminRepository;
+    private adminRepository AdminRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -117,11 +118,21 @@ public ModelAndView addproduct(){
     mav.addObject("Product",newProduct);
     return mav;
 }
+
+
+
 @PostMapping("add-product")
-public String saveproduct(@ModelAttribute product newProduct){
+public RedirectView saveproduct(@ModelAttribute product newProduct){
    this.ProductRepository.save(newProduct);
-   return "Product Added";
+//    System.out.println("Fone");
+   return new RedirectView("/Admin/List-products");
 }
+
+/*@PostMapping("Registration")
+    public String saveUser(@ModelAttribute User user) {
+        this.userRepository.save(user);
+        return "Added";
+    }*/
 
 @GetMapping("delete-product/{productId}")
 public ModelAndView deleteAccount(@PathVariable("productId") int ProductId) {
