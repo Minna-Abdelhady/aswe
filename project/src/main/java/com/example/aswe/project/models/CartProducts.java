@@ -1,5 +1,7 @@
 package com.example.aswe.project.models;
 
+import com.example.aswe.project.repositories.cartRepository;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,17 +17,17 @@ public class CartProducts {
     private int price;
     private int quantity;
     @ManyToOne
-    private shoppingCart ShoppingCart;
+    private ShoppingCart shoppingcart;
 
 
    
 
-    public CartProducts(int id, String name, int price, int quantity,shoppingCart Shoppingcart) {
+    public CartProducts(int id, String name, int price, int quantity,ShoppingCart shoppingcart) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.ShoppingCart =Shoppingcart  ;
+        this.shoppingcart =shoppingcart  ;
     }
 
 
@@ -62,12 +64,12 @@ public class CartProducts {
         this.quantity = quantity;
     }
 
-    public shoppingCart getShoppingCart() {
-        return this.ShoppingCart;
+    public ShoppingCart getShoppingCart() {
+        return this.shoppingcart;
     }
 
-    public void setShoppingCart(shoppingCart ShoppingCart) {
-        this.ShoppingCart = ShoppingCart;
+    public void setShoppingCart(ShoppingCart shoppingcart) {
+        this.shoppingcart = shoppingcart;
     }
     
 }

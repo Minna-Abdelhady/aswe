@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class shoppingCart {
+public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,10 +18,10 @@ public class shoppingCart {
     
    
 
-    public shoppingCart() {
+    public ShoppingCart() {
     }
 
-    public shoppingCart(int id, String name) {
+    public ShoppingCart(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -42,38 +42,38 @@ public class shoppingCart {
         this.name = name;
     }
 
-    public shoppingCart id(int id) {
-        setId(id);
-        return this;
-    }
+    //public ShoppingCart id(int id) {
+        //setId(id);
+       // return this;
+   // }
 
-    public shoppingCart name(String name) {
-        setName(name);
-        return this;
-    }
+    // public ShoppingCart name(String name) {
+    //     setName(name);
+    //     return this;
+    // }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof shoppingCart)) {
-            return false;
-        }
-        shoppingCart shoppingCart = (shoppingCart) o;
-        return id == shoppingCart.id && Objects.equals(name, shoppingCart.name);
-    }
+    // @Override
+    // public boolean equals(Object o) {
+    //     if (o == this)
+    //         return true;
+    //     if (!(o instanceof ShoppingCart)) {
+    //         return false;
+    //     }
+    //     ShoppingCart shoppingCart = (ShoppingCart) o;
+    //     return id == shoppingCart.id && Objects.equals(name, shoppingCart.name);
+    // }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
+    // @Override
+    // public int hashCode() {
+    //     return Objects.hash(id, name);
+    // }
 
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            "}";
-    }
+    // @Override
+    // public String toString() {
+    //     return "{" +
+    //         " id='" + getId() + "'" +
+    //         ", name='" + getName() + "'" +
+    //         "}";
+    // }
     
 }
