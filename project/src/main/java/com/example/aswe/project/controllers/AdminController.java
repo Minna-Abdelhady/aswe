@@ -15,9 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.example.aswe.project.models.Admin;
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.product;
-import com.example.aswe.project.repositories.adminRepository;
+// import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.UserRepository;
-//import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.productRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +29,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/Admin")
 public class adminController {
     
-    @Autowired
-    private adminRepository AdminRepository;
+    // @Autowired
+    // private adminRepository AdminRepository;
 
     @Autowired
     private UserRepository userRepository;

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.aswe.project.models.shoppingCart;
 
-public interface CartRepository extends JpaRepository<shoppingCart,Integer>{
+public interface cartRepository extends JpaRepository<shoppingCart,Integer>{
     shoppingCart findbyshoppingcartID(int id);
 }
