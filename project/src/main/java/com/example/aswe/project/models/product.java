@@ -2,6 +2,8 @@ package com.example.aswe.project.models;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.example.aswe.project.repositories.CartItemsRepository;
+
 @Entity
 @Table(name="product")
 public class product {
@@ -14,6 +16,9 @@ public class product {
     private String status;
     // private byte[] productImg;
     // private String productImgUrl;
+
+    @OneToMany
+    private CartItemsRepository cartItemsRepository;
 
     public int getProductId() {
         return productId;
@@ -54,7 +59,13 @@ public class product {
     public void setStatus(String status) {
         this.status = status;
     }
+    public CartItemsRepository getcartItemsRepository() {
+        return cartItemsRepository;
+    }
 
+    public void setCartItemsRepository(CartItemsRepository cartItemsRepository) {
+        this.cartItemsRepository = cartItemsRepository;
+    }
     // public byte[] getProductImg() {
     //     return productImg;
     // }

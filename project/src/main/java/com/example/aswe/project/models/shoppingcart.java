@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 import java.util.Objects;
 
 @Entity
@@ -12,11 +14,9 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
-
-   
-    
-   
+  
+    @ManyToOne
+    CartProducts cartProducts;
 
     public ShoppingCart() {
     }
@@ -40,6 +40,15 @@ public class ShoppingCart {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public CartProducts getCartProducts() {
+        return this.cartProducts;
+    }
+
+    public void setCartProducts(CartProducts cartProducts ) {
+        this.cartProducts=cartProducts;
     }
 
     //public ShoppingCart id(int id) {

@@ -16,6 +16,13 @@
             <th>Img</th>
         </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+            <tr th:each="product: ${products}">
+            <td th:text="${product.Name}"/>
+            <td th:text="${product.Price}"/>
+            <td  th:text="${product.Img}"/>
+            </tr>
+        </tbody>
     </table>
+    <a href="/html/user/index.html">Go to Home</a>
 </html>

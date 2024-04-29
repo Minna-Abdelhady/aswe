@@ -2,6 +2,8 @@ package com.example.aswe.project.models;
 
 import javax.validation.constraints.NotBlank;
 
+import com.example.aswe.project.repositories.productRepository;
+
 // import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -36,7 +39,12 @@ public class User {
 
     @ManyToOne
     private UserType type;
+    
+    @OneToMany
+    private productRepository ProductRepository;
 
+    @OneToMany
+    private ShoppingCart shoppingCart;
 
     public int getId() {
         return this.id;
@@ -84,6 +92,22 @@ public class User {
 
     public void setType(UserType type) {
         this.type = type;
+    }
+     
+    public productRepository getProductRepository(){
+        return this.ProductRepository;
+    }
+
+    public void setProductRepository(productRepository ProductRepository){
+        this.ProductRepository=ProductRepository;
+    }
+
+    public ShoppingCart getShoppingCart(){
+        return this.shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart){
+        this.shoppingCart=shoppingCart;
     }
 
     // public List<CartItem> getCart() {

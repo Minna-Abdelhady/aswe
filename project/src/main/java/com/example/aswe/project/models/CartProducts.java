@@ -1,6 +1,6 @@
 package com.example.aswe.project.models;
 
-import com.example.aswe.project.repositories.cartRepository;
+import com.example.aswe.project.repositories.CartRepository;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,8 +19,16 @@ public class CartProducts {
     @ManyToOne
     private ShoppingCart shoppingcart;
 
+    @ManyToOne
+    private User user;
 
-   
+    @ManyToOne
+    product Product;
+
+    
+    public CartProducts(){
+
+    }
 
     public CartProducts(int id, String name, int price, int quantity,ShoppingCart shoppingcart) {
         this.id = id;
@@ -71,5 +79,20 @@ public class CartProducts {
     public void setShoppingCart(ShoppingCart shoppingcart) {
         this.shoppingcart = shoppingcart;
     }
-    
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public product getProduct() {
+        return this.Product;
+    }
+
+    public void setProduct(product Product) {
+        this.Product = Product;
+    }
 }
