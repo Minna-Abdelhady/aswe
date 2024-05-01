@@ -37,13 +37,13 @@ public class CartController {
     @Autowired
     private UserRepository userRepository;
    
-  @GetMapping("/cart/{id}")
-  public ModelAndView getshoppingcart(@PathVariable("id") int id) {
-      ModelAndView mav= new ModelAndView("/html/user/list-cart.html");
-      List<CartProducts> cartItems=this.cartItems.findAllByshoppingCartId(id);
-      mav.addObject("cart", cartItems);
-      return mav;
-  }
+  // @GetMapping("/cart/{id}")
+  // public ModelAndView getshoppingcart(@PathVariable("id") int id) {
+  //     ModelAndView mav= new ModelAndView("/html/user/list-cart.html");
+  //     List<CartProducts> cartItems=this.cartItems.findAllByshoppingCartId(id);
+  //     mav.addObject("cart", cartItems);
+  //     return mav;
+  // }
   // @GetMapping("add-product")
   // public ModelAndView addproduct(){
   //   ModelAndView mav= new ModelAndView("/html/user/list-product.html");
@@ -59,31 +59,31 @@ public class CartController {
   //  this.ProductRepository.save(product);
   //  return "Added";
   // }
-  @GetMapping("/add-to-cart/{userId}/{productId}")
- public RedirectView addToCart(@PathVariable("userId") int userId, @PathVariable("productId") int productId) {
-    User user = this.userRepository.findByid(userId);
-    if (user != null) {
-        product Product = this.ProductRepository.findByProductId(productId);
-        if (Product != null) {
-          ShoppingCart shoppingcart=user.getShoppingCart();
-          if(shoppingcart==null){
-            shoppingcart=new ShoppingCart();
-            user.setShoppingCart(shoppingcart);
-            CartProducts cartProducts=new CartProducts();
-            cartProducts.setUser(user);
-            cartProducts.setProduct(Product);
-           // shoppingcart.getCartProducts().add(cartProducts);
-            this.userRepository.save(user);
+//   @GetMapping("/add-to-cart/{userId}/{productId}")
+//  public RedirectView addToCart(@PathVariable("userId") int userId, @PathVariable("productId") int productId) {
+//     User user = this.userRepository.findByid(userId);
+//     if (user != null) {
+//         product Product = this.ProductRepository.findByProductId(productId);
+//         if (Product != null) {
+//           ShoppingCart shoppingcart=user.getShoppingCart();
+//           if(shoppingcart==null){
+//             shoppingcart=new ShoppingCart();
+//             user.setShoppingCart(shoppingcart);
+//             CartProducts cartProducts=new CartProducts();
+//             cartProducts.setUser(user);
+//             cartProducts.setProduct(Product);
+//            // shoppingcart.getCartProducts().add(cartProducts);
+//             this.userRepository.save(user);
             
-          }
+//           }
 
-        } else {
-            ModelAndView errorMav = new ModelAndView("error.html");
-            errorMav.addObject("errorMessage", "Product not found");
-            //return errorMav;
-        }
-    } 
-}
+//         } else {
+//             ModelAndView errorMav = new ModelAndView("error.html");
+//             errorMav.addObject("errorMessage", "Product not found");
+//             //return errorMav;
+//         }
+//     } 
+// }
 
 }
  

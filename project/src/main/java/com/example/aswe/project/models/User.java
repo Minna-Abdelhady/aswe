@@ -40,11 +40,11 @@ public class User {
     @ManyToOne
     private UserType type;
     
-    @OneToMany
-    private productRepository ProductRepository;
+    // @OneToMany
+    // private productRepository ProductRepository;
 
-    @OneToMany
-    private ShoppingCart shoppingCart;
+    // @OneToMany
+    // private ShoppingCart shoppingCart;
 
     public int getId() {
         return this.id;
@@ -94,21 +94,21 @@ public class User {
         this.type = type;
     }
      
-    public productRepository getProductRepository(){
-        return this.ProductRepository;
-    }
+    // public productRepository getProductRepository(){
+    //     return this.ProductRepository;
+    // }
 
-    public void setProductRepository(productRepository ProductRepository){
-        this.ProductRepository=ProductRepository;
-    }
+    // public void setProductRepository(productRepository ProductRepository){
+    //     this.ProductRepository=ProductRepository;
+    // }
 
-    public ShoppingCart getShoppingCart(){
-        return this.shoppingCart;
-    }
+    // public ShoppingCart getShoppingCart(){
+    //     return this.shoppingCart;
+    // }
 
-    public void setShoppingCart(ShoppingCart shoppingCart){
-        this.shoppingCart=shoppingCart;
-    }
+    // public void setShoppingCart(ShoppingCart shoppingCart){
+    //     this.shoppingCart=shoppingCart;
+    // }
 
     // public List<CartItem> getCart() {
     //     return this.cart;
