@@ -41,13 +41,16 @@ public class CartController {
     @Autowired
     private UserRepository userRepository;
    
-   @GetMapping("/cart/{id}")
-   public ModelAndView getshoppingcart(@PathVariable("id") int id) {
-     ModelAndView mav= new ModelAndView("/html/user/list-cart.html");
-     Optional<CartProducts> cartproducts=this.cartItems.findById(id);
-    mav.addObject("cart", cartItems);
-    return mav;
-   }
+  //  @GetMapping("/cart/{id}")
+  //  public ModelAndView getshoppingcart(@PathVariable("id") int id) {
+  //    ModelAndView mav= new ModelAndView("/html/user/list-cart.html");
+  //    CartProducts cartproducts=this.cartItems.findById(id);
+  //    if(cartproducts!=null){
+
+  //    }
+  //   mav.addObject("cart", cartItems);
+  //   return mav;
+  //  }
   // @GetMapping("add-product")
   // public ModelAndView addproduct(){
   //   ModelAndView mav= new ModelAndView("/html/user/list-product.html");
@@ -91,12 +94,31 @@ public class CartController {
     }
     return mav; 
 }
-// @GetMapping("/delete-cartItem/{userId}/{CartProducts_Id}")
-// public ModelAndView deleteItem(@PathVariable("userId")int userId,@PathVariable ("CartProducts_Id") int CartProducts_Id) {
-//   ModelAndView mav= new ModelAndView("/html/user/list-cart.html");
-
-//     return 
-// }
-
+@GetMapping("/delete-cartItem/{userId}/{CartProducts_Id}")
+public ModelAndView deleteItem(@PathVariable("userId")int userId,@PathVariable ("CartProducts_Id") int CartProducts_Id) {
+  ModelAndView mav= new ModelAndView("/html/user/list-cart.html");
+  User user=this.userRepository.findByid(userId);
+  if (user != null) {
+  ShoppingCart shoppingcart=user.getShoppingCart();
+  if(shoppingcart==null){
+     mav.addObject("errorMessage", "shoppin cart is already empty");
+     return mav;
+  }
+  CartProducts cartProductsToDelete=null;
+  for(CartProducts cartproducts: shoppingcart.getCartProductsList()){
+    if(cartproducts.getId()==CartProducts_Id){
+    cartProductsToDelete=cartproducts;
+    break;
+  }
 }
- 
+   if(cartProductsToDelete!=null){
+    shoppingcart.getCartProductsList().remove(CartProducts_Id);
+    userRepository.save(user);
+    mav.addObject("successMessage", "Product deleted from cart successfully");
+    } else {
+      mav.addObject("errorMessage", "CartProduct not found in the shopping cart");
+   }
+}
+return mav;
+}
+}
