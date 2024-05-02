@@ -22,7 +22,7 @@ import org.springframework.validation.BindingResult;
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserFeedback;
 import com.example.aswe.project.models.UserType;
-import com.example.aswe.project.models.product;
+import com.example.aswe.project.models.Product;
 import com.example.aswe.project.repositories.FeedbackRepository;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.productRepository;
@@ -144,7 +144,7 @@ public class UserController {
     @GetMapping("List-products")
     public ModelAndView getproducts(){
         ModelAndView mav = new ModelAndView("html/user/list-products.html");
-        List<product> Products = this.ProductRepository.findAll();
+        List<Product> Products = this.ProductRepository.findAll();
         mav.addObject("products",Products);
         return mav;
     }
@@ -301,7 +301,7 @@ public class UserController {
 
         @GetMapping("/")
         public String home(Model model) {
-            List<product> products = productService.findAll();
+            List<Product> products = productService.findAll();
             model.addAttribute("products", products);
             return "home";
         }

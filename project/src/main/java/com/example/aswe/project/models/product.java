@@ -1,12 +1,21 @@
+
 package com.example.aswe.project.models;
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 import java.util.List;
 
 import com.example.aswe.project.repositories.CartItemsRepository;
 
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+
+import java.util.Objects;
+
 @Entity
 @Table(name="product")
-public class product {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
@@ -14,6 +23,7 @@ public class product {
     private String productDescription;
     private Double productPrice;
     private String status;
+
     // private byte[] productImg;
     // private String productImgUrl;
 
@@ -70,6 +80,7 @@ public class product {
     //     return productImg;
     // }
 
+    
     // public void setProductImg(byte[] productImg) {
     //     this.productImg = productImg;
     // }
@@ -82,7 +93,7 @@ public class product {
     //     this.productImgUrl = productImgUrl;
     // }
 
-    public static List<product> findAll() {
+    public static List<Product> findAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }

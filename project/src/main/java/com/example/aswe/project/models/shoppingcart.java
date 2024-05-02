@@ -5,33 +5,58 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import org.hibernate.annotations.OnDelete;
 
 @Entity
 public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int cartId;
     private String name;
   
+    @OneToMany
+    private List<CartProducts> cartProductsList;
+    
+    @OneToOne
+    private User user;
+
     @ManyToOne
-    CartProducts cartProducts;
+    Product product;
 
     public ShoppingCart() {
     }
 
-    public ShoppingCart(int id, String name) {
-        this.id = id;
+    public ShoppingCart(int cartId, String name,List<CartProducts> cartProductsList) {
+        this.cartId = cartId;
         this.name = name;
+        this.cartProductsList=cartProductsList;
+    }   
+    public User getUser(){
+        return user;
+    }
+    public void setUser(User user){
+        this.user=user;
+    }
+    public Product getProduct(){
+        return product;
+    }
+    public void setProduct(Product product){
+        this.product=product;
     }
 
     public int getId() {
-        return this.id;
+        return this.cartId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.cartId = id;
     }
 
     public String getName() {
@@ -41,14 +66,32 @@ public class ShoppingCart {
     public void setName(String name) {
         this.name = name;
     }
-
-
-    public CartProducts getCartProducts() {
-        return this.cartProducts;
+    public List<CartProducts> getCartProductsList() {
+        return cartProductsList;
     }
 
-    public void setCartProducts(CartProducts cartProducts ) {
-        this.cartProducts=cartProducts;
+    public void setCartProductsList(List<CartProducts> cartProductsList) {
+        this.cartProductsList =cartProductsList;
+    }
+
+    // public CartProducts getCartProducts() {
+    //     return this.cartProducts;
+    // }
+
+    // public void setCartProducts(CartProducts cartProducts ) {
+    //     this.cartProductsList=cartProducts;
+    // }
+    public void addProductToCart(CartProducts cartProduct){
+        if(cartProductsList==null){
+            cartProductsList=new ArrayList<>();
+        }
+        
+            // CartProducts cartproducts=new CartProducts();
+            // cartproducts.setProduct(product);
+            // cartproducts.setUser(user);
+            cartProductsList.add(cartProduct);
+        
+    }
     }
 
     //public ShoppingCart id(int id) {
@@ -85,4 +128,4 @@ public class ShoppingCart {
     //         "}";
     // }
     
-}
+

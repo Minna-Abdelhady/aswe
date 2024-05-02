@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -43,8 +44,8 @@ public class User {
     // @OneToMany
     // private productRepository ProductRepository;
 
-    // @OneToMany
-    // private ShoppingCart shoppingCart;
+    @OneToOne
+    private ShoppingCart shoppingCart;
 
     public int getId() {
         return this.id;
@@ -102,13 +103,13 @@ public class User {
     //     this.ProductRepository=ProductRepository;
     // }
 
-    // public ShoppingCart getShoppingCart(){
-    //     return this.shoppingCart;
-    // }
+    public ShoppingCart getShoppingCart(){
+        return this.shoppingCart;
+    }
 
-    // public void setShoppingCart(ShoppingCart shoppingCart){
-    //     this.shoppingCart=shoppingCart;
-    // }
+    public void setShoppingCart(ShoppingCart shoppingCart){
+        this.shoppingCart=shoppingCart;
+    }
 
     // public List<CartItem> getCart() {
     //     return this.cart;

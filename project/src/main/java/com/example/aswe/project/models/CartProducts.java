@@ -1,5 +1,8 @@
 package com.example.aswe.project.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.aswe.project.repositories.CartRepository;
 
 import jakarta.persistence.Entity;
@@ -7,12 +10,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class CartProducts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int CartProducts_Id;
     private String name;
     private int price;
     private int quantity;
@@ -23,28 +27,32 @@ public class CartProducts {
     private User user;
 
     @ManyToOne
-    product Product;
+   private Product product;
 
-    
+    @OneToMany
+    private List<Product>products= new ArrayList<>();
+
     public CartProducts(){
 
     }
 
-    public CartProducts(int id, String name, int price, int quantity,ShoppingCart shoppingcart) {
-        this.id = id;
+    public CartProducts(int CartProducts_Id, String name, int price, int quantity,ShoppingCart shoppingcart, User user, Product product) {
+        this.CartProducts_Id = CartProducts_Id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.shoppingcart =shoppingcart  ;
+        this.shoppingcart =shoppingcart;
+        this.user=user;
+        this.product=product;
     }
 
 
     public int getId() {
-        return this.id;
+        return this.CartProducts_Id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int CartProducts_Id) {
+        this.CartProducts_Id = CartProducts_Id;
     }
 
     public String getName() {
@@ -88,11 +96,25 @@ public class CartProducts {
         this.user = user;
     }
 
-    public product getProduct() {
-        return this.Product;
+    public Product getProduct() {
+        return this.product;
     }
 
-    public void setProduct(product Product) {
-        this.Product = Product;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    public List<Product>getProducts(){
+        return this.products;
+    }
+    public void setProducts(List<Product> products){
+        this.products=products;
+    }
+    public void addProduct(Product product){
+      products.add(product);
+    }
+
+    public Object stream() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'stream'");
     }
 }

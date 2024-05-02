@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.project.models.Admin;
 import com.example.aswe.project.models.User;
-import com.example.aswe.project.models.product;
+import com.example.aswe.project.models.Product;
 // import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.productRepository;
@@ -105,7 +105,7 @@ public class adminController {
     @GetMapping("List-products")
     public ModelAndView getproducts(){
         ModelAndView mav = new ModelAndView("html/admin/list-products.html");
-        List<product> Products = this.ProductRepository.findAll();
+        List<Product> Products = this.ProductRepository.findAll();
         mav.addObject("products",Products);
         return mav;
     }
@@ -113,7 +113,7 @@ public class adminController {
 @GetMapping("add-product")
 public ModelAndView addproduct(){
     ModelAndView mav=new ModelAndView("html/admin/AddProduct.html");
-    product newProduct= new product();
+    Product newProduct= new Product();
     mav.addObject("Product",newProduct);
     return mav;
 }
@@ -121,7 +121,7 @@ public ModelAndView addproduct(){
 
 
 @PostMapping("add-product")
-public RedirectView saveproduct(@ModelAttribute product newProduct){
+public RedirectView saveproduct(@ModelAttribute Product newProduct){
    this.ProductRepository.save(newProduct);
 //    System.out.println("Fone");
    return new RedirectView("/Admin/List-products");
@@ -135,7 +135,7 @@ public RedirectView saveproduct(@ModelAttribute product newProduct){
 
 @GetMapping("delete-product/{productId}")
 public ModelAndView deleteAccount(@PathVariable("productId") int ProductId) {
-    product Product = this.ProductRepository.findByProductId(ProductId);
+    Product Product = this.ProductRepository.findByProductId(ProductId);
     if (ProductId !=0) {
         this.ProductRepository.delete(Product);
         ModelAndView errorMav = new ModelAndView("error.html");
