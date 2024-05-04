@@ -30,6 +30,15 @@ public class Product {
     // @OneToMany
     // private CartItemsRepository cartItemsRepository;
 
+    public Product() {
+
+    }
+    
+    public Product(String productName, Double productPrice) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+    }
+
     public int getProductId() {
         return productId;
     }

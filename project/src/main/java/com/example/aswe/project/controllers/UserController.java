@@ -40,6 +40,20 @@ public class UserController {
     @Autowired
     private productRepository ProductRepository;
 
+    public UserController(productRepository ProductRepository) {
+        this.ProductRepository = ProductRepository; 
+    }
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository; 
+    }
+
+    public UserController() {}
+
+    public void setProductRepository(productRepository ProductRepository) {
+        this.ProductRepository = ProductRepository;
+    }
+    
     @GetMapping("")
     public ModelAndView getUsers() {
         ModelAndView mav = new ModelAndView("/html/user/list-users.html");
@@ -63,7 +77,7 @@ public class UserController {
         mav.addObject("user", newUser);
         return mav;
     }
-    
+
     @GetMapping("about-us")
     public ModelAndView aboutus() {
         ModelAndView mav = new ModelAndView("/html/user/about.html");
