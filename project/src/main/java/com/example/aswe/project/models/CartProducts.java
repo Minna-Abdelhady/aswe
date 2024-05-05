@@ -3,8 +3,6 @@ package com.example.aswe.project.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.aswe.project.repositories.CartRepository;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -10,9 +10,6 @@ import jakarta.persistence.OneToOne;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import org.hibernate.annotations.OnDelete;
 
 @Entity
 public class ShoppingCart {

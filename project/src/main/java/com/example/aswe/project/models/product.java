@@ -1,17 +1,12 @@
-
 package com.example.aswe.project.models;
-//import jakarta.persistence.*;
-import java.util.List;
 
-import com.example.aswe.project.repositories.CartItemsRepository;
+import java.util.List;
 
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-
-import java.util.Objects;
 
 @Entity
 @Table(name="product")
