@@ -24,11 +24,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 @RestController
 @RequestMapping("/Admin")
 public class adminController {
-    
+
     // @Autowired
     // private adminRepository AdminRepository;
 
@@ -55,7 +54,7 @@ public class adminController {
     }
 
     @GetMapping("List-Users")
-    public ModelAndView getUsers(){
+    public ModelAndView getUsers() {
         ModelAndView mav = new ModelAndView("html/admin/list-users.html");
         List<User> persons = this.userRepository.findAll();
         List<User> users = new ArrayList<>();
@@ -66,6 +65,21 @@ public class adminController {
             }
         }
         mav.addObject("users", users);
+        return mav;
+    }
+
+    @GetMapping("List-Admins")
+    public ModelAndView getAdmins() {
+        ModelAndView mav = new ModelAndView("html/admin/list-admins.html");
+        List<User> persons = this.userRepository.findAll();
+        List<User> admins = new ArrayList<>();
+
+        for (User person : persons) {
+            if (person.getType().getId() == 1) {
+                admins.add(person);
+            }
+        }
+        mav.addObject("admins", admins);
         return mav;
     }
 
@@ -101,51 +115,50 @@ public class adminController {
         this.userRepository.save(user);
         return new RedirectView("/Admin/List-Users");
     }
-  
+
     @GetMapping("List-products")
-    public ModelAndView getproducts(){
+    public ModelAndView getproducts() {
         ModelAndView mav = new ModelAndView("html/admin/list-products.html");
         List<Product> Products = this.ProductRepository.findAll();
-        mav.addObject("products",Products);
+        mav.addObject("products", Products);
         return mav;
     }
 
-@GetMapping("add-product")
-public ModelAndView addproduct(){
-    ModelAndView mav=new ModelAndView("html/admin/AddProduct.html");
-    Product newProduct= new Product();
-    mav.addObject("Product",newProduct);
-    return mav;
-}
+    @GetMapping("add-product")
+    public ModelAndView addproduct() {
+        ModelAndView mav = new ModelAndView("html/admin/AddProduct.html");
+        Product newProduct = new Product();
+        mav.addObject("Product", newProduct);
+        return mav;
+    }
 
+    @PostMapping("add-product")
+    public RedirectView saveproduct(@ModelAttribute Product newProduct) {
+        this.ProductRepository.save(newProduct);
+        // System.out.println("Fone");
+        return new RedirectView("/Admin/List-products");
+    }
 
+    /*
+     * @PostMapping("Registration")
+     * public String saveUser(@ModelAttribute User user) {
+     * this.userRepository.save(user);
+     * return "Added";
+     * }
+     */
 
-@PostMapping("add-product")
-public RedirectView saveproduct(@ModelAttribute Product newProduct){
-   this.ProductRepository.save(newProduct);
-//    System.out.println("Fone");
-   return new RedirectView("/Admin/List-products");
-}
-
-/*@PostMapping("Registration")
-    public String saveUser(@ModelAttribute User user) {
-        this.userRepository.save(user);
-        return "Added";
-    }*/
-
-@GetMapping("delete-product/{productId}")
-public ModelAndView deleteAccount(@PathVariable("productId") int ProductId) {
-    Product Product = this.ProductRepository.findByProductId(ProductId);
-    if (ProductId !=0) {
-        this.ProductRepository.delete(Product);
+    @GetMapping("delete-product/{productId}")
+    public ModelAndView deleteAccount(@PathVariable("productId") int ProductId) {
+        Product Product = this.ProductRepository.findByProductId(ProductId);
+        if (ProductId != 0) {
+            this.ProductRepository.delete(Product);
+            ModelAndView errorMav = new ModelAndView("error.html");
+            errorMav.addObject("errorMessage", "Deleted successfully");
+            return errorMav;
+        }
         ModelAndView errorMav = new ModelAndView("error.html");
-        errorMav.addObject("errorMessage", "Deleted successfully");
+        errorMav.addObject("errorMessage", "User not found");
         return errorMav;
     }
-    ModelAndView errorMav = new ModelAndView("error.html");
-    errorMav.addObject("errorMessage", "User not found");
-    return errorMav;
-}
-
 
 }
