@@ -26,12 +26,14 @@ public class UserTest {
         // Mock repository behavior
         ListCrudRepository<Product, Integer> productRepository = Mockito.mock(ListCrudRepository.class);
         when(productRepository.findAll()).thenReturn(mockProducts);
+        System.out.println(productRepository);
 
         // Call the method         
         productRepository productRepo = Mockito.mock(productRepository.class);
         UserController userController = new UserController();
         userController.setProductRepository(productRepo);
         ModelAndView mav = userController.getproducts();
+        System.out.println(mav);
 
         //Assert view name
         assertEquals("html/user/list-products.html", mav.getViewName());
