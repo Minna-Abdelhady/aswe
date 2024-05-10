@@ -53,6 +53,8 @@ public class adminController {
         return mav;
     }
 
+    // User CRUD
+
     @GetMapping("List-Users")
     public ModelAndView getUsers() {
         ModelAndView mav = new ModelAndView("html/admin/list-users.html");
@@ -65,21 +67,6 @@ public class adminController {
             }
         }
         mav.addObject("users", users);
-        return mav;
-    }
-
-    @GetMapping("List-Admins")
-    public ModelAndView getAdmins() {
-        ModelAndView mav = new ModelAndView("html/admin/list-admins.html");
-        List<User> persons = this.userRepository.findAll();
-        List<User> admins = new ArrayList<>();
-
-        for (User person : persons) {
-            if (person.getType().getId() == 1) {
-                admins.add(person);
-            }
-        }
-        mav.addObject("admins", admins);
         return mav;
     }
 
@@ -116,6 +103,33 @@ public class adminController {
         return new RedirectView("/Admin/List-Users");
     }
 
+    @GetMapping("delete-userAccount/{userId}")
+    public RedirectView deleteUserAccount(@PathVariable("userId") int userId) {
+        User user = this.userRepository.findByid(userId);
+        if (user != null) {
+            this.userRepository.delete(user);
+            return new RedirectView("/Admin/List-Users");
+        }
+        return new RedirectView("/Admin/List-Users");
+    }
+
+    // Admin CRUD
+
+    @GetMapping("List-Admins")
+    public ModelAndView getAdmins() {
+        ModelAndView mav = new ModelAndView("html/admin/list-admins.html");
+        List<User> persons = this.userRepository.findAll();
+        List<User> admins = new ArrayList<>();
+
+        for (User person : persons) {
+            if (person.getType().getId() == 1) {
+                admins.add(person);
+            }
+        }
+        mav.addObject("admins", admins);
+        return mav;
+    }
+
     @GetMapping("edit-admin/{adminId}")
     public ModelAndView editAdminProfile(@PathVariable("adminId") Integer adminId) {
         ModelAndView mav = new ModelAndView("/html/admin/edit-admin.html");
@@ -149,15 +163,7 @@ public class adminController {
         return new RedirectView("/Admin/List-Admins");
     }
 
-    @GetMapping("delete-userAccount/{userId}")
-    public RedirectView deleteUserAccount(@PathVariable("userId") int userId) {
-        User user = this.userRepository.findByid(userId);
-        if (user != null) {
-            this.userRepository.delete(user);
-            return new RedirectView("/Admin/List-Users");
-        }
-        return new RedirectView("/Admin/List-Users");
-    }
+    // Products CRUD
 
     @GetMapping("List-products")
     public ModelAndView getproducts() {
