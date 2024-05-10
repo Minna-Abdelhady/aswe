@@ -163,6 +163,16 @@ public class adminController {
         return new RedirectView("/Admin/List-Admins");
     }
 
+    @GetMapping("delete-adminAccount/{adminId}")
+    public RedirectView deleteAdminAccount(@PathVariable("adminId") int adminId) {
+        User admin = this.userRepository.findByid(adminId);
+        if (admin != null) {
+            this.userRepository.delete(admin);
+            return new RedirectView("/Admin/List-Admins");
+        }
+        return new RedirectView("/Admin/List-Admins");
+    }
+
     // Products CRUD
 
     @GetMapping("List-products")
