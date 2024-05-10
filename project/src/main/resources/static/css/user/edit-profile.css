@@ -13,6 +13,14 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+  
+/* .form-group {
+    margin-bottom: 20px;
+} */
+
+input[type="text"] {
+    width: 100%; /* Make the text inputs fill the container width */
+}
 
 h2 {
     text-align: center;
