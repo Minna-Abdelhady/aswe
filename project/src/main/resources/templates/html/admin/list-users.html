@@ -13,12 +13,14 @@
 </head>
 
 <body>
-    {% include AdminSideNavBar.html %}
+    <header th:include="../templates/partials/AdminTopNavBar.html"></header>
+    <!-- {% include AdminSideNavBar.html %} -->
     
-    {% include AdminTopNavBar.html %}
+    <!-- {% include AdminTopNavBar.html %} -->
 
     <!-- <object type="text/html" data="AdminNavBar.html"></object> -->
     <script src="/js/AdminNavBar.js"></script>
+    <header th:include="../templates/partials/AdminSideNavBar.html"></header>
     
     <div class="container-fluid">
         <div class="row">
