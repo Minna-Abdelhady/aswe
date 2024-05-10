@@ -8,34 +8,21 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> -->
-    <link rel="stylesheet" href="/partials/try.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
 <body>
-    <header th:include="../templates/partials/AdminNavBars.html"></header>
 
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <header th:include="../templates/partials/AdminTopNavBar.html"></header>
-    </nav> -->
-    <!-- <object type="text/html" data="AdminNavBar.html"></object> -->
+    <header th:include="../templates/partials/AdminTopNavBar.html"></header>
 
-    <!-- <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
+
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">-->
-                    <!-- <header th:include="../templates/partials/AdminSideNavBar.html"></header> -->
-                <!-- </div>
-            </nav>  -->
-    <!-- <header th:include="../templates/partials/AdminTopNavBar.html"></header> -->
-    
-    <!-- <div class="container-fluid">
-        <div class="row">
-            <header th:include="../templates/partials/AdminSideNavBar.html"></header>
-            <script src="AdminNavBar.js"></script> -->
-            <!-- <script src="/partials/adminSideNavbar.html"></script> -->
+                <header th:include="../templates/partials/AdminSideNavBar.html"></header>
+            </nav>
 
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
                 <h1 class="mt-5">List Users</h1>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -50,18 +37,18 @@
                         </thead>
                         <tbody>
                             <tr th:each="user: ${users}">
-                                <td th:text="${user.id}"/>
-                                <td th:text="${user.FName}"/>
-                                <td th:text="${user.LName}"/>
-                                <td th:text="${user.Email}"/>
+                                <td th:text="${user.id}"></td>
+                                <td th:text="${user.FName}"></td>
+                                <td th:text="${user.LName}"></td>
+                                <td th:text="${user.Email}"></td>
                                 <td><a th:href="@{'/Admin/edit-user/' + ${user.id}}">Edit</a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </main>
-        <!-- </div>
-    </div> -->
+        </div>
+    </div>
 
     <!-- Bootstrap JS, jQuery, and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
