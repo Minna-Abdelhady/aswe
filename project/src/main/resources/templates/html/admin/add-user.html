@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/user/edit-profile.css">
 </head>
 
 <body>
@@ -24,16 +25,26 @@
                 <header th:include="../templates/partials/AdminSideNavBar.html"></header>
             </nav>
 
-            <form th:action="@{/Admin/Save-User}" th:object="${user}" method="POST">
-                
-                <input type="text" th:field="*{FName}" placeholder="Enter the User's FName">
-                <input type="text" th:field="*{LName}" placeholder="Enter the User's FName">
-                <input type="text" th:field="*{Email}" placeholder="Enter the User's email">
-                <input type="text" th:field="*{Password}" placeholder="Enter the User's password">
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="container">
+                    <h2>Add a User profile</h2>
+                    <form th:action="@{/Admin/Save-User}" th:object="${user}" method="POST">
+                        <h6>First Name</h6>
+                        <input type="text" th:field="*{FName}" placeholder="Enter the User's First Name">
+                        <h6>Last Name</h6>
+                        <input type="text" th:field="*{LName}" placeholder="Enter the User's Last Name">
+                        <h6>E-mail</h6>
+                        <input type="text" th:field="*{Email}" placeholder="Enter the User's E-mail">
+                        <h6>Password</h6>
+                        <input type="text" th:field="*{Password}" placeholder="Enter the User's Password">
 
-                <input type="submit">
-            </form>
-            
+                        <input type="submit" class="btn btn-primary">
+                    </form>
+
+                </div>
+
+            </main>
+
         </div>
     </div>
 
@@ -44,4 +55,3 @@
 </body>
 
 </html>
-
