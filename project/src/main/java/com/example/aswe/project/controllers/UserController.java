@@ -140,10 +140,10 @@ public class UserController {
                 break;
             }
         }
-        if (dbUser == null) {
-            // User not found
-            return new RedirectView("/User/Login");
-        }
+        // if (dbUser == null) {
+        //     // User not found
+        //     return new RedirectView("/User/Login");
+        // }
         if (dbUser.getType().getId() == 1) {
             return new RedirectView("/Admin/Dashboard");
         }

@@ -33,6 +33,7 @@
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Edit</th>
+                                <th scope="col" style="color: red;">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,6 +43,7 @@
                                 <td th:text="${user.LName}"></td>
                                 <td th:text="${user.Email}"></td>
                                 <td><a th:href="@{'/Admin/edit-user/' + ${user.id}}">Edit</a></td>
+                                <td style="color: red;"><a th:href="@{'/Admin/delete-userAccount/' + ${user.id}}">Delete</a></td>
                             </tr>
                         </tbody>
                     </table>

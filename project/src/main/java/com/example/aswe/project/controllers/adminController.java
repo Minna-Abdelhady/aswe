@@ -149,6 +149,16 @@ public class adminController {
         return new RedirectView("/Admin/List-Admins");
     }
 
+    @GetMapping("delete-userAccount/{userId}")
+    public RedirectView deleteUserAccount(@PathVariable("userId") int userId) {
+        User user = this.userRepository.findByid(userId);
+        if (user != null) {
+            this.userRepository.delete(user);
+            return new RedirectView("/Admin/List-Users");
+        }
+        return new RedirectView("/Admin/List-Users");
+    }
+
     @GetMapping("List-products")
     public ModelAndView getproducts() {
         ModelAndView mav = new ModelAndView("html/admin/list-products.html");
@@ -171,14 +181,6 @@ public class adminController {
         // System.out.println("Fone");
         return new RedirectView("/Admin/List-products");
     }
-
-    /*
-     * @PostMapping("Registration")
-     * public String saveUser(@ModelAttribute User user) {
-     * this.userRepository.save(user);
-     * return "Added";
-     * }
-     */
 
     @GetMapping("delete-product/{productId}")
     public ModelAndView deleteAccount(@PathVariable("productId") int ProductId) {
