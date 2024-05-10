@@ -214,14 +214,6 @@ public class adminController {
 
     // Products CRUD
 
-    @GetMapping("List-products")
-    public ModelAndView getproducts() {
-        ModelAndView mav = new ModelAndView("html/admin/list-products.html");
-        List<Product> Products = this.ProductRepository.findAll();
-        mav.addObject("products", Products);
-        return mav;
-    }
-
     @GetMapping("add-product")
     public ModelAndView addproduct() {
         ModelAndView mav = new ModelAndView("html/admin/AddProduct.html");
@@ -233,7 +225,46 @@ public class adminController {
     @PostMapping("add-product")
     public RedirectView saveproduct(@ModelAttribute Product newProduct) {
         this.ProductRepository.save(newProduct);
-        // System.out.println("Fone");
+        return new RedirectView("/Admin/List-products");
+    }
+
+    @GetMapping("List-products")
+    public ModelAndView getproducts() {
+        ModelAndView mav = new ModelAndView("html/admin/list-products.html");
+        List<Product> Products = this.ProductRepository.findAll();
+        mav.addObject("products", Products);
+        return mav;
+    }
+
+    @GetMapping("edit-product/{productId}")
+    public ModelAndView editProduct(@PathVariable("productId") Integer productId) {
+        ModelAndView mav = new ModelAndView("/html/admin/edit-product.html");
+        Product newProduct = this.ProductRepository.findByProductId(productId);
+        if (newProduct != null) {
+            mav.addObject("product", newProduct);
+            return mav;
+        }
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "Product not found");
+        return errorMav;
+    }
+
+    @PostMapping("edit-product/{productId}")
+    public RedirectView saveProduct(@PathVariable("productId") int productId, @ModelAttribute Product updatedProduct) {
+        Product product = this.ProductRepository.findByProductId(productId);
+        if (!product.getProductName().equals(updatedProduct.getProductName())) {
+            product.setProductName(updatedProduct.getProductName());
+        }
+        if (!product.getProductDescription().equals(updatedProduct.getProductDescription())) {
+            product.setProductDescription(updatedProduct.getProductDescription());
+        }
+        if (!product.getProductPrice().equals(updatedProduct.getProductPrice())) {
+            product.setProductPrice(updatedProduct.getProductPrice());
+        }
+        if (!product.getStatus().equals(updatedProduct.getStatus())) {
+            product.setStatus(updatedProduct.getStatus());
+        }
+        this.ProductRepository.save(product);
         return new RedirectView("/Admin/List-products");
     }
 
