@@ -29,14 +29,12 @@
                 <div class="container">
                     <h2>Edit Admin profile</h2>
                     <form th:action="@{/Admin/edit-admin/{adminId}(adminId=${admin.getId()})}" th:object="${admin}" method="POST">
+                        <h6>First Name</h6>
                         <input type="text" th:field="*{FName}" placeholder="Enter First Name">
-                        <br>
+                        <h6>Last Name</h6>
                         <input type="text" th:field="*{LName}" placeholder="Enter Last Name">
-                        <br>
+                        <h6>E-mail</h6>
                         <input type="text" th:field="*{Email}" placeholder="Enter Email">
-                        <br>
-                        <input type="password" th:field="*{Password}" placeholder="Enter Password">
-                        <br>
 
                         <input type="submit">
                     </form>
