@@ -64,7 +64,7 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="container">
-          <h2>Edit my profile</h2>
+          <h2>Edit User profile</h2>
           <form th:action="@{/Admin/edit-user/{userId}(userId=${user.getId()})}" th:object="${user}" method="POST">
               <input type="text" th:field="*{FName}" placeholder="Enter First Name">
               <br>
@@ -72,9 +72,7 @@
               <br>
               <input type="text" th:field="*{Email}" placeholder="Enter Email">
               <br>
-              <input type="password" th:field="*{Password}" placeholder="Enter Password">
-              <br>
-
+              
               <input type="submit">
           </form>
         </div>
