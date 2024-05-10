@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/user/edit-profile.css">
+
+</head>
+
+<body>
+
+    <header th:include="../templates/partials/AdminTopNavBar.html"></header>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <header th:include="../templates/partials/AdminSideNavBar.html"></header>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="container">
+                    <h2>Edit Product</h2>
+                    <form th:action="@{/Admin/edit-product/{productId}(productId=${product.productId()})}"
+                        th:object="${product}" method="POST">
+                        <h6>Product Name</h6>
+                        <input type="text" th:field="*{productName}" placeholder="Enter Product Name" class="form-control">
+                        <h6>Product Description</h6>
+                        <input type="text" th:field="*{productDescription}" placeholder="Enter Product Description" class="form-control">
+                        <h6>Product Price</h6>
+                        <input type="text" th:field="*{productPrice}" placeholder="Enter Product Price" class="form-control">
+                        <h6>Product status</h6>
+                        <input type="text" th:field="*{status}" placeholder="Enter Product Price" class="form-control">
+                        
+                        <input type="submit" class="btn btn-primary">
+                    </form>
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, jQuery, and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
