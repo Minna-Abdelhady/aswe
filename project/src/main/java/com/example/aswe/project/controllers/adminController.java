@@ -135,6 +135,25 @@ public class adminController {
 
     // Admin CRUD
 
+    @GetMapping("Add-Admin")
+    public ModelAndView addAdmin() {
+        ModelAndView mav = new ModelAndView("/html/admin/add-admin.html");
+        User newAdmin = new User();
+        mav.addObject("admin", newAdmin);
+        return mav;
+    }
+
+    @PostMapping("Save-Admin")
+    public RedirectView saveAdmin(@ModelAttribute User admin) {
+        // Setting the user type
+        UserType userType = new UserType();
+        userType.setId(1); // id 1 corresponds to Admin type
+        userType.setName(UserType.TYPE_USER);
+        admin.setType(userType);
+        this.userRepository.save(admin);
+        return new RedirectView("/Admin/List-Admins");
+    }
+
     @GetMapping("List-Admins")
     public ModelAndView getAdmins() {
         ModelAndView mav = new ModelAndView("html/admin/list-admins.html");
