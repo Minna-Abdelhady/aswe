@@ -304,7 +304,6 @@ public class UserController {
         return mav;
     }
 
-    @SuppressWarnings("null")
     @PostMapping("/feedback")
     public String addFeedback(@ModelAttribute UserFeedback feedback) {
         this.feedbackRepository.save(feedback); // save the new feedback record
