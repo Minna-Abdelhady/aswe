@@ -269,17 +269,13 @@ public class adminController {
     }
 
     @GetMapping("delete-product/{productId}")
-    public ModelAndView deleteAccount(@PathVariable("productId") int ProductId) {
+    public RedirectView deleteAccount(@PathVariable("productId") int ProductId) {
         Product Product = this.ProductRepository.findByProductId(ProductId);
         if (ProductId != 0) {
             this.ProductRepository.delete(Product);
-            ModelAndView errorMav = new ModelAndView("error.html");
-            errorMav.addObject("errorMessage", "Deleted successfully");
-            return errorMav;
+            return new RedirectView("/Admin/List-products");
         }
-        ModelAndView errorMav = new ModelAndView("error.html");
-        errorMav.addObject("errorMessage", "User not found");
-        return errorMav;
+        return new RedirectView("/Admin/List-products");
     }
 
 }
