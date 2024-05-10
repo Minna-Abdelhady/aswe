@@ -55,6 +55,22 @@ public class adminController {
 
     // User CRUD
 
+    @GetMapping("Add-User")
+    public ModelAndView addUser() {
+        System.out.println("Add user func()");
+        ModelAndView mav = new ModelAndView("/html/admin/add-user.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        System.out.println("Before return: Add user func()");
+        return mav;
+    }
+
+    @PostMapping("Save-User")
+    public RedirectView saveUser(@ModelAttribute User user) {
+        this.userRepository.save(user);
+        return new RedirectView("/Admin/List-Users");
+    }
+
     @GetMapping("List-Users")
     public ModelAndView getUsers() {
         ModelAndView mav = new ModelAndView("html/admin/list-users.html");
