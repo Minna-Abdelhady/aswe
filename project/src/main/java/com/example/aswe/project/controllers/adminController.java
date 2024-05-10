@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.project.models.Admin;
 import com.example.aswe.project.models.User;
+import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.models.Product;
 // import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.UserRepository;
@@ -57,16 +58,19 @@ public class adminController {
 
     @GetMapping("Add-User")
     public ModelAndView addUser() {
-        System.out.println("Add user func()");
         ModelAndView mav = new ModelAndView("/html/admin/add-user.html");
         User newUser = new User();
         mav.addObject("user", newUser);
-        System.out.println("Before return: Add user func()");
         return mav;
     }
 
     @PostMapping("Save-User")
     public RedirectView saveUser(@ModelAttribute User user) {
+        // Setting the user type
+        UserType userType = new UserType();
+        userType.setId(2); // id 2 corresponds to User type
+        userType.setName(UserType.TYPE_USER);
+        user.setType(userType);
         this.userRepository.save(user);
         return new RedirectView("/Admin/List-Users");
     }
