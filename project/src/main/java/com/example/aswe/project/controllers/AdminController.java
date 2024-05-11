@@ -54,6 +54,21 @@ public class adminController {
         return mav;
     }
 
+    // Admin profile management
+
+    @GetMapping("Profile/{adminId}")
+    public ModelAndView getAdmin(@PathVariable("adminId") Integer adminId) {
+        ModelAndView mav = new ModelAndView("/html/admin/view-profile.html");
+        User admin = this.userRepository.findByid(adminId);
+        if (admin != null) {
+            mav.addObject("admin", admin);
+            return mav;
+        }
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "User not found");
+        return errorMav;
+    }
+
     // User CRUD
 
     @GetMapping("Add-User")
