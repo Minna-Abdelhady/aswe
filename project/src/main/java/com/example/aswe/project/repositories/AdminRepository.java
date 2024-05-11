@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.aswe.project.models.Admin;
 // import com.example.aswe.project.models.User;
+import com.example.aswe.project.models.User;
 
 @Repository
 public interface adminRepository extends JpaRepository<Admin, Integer> {
+
+    void save(User user);
     
     // @Query("SELECT u FROM User u WHERE u.type.id = :userTypeId")
     // List<User> findByUserTypeId(@Param("userTypeId") int userTypeId);

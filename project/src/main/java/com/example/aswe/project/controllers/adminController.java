@@ -18,6 +18,7 @@ import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.models.Product;
 // import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.UserRepository;
+import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.productRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +30,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/Admin")
 public class adminController {
 
-    // @Autowired
-    // private adminRepository AdminRepository;
+    @Autowired
+    private adminRepository adminRepo;
+
+    public adminController(adminRepository adminRepo) {
+        this.adminRepo = adminRepo;
+    }
 
     @Autowired
     private UserRepository userRepository;
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public RedirectView saveUserTest(User user) {
+        if (userRepository != null) {
+            userRepository.save(user);
+        }
+        return new RedirectView("/Admin/List-Users");
+    }
 
     @Autowired
     private productRepository ProductRepository;
