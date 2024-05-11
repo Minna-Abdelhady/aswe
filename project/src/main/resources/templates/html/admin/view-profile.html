@@ -2,53 +2,58 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="../../../css/user/view-profile.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/user/view-profile.css" />
 
 </head>
 
 <body>
 
-  <header th:include="../templates/partials/AdminTopNavBar.html"></header>
+    <header th:include="../templates/partials/AdminTopNavBar.html"></header>
 
-  <div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid">
+        <div class="row">
 
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <header th:include="../templates/partials/AdminSideNavBar.html"></header>
-      </nav>
+            <!-- <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <header th:include="../templates/partials/AdminSideNavBar.html"></header>
+            </nav> -->
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar" th:if="${admin != null}">
+                <header th:include="../templates/partials/AdminSideNavBar.html" th:with="admin=${admin}"></header>
+            </nav>           
 
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="container">
-            <h2>My Profile</h2>
-            <hr>
-            <label for="firstName">First Name:</label>
-            <p><span th:text="${admin.FName}"></span></p>
-        
-            <label for="lastName">Last Name:</label>
-            <p><span th:text="${admin.LName}"></span></p>
-        
-            <label for="email">Email:</label>
-            <p><span th:text="${admin.Email}"></span></p>
-        
-            <a th:href="@{/Admin/edit-profile/{adminId}(adminId=${admin.getId()})}" class="button-link">Edit Profile</a>
-            <a th:href="@{/Admin/sign-out}" class="button-link">Sign out</a>
-            <a th:href="@{/Admin/delete-account/{adminId}(adminId=${admin.getId()})}" class="button-link">Delete Account</a>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="container">
+                    <h2>My Profile</h2>
+                    <hr>
+                    <label for="firstName">First Name:</label>
+                    <p><span th:text="${admin.FName}"></span></p>
+
+                    <label for="lastName">Last Name:</label>
+                    <p><span th:text="${admin.LName}"></span></p>
+
+                    <label for="email">Email:</label>
+                    <p><span th:text="${admin.Email}"></span></p>
+
+                    <a th:href="@{/Admin/edit-profile/{adminId}(adminId=${admin.getId()})}" class="btn btn-primary">Edit
+                        Profile</a>
+                    <a th:href="@{/Admin/sign-out}" class="btn btn-primary">Sign out</a>
+                    <a th:href="@{/Admin/delete-account/{adminId}(adminId=${admin.getId()})}"
+                        class="btn btn-primary">Delete Account</a>
+                </div>
+            </main>
         </div>
-      </main>
     </div>
-  </div>
 
-  <!-- Bootstrap JS, jQuery, and Popper.js -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS, jQuery, and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
