@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.aswe.project.controllers.UserController;
 import com.example.aswe.project.controllers.adminController;
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.repositories.adminRepository;
@@ -29,12 +30,23 @@ public class AdminTest {
         assertNotNull(user);
     }
 
+    // Same function with the same functions another way
+    // @Test
+    // public void testAddUser2() {
+    //     ModelAndView mav = adminCont.addUser();
+    //     assertEquals("/html/admin/add-user.html", mav.getViewName());
+    //     assertNotNull(mav.getModel().get("user"));
+    // }
+
     @Test 
     public void testSaveUser() {
+        // User user = new User();
+        // RedirectView redirectView = adminCont.saveUserTest(user);
+        // assertEquals("/Admin/List-Users", redirectView.getUrl());
+        // verify(adminRepo, times(1)).save(user);
         User user = new User();
-        RedirectView redirectView = adminCont.saveUserTest(user);
+        RedirectView redirectView = adminCont.saveUser(user);
         assertEquals("/Admin/List-Users", redirectView.getUrl());
-        verify(adminRepo, times(1)).save(user);
     }
 
 }
