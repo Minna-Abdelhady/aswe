@@ -59,7 +59,7 @@ public class CartController {
     ModelAndView mav = new ModelAndView("/html/user/list-cart.html");
     User user = this.userRepository.findByid(userId);
     if (user != null) {
-      Product product = this.ProductRepository.findByProductId(productId);
+      Product product = this.ProductRepository.findByid(productId);
       if (product != null) {
         ShoppingCart shoppingcart = user.getShoppingCart();
         if (shoppingcart == null) {

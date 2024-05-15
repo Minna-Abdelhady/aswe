@@ -4,6 +4,6 @@ import com.example.aswe.project.models.Product;
 
 
 public interface productRepository extends JpaRepository<Product,Integer> {
-    Product findByProductId(int productId);
-    // product findByProductid(int productId);
+    // Product findByProductId(int productId);
+    Product findByid(int id);
 }

@@ -28,15 +28,12 @@ public class AdminTest {
         assertEquals("/html/admin/add-user.html", mav.getViewName());
         User user = (User) mav.getModel().get("user");
         assertNotNull(user);
+        // Another way 
+        // ModelAndView mav = adminCont.addUser();
+        // assertEquals("/html/admin/add-user.html", mav.getViewName());
+        // assertNotNull(mav.getModel().get("user"));
     }
 
-    // Same function with the same functions another way
-    // @Test
-    // public void testAddUser2() {
-    //     ModelAndView mav = adminCont.addUser();
-    //     assertEquals("/html/admin/add-user.html", mav.getViewName());
-    //     assertNotNull(mav.getModel().get("user"));
-    // }
 
     @Test 
     public void testSaveUser() {
