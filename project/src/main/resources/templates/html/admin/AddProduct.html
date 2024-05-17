@@ -16,82 +16,41 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Admin Dashboard</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><i class="fas fa-user"></i> Username <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- <object type="text/html" data="AdminNavBar.html"></object> -->
+
+    <header th:include="../templates/partials/AdminTopNavBar.html"></header>
 
     <div class="container-fluid">
         <div class="row">
+
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/Admin/Dashboard">
-                                <i class="fas fa-home"></i>
-                                Dashboard <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Admin/List-Users">
-                                <i class="fas fa-users"></i>
-                                List Users
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-chart-bar"></i>
-                                Reports
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <header th:include="../templates/partials/AdminSideNavBar.html"></header>
             </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <h1 class="mt-5">Add Product</h1>
-        
-        <form th:action="@{/Admin/add-product}" th:object="${Product}" method="POST">
-         <input type="text" th:field="*{productName}" placeholder="Enter the Product Name">
-         <br> <br>
-         <input type="text" th:field="*{productDescription}" placeholder="Enter Description for the product">
-         <br> <br>
-         <input type="text" th:field="*{productPrice}"  placeholder="Enter product price">
-         <br> <br>
-         <input type="text" th:field="*{status}" placeholder="Enter product Status">
-         <br> <br>
-        <input type="submit">
-        </form>
+
+                <form th:action="@{/Admin/add-product}" th:object="${Product}" method="POST">
+                    <input type="text" th:field="*{name}" placeholder="Enter the Product Name">
+                    <br> <br>
+                    <input type="text" th:field="*{brand}" placeholder="Enter brand for the product">
+                    <br> <br>
+                    <input type="text" th:field="*{category}" placeholder="Enter product category">
+                    <br> <br>
+                    <input type="text" th:field="*{price}" placeholder="Enter product price">
+                    <br> <br>
+                    <input type="text" th:field="*{description}" placeholder="Enter product description">
+                    <br> <br>
+                    <input type="submit">
+                </form>
+            </main>
+        </div>
     </div>
-</main>
-</div>
-</div>
-       <!-- Bootstrap JS, jQuery, and Popper.js -->
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   
-        <a href="Home">Go to Home</a>
-    </body>
+
+    <!-- Bootstrap JS, jQuery, and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
 </html>

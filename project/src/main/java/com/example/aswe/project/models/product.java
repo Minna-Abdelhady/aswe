@@ -1,12 +1,10 @@
 package com.example.aswe.project.models;
+
 import jakarta.persistence.*;
 import java.util.Date;
 
-
-
-
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,14 +15,14 @@ public class Product {
     private double price;
     @Column(columnDefinition = "TEXT")
     private String description;
-    private Date createdAt;
+    // private Date createdAt;          // Will be added in the reports
     private String ImgFileName;
 
-        public Product() {}
+    public Product() {
+    }
 
-
-
-    public Product(int id, String name, String brand, String category, double price, String description, Date createdAt, String ImgFileName) {
+    public Product(int id, String name, String brand, String category, double price, String description, Date createdAt,
+            String ImgFileName) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -33,7 +31,6 @@ public class Product {
         this.description = description;
         this.ImgFileName = ImgFileName;
     }
-
 
     public int getId() {
         return this.id;
@@ -83,7 +80,6 @@ public class Product {
         this.description = description;
     }
 
-
     public String getImgFileName() {
         return this.ImgFileName;
     }
@@ -95,21 +91,14 @@ public class Product {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", brand='" + getBrand() + "'" +
-            ", category='" + getCategory() + "'" +
-            ", price='" + getPrice() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", ImgFileName='" + getImgFileName() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", name='" + getName() + "'" +
+                ", brand='" + getBrand() + "'" +
+                ", category='" + getCategory() + "'" +
+                ", price='" + getPrice() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", ImgFileName='" + getImgFileName() + "'" +
+                "}";
     }
-
-
-    
-
-
-
-
 
 }
