@@ -32,13 +32,13 @@
                 </div>
                 <div class="product-container">
                     <div class="product-card" th:each="product: ${products}">
-                        <!-- <img class="product-image" th:src="${product.imageUrl}" alt="Product Image"> -->
+                        <img class="product-image" th:src="${product.ImgFileName}" alt="${product.name}">
                         <div class="product-details">
                             <p class="product-name" th:text="${product.name}"></p>
-                            <p class="product-brand" th:text="${product.brand}"></p>
-                            <p class="product-category" th:text="'Price: ' + ${product.category}"></p>
-                            <p class="product-price" th:text="${product.price}"></p>
-                            <p class="product-description" th:text="${product.description}"></p>
+                            <!-- <p class="product-brand" th:text="'Brand: ' + ${product.brand}"></p>
+                            <p class="product-category" th:text="'Category: ' + ${product.category}"></p> -->
+                            <p class="product-price" th:text="'Price: ' + ${product.price}"></p>
+                            <!-- <p class="product-description" th:text="'Description: ' + ${product.description}"></p> -->
                             <!-- Edit and Delete buttons -->
                             <div class="product-buttons">
                                 <a th:href="@{'/Admin/edit-product/' + ${product.id}}">
