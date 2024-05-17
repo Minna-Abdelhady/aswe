@@ -35,6 +35,7 @@ public class AdminTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+        adminRepo = mock(adminRepository.class);
         userRepository = mock(UserRepository.class);
         adminCont = new adminController(adminRepo, userRepository);
     }
