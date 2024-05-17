@@ -32,7 +32,7 @@
                 </div>
                 <div class="product-container">
                     <div class="product-card" th:each="product: ${products}">
-                        <img class="product-image" th:src="${product.ImgFileName}" alt="${product.name}">
+                        <img class="product-image" th:src="${product.ImgFileName}" th:alt="${product.name}">
                         <div class="product-details">
                             <p class="product-name" th:text="${product.name}"></p>
                             <!-- <p class="product-brand" th:text="'Brand: ' + ${product.brand}"></p>
