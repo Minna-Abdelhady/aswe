@@ -27,16 +27,18 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="container">
                     <h2>Edit Product</h2>
-                    <form th:action="@{/Admin/edit-product/{productId}(productId=${product.productId()})}"
+                    <form th:action="@{/Admin/edit-product/{productId}(productId=${product.getId()})}"
                         th:object="${product}" method="POST">
                         <h6>Product Name</h6>
-                        <input type="text" th:field="*{productName}" placeholder="Enter Product Name" class="form-control">
-                        <h6>Product Description</h6>
-                        <input type="text" th:field="*{productDescription}" placeholder="Enter Product Description" class="form-control">
+                        <input type="text" th:field="*{name}" placeholder="Enter Product Name" class="form-control">
+                        <h6>Product Brand</h6>
+                        <input type="text" th:field="*{brand}" placeholder="Enter Product Brand" class="form-control">
+                        <h6>Product Category</h6>
+                        <input type="text" th:field="*{category}" placeholder="Enter Product Category" class="form-control">
                         <h6>Product Price</h6>
-                        <input type="text" th:field="*{productPrice}" placeholder="Enter Product Price" class="form-control">
-                        <h6>Product status</h6>
-                        <input type="text" th:field="*{status}" placeholder="Enter Product Price" class="form-control">
+                        <input type="text" th:field="*{price}" placeholder="Enter Product Price" class="form-control">
+                        <h6>Product Description</h6>
+                        <input type="text" th:field="*{description}" placeholder="Enter Product Description" class="form-control">
                         
                         <input type="submit" class="btn btn-primary">
                     </form>
