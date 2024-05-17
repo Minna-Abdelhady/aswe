@@ -9,10 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <!-- Custom styles -->
-    <style>
-        /* Add your custom styles here */
-    </style>
+    <link rel="stylesheet" href="../../../css/user/edit-profile.css">
 </head>
 
 <body>
@@ -31,15 +28,11 @@
 
                 <form th:action="@{/Admin/add-product}" th:object="${Product}" method="POST">
                     <input type="text" th:field="*{name}" placeholder="Enter the Product Name">
-                    <br> <br>
                     <input type="text" th:field="*{brand}" placeholder="Enter brand for the product">
-                    <br> <br>
                     <input type="text" th:field="*{category}" placeholder="Enter product category">
-                    <br> <br>
                     <input type="text" th:field="*{price}" placeholder="Enter product price">
-                    <br> <br>
                     <input type="text" th:field="*{description}" placeholder="Enter product description">
-                    <br> <br>
+
                     <input type="submit">
                 </form>
             </main>
