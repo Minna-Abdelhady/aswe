@@ -2,9 +2,8 @@ package com.example.aswe.project;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
-
-import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +54,6 @@ public class AdminTest {
         assertNotNull(redirectView);
         assertEquals("/Admin/List-Users", redirectView.getUrl());
 
-        // verify(adminRepo, ((adminRepository) times(1)).save(user));
         User savedUser = userRepository.findById(user.getId()).orElse(null);
         assertNotNull(savedUser);
         assertEquals("Minna", savedUser.getFName());
@@ -87,15 +85,21 @@ public class AdminTest {
         assertEquals("sara.hany@gmail.com", savedUser.getEmail());
     }
 
-    // @Test 
-    // public void testRemoveUser() {
-    //     User user1 = new User();
-    //     User user2 = new User();
-    //     User user3 = new User();
+    @Test 
+    public void testDeleteUserAccount() {
+        User user = new User();
+        user.setId(1);
+        user.setFName("Minna");
+        user.setLName("Hany");
+        user.setEmail("minna.hany@gmail.com");
+        user.setPassword("password");
+        userRepository.save(user);
 
-    //     adminCont.addUser(user1);
-    //     adminCont.deleteAccount(user1.getId());
-    //     assertEquals(2, );
-    // }
+        RedirectView redirectView = adminCont.deleteUserAccount(1);
+        assertEquals("/Admin/List-Users", redirectView.getUrl());
+
+        User deletedUser = userRepository.findByid(1);
+        assertNull(deletedUser);
+    }
 
 }
