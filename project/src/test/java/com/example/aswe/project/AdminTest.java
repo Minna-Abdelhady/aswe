@@ -8,11 +8,13 @@ import static org.mockito.Mockito.mock;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.project.controllers.adminController;
 import com.example.aswe.project.models.User;
+import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
 
@@ -21,7 +23,9 @@ public class AdminTest {
     private adminRepository adminRepo = mock(adminRepository.class);
     private adminController adminCont = new adminController(adminRepo);
 
+    @Autowired
     private UserRepository userRepository;
+
     // @Mock
     // private adminRepository adminRepo = mock(adminRepository.class);;
 
@@ -31,6 +35,8 @@ public class AdminTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+        userRepository = mock(UserRepository.class);
+        adminCont = new adminController(adminRepo, userRepository);
     }
 
     @Test
@@ -49,6 +55,10 @@ public class AdminTest {
         user.setLName("Hany");
         user.setEmail("minna.hany@email.com");
         user.setPassword("password");
+        UserType userType = new UserType();
+        userType.setId(2); // id 2 corresponds to User type
+        userType.setName(UserType.TYPE_USER);
+        user.setType(userType);
 
         RedirectView redirectView = adminCont.saveUser(user);
         assertNotNull(redirectView);
@@ -68,6 +78,7 @@ public class AdminTest {
         originalUser.setLName("Hany");
         originalUser.setEmail("minna.hany@gmail.com");
         originalUser.setPassword("password");
+        // System.out.println(userRepository);
         userRepository.save(originalUser);
 
         User updatedUser = new User();
