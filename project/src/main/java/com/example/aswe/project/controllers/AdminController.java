@@ -21,6 +21,8 @@ import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.productRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +40,7 @@ public class adminController {
     }
 
     public adminController(){
-        
+
     }
 
     @Autowired
@@ -81,6 +83,27 @@ public class adminController {
         ModelAndView mav = new ModelAndView("/html/admin/view-profile.html");
         User admin = this.userRepository.findByid(adminId);
         if (admin != null) {
+            mav.addObject("admin", admin);
+            return mav;
+        }
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "User not found");
+        return errorMav;
+    }
+
+    // Modified getAdmin method to use sessions 
+    @GetMapping("Profile")
+    public ModelAndView getAdminProfile(HttpSession session) {
+        // String email = (String) session.getAttribute("Email");
+        Integer adminId = (Integer) session.getAttribute("id");
+        if (adminId == null) {
+            ModelAndView errorMav = new ModelAndView("error.html");
+            errorMav.addObject("errorMessage", "User not found");
+            return errorMav;
+        }
+        User admin = this.userRepository.findByid(adminId);
+        if (admin != null) {
+            ModelAndView mav = new ModelAndView("/html/admin/view-profile.html");
             mav.addObject("admin", admin);
             return mav;
         }

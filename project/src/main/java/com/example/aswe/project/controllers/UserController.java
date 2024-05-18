@@ -130,10 +130,9 @@ public class UserController {
     public RedirectView loginProcess(@RequestParam("Email") @NotBlank(message = "Email is required") @Email(message = "Email must be a valid email address") String Email,
                                   @RequestParam("Password") @NotBlank(message = "Password is required") String Password,
                                   HttpSession session) {
-        System.out.println("Login");
         // User dbUser = userRepository.findByEmail(Email);
         List<User> users = this.userRepository.findAll();
-        User dbUser=new User();
+        User dbUser = new User();
         for (User user : users) {
             if (user.getEmail().equals(Email)) {
                 dbUser = user;
@@ -145,6 +144,7 @@ public class UserController {
         //     return new RedirectView("/User/Login");
         // }
         if (dbUser.getType().getId() == 1) {
+            session.setAttribute("id", dbUser.getId());
             return new RedirectView("/Admin/Dashboard");
         }
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
