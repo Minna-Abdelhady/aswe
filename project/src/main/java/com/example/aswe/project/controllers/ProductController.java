@@ -52,10 +52,10 @@ public class ProductController {
         model.addAttribute("ProductDto", ProductDto);
         return "products/createProduct";
     }
-@PostMapping("/create")
-public String saveProduct(@Valid @ModelAttribute productDto productDto, BindingResult result) {
-    if (result.hasErrors()) {
-        return "products/createProduct";
+    @PostMapping("/create")
+    public String saveProduct(@Valid @ModelAttribute productDto productDto, BindingResult result) {
+        if (result.hasErrors()) {
+            return "products/createProduct";
     }
 
     // Check if image file is present

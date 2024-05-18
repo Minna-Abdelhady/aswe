@@ -32,13 +32,13 @@ public class AdminTest {
     // @InjectMocks
     // private adminController adminCont = new adminController(adminRepo);
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-        adminRepo = mock(adminRepository.class);
-        userRepository = mock(UserRepository.class);
-        adminCont = new adminController(adminRepo, userRepository);
-    }
+    // @BeforeEach
+    // public void setUp() {
+    //     MockitoAnnotations.openMocks(this);
+    //     adminRepo = mock(adminRepository.class);
+    //     userRepository = mock(UserRepository.class);
+    //     adminCont = new adminController(adminRepo, userRepository);
+    // }
 
     @Test
     public void testAddUser() {
