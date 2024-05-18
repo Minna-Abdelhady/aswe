@@ -22,9 +22,10 @@ public class AdminTest {
     
     private adminRepository adminRepo = mock(adminRepository.class);
     private adminController adminCont = new adminController(adminRepo);
+    // private adminController adminCont = new adminController();
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepository = mock(UserRepository.class);
 
     // @Mock
     // private adminRepository adminRepo = mock(adminRepository.class);;
@@ -37,7 +38,7 @@ public class AdminTest {
         MockitoAnnotations.openMocks(this);
         adminRepo = mock(adminRepository.class);
         userRepository = mock(UserRepository.class);
-        adminCont = new adminController(adminRepo, userRepository);
+        // adminCont = new adminController(adminRepo, userRepository);
     }
 
     @Test
@@ -80,7 +81,7 @@ public class AdminTest {
         originalUser.setEmail("minna.hany@gmail.com");
         originalUser.setPassword("password");
         // System.out.println(userRepository);
-        userRepository.save(originalUser);
+        this.userRepository.save(originalUser);
 
         User updatedUser = new User();
         updatedUser.setFName("Sara");

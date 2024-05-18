@@ -37,9 +37,8 @@ public class adminController {
         this.adminRepo = adminRepo;
     }
 
-    public adminController(adminRepository adminRepo, UserRepository userRepository) {
-        this.adminRepo = adminRepo;
-        this.userRepository = userRepository;
+    public adminController(){
+        
     }
 
     @Autowired
