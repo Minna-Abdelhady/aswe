@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -31,13 +33,13 @@ public class AdminTest {
     // @InjectMocks
     // private adminController adminCont = new adminController(adminRepo);
 
-    // @BeforeEach
-    // public void setUp() {
-    //     MockitoAnnotations.openMocks(this);
-    //     adminRepo = mock(adminRepository.class);
-    //     userRepository = mock(UserRepository.class);
-    //     adminCont = new adminController(adminRepo, userRepository);
-    // }
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        adminRepo = mock(adminRepository.class);
+        userRepository = mock(UserRepository.class);
+        // adminCont = new adminController(adminRepo, userRepository);
+    }
 
     @Test
     public void testAddUser() {
@@ -79,7 +81,7 @@ public class AdminTest {
         originalUser.setEmail("minna.hany@gmail.com");
         originalUser.setPassword("password");
         // System.out.println(userRepository);
-        userRepository.save(originalUser);
+        this.userRepository.save(originalUser);
 
         User updatedUser = new User();
         updatedUser.setFName("Sara");
