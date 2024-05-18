@@ -163,65 +163,7 @@ public class UserController {
         List<Product> Products = this.ProductRepository.findAll();
         mav.addObject("products",Products);
         return mav;
-    }
-
-    // @GetMapping("List-products")
-    // public ResponseEntity getproducts(){
-    //     List<product> Products = this.ProductRepository.findAll();
-    //     return new ResponseEntity<>(Products, HttpStatus.OK);
-    // }
-
-    // @GetMapping("Registration")
-    // public ModelAndView addUser() {
-    //     ModelAndView mav = new ModelAndView("/html/user/registration.html");
-    //     User newUser = new User();
-    //     mav.addObject("user", newUser);
-    //     return mav;
-    // }
-
-    // @PostMapping("Registration")
-    // public String saveUser(@ModelAttribute User user) {
-    //     String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
-    //     user.setPassword(encoddedPassword);
-    //     this.userRepository.save(user);
-    //     return "Added";
-    // }
-
-    // @GetMapping("Login")
-    // public ModelAndView login() {
-    //     ModelAndView mav = new ModelAndView("/html/user/login.html");
-    //     User newUser = new User();
-    //     mav.addObject("user", newUser);
-    //     return mav;
-    // }
-
-    // @PostMapping("Login")
-    // public RedirectView loginProcess(@RequestParam("Email") String Email, @RequestParam("Password") String Password,
-    //         HttpSession session) {
-    //     System.out.println("Login");
-    //     // User dbUser = this.userRepository.findByEmail(Email);
-    //     User dbUser = new User();
-    //     List<User> users = this.userRepository.findAll();
-    //     for (User user : users) {
-    //         if (user.getEmail().equals(Email)) {
-    //             dbUser = user;
-    //             break;
-    //         }
-    //     }
-    //     System.out.println("Login");
-    //     System.out.println(dbUser.getEmail());
-
-    //     Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
-    //     if (isPasswordMatched) {
-    //         session.setAttribute(Email, dbUser.getEmail());
-    //         return new RedirectView("/User/Home");
-    //     } else {
-    //         // Working password wrong
-    //         return new RedirectView("/User/Login");
-    //     }
-    //     // return new RedirectView("/User/Home");
-    // }
-    
+    }    
 
     @GetMapping("profile/{userId}")
     public ModelAndView get1User(@PathVariable("userId") Integer userId) {
@@ -270,23 +212,26 @@ public class UserController {
     }
 
     @GetMapping("/sign-out")
-    public String signOut(HttpServletRequest request) {
+    public RedirectView signOut(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/";
+        return new RedirectView("/User/Login");
     }
 
     @GetMapping("delete-account/{userId}")
-    public ModelAndView deleteAccount(@PathVariable("userId") int userId) {
+    public RedirectView deleteAccount(@PathVariable("userId") int userId) {
         User user = this.userRepository.findByid(userId);
         if (user != null) {
             this.userRepository.delete(user);
-            ModelAndView errorMav = new ModelAndView("error.html");
-            errorMav.addObject("errorMessage", "Deleted successfully");
-            return errorMav;
+            return new RedirectView("/User/Registration");
         }
+        return new RedirectView("/User/error");
+    }
+
+    @GetMapping("error")
+    public ModelAndView errorPage() {
         ModelAndView errorMav = new ModelAndView("error.html");
         errorMav.addObject("errorMessage", "User not found");
         return errorMav;

@@ -10,7 +10,7 @@ import com.example.aswe.project.models.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByid(int id);
     // User findByEmail(String email);
-    // El mo4kla en el attribute lazm yeb2a small letter not capital
+    // El mo4kla en el attribute lazm yeb2a small letters not capital
     // Capital bs in case enha greater than one word
 
     // <List>User findByemail(String Email);
