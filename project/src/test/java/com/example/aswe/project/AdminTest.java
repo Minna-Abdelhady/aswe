@@ -6,8 +6,6 @@ import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -22,9 +20,10 @@ public class AdminTest {
     
     private adminRepository adminRepo = mock(adminRepository.class);
     private adminController adminCont = new adminController(adminRepo);
+    // private adminController adminCont = new adminController();
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepository = mock(UserRepository.class);
 
     // @Mock
     // private adminRepository adminRepo = mock(adminRepository.class);;

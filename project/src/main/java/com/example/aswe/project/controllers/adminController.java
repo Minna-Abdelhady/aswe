@@ -37,6 +37,10 @@ public class adminController {
         this.adminRepo = adminRepo;
     }
 
+    public adminController(){
+        
+    }
+
     @Autowired
     private UserRepository userRepository;
 
