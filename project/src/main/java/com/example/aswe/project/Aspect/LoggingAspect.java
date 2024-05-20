@@ -1,6 +1,8 @@
 package com.example.aswe.project.Aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -21,6 +23,21 @@ public class LoggingAspect {
     @Before("controllersPointcut()")
     public void beforeMethod(JoinPoint joinPoint){
         System.out.println("Before method execution: " + joinPoint.getSignature());
+
+
+
     }
+
+        // This method measures the time taken for the execution of any method in the controllers package and prints it
+    @Around("within(com.example.aswe.demo.controllers.*)")
+    public Object timeTracker(ProceedingJoinPoint joinPoint) throws Throwable{
+        long startTime = System.currentTimeMillis();
+        Object result = joinPoint.proceed();
+        long endTime = System.currentTimeMillis();
+        long timeTakeninMs = endTime - startTime;
+        System.out.println("Time taken by "+joinPoint.getSignature()+" is "+timeTakeninMs+"ms");
+        return result;
+    }
+    
 
 }
