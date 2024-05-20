@@ -15,7 +15,7 @@ public class Product {
     private double price;
     @Column(columnDefinition = "TEXT")
     private String description;
-    // private Date createdAt;          // Will be added in the reports
+    // private Date createdAt; // Will be added in the reports
     private String ImgFileName;
 
     public Product() {
