@@ -143,16 +143,18 @@ public class UserController {
         //     // User not found
         //     return new RedirectView("/User/Login");
         // }
-        if (dbUser.getType().getId() == 1) {
-            session.setAttribute("id", dbUser.getId());
-            return new RedirectView("/Admin/Dashboard");
-        }
         Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
         if (isPasswordMatched) {
-            session.setAttribute(Email, dbUser.getEmail());
+            // session.setAttribute(Email, dbUser.getEmail());
+            session.setAttribute("id", dbUser.getId());
+            if (dbUser.getType().getId() == 1) {
+                // session.setAttribute("id", dbUser.getId());
+                return new RedirectView("/Admin/Dashboard");
+            }
             return new RedirectView("/User/Home");
         } else {
             // Working password wrong
+            System.out.println("Password does not match for user: " + Email);
             return new RedirectView("/User/Login");
         }
     }
