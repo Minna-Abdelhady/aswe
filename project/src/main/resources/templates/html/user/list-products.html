@@ -4,8 +4,10 @@
     <title>List Products</title>
     <link rel="stylesheet" href="../../../css/user/cards.css">
 </head>
+<header th:include="../templates/partials/header.html"></header>
+
 <body>
-    <h2>List Products</h2>
+
     <div class="product-container">
         <div class="product-card" th:each="product: ${products}">
             <!-- <img class="product-image" th:src="${product.imageUrl}" alt="Product Image"> -->
@@ -15,8 +17,15 @@
                 <p class="product-category" th:text="'Category: ' + ${product.category}"></p>
                 <p class="product-price" th:text="'Price: ' + ${product.price}"></p>
                 <p class="product-description" th:text="'Description: ' + ${product.description}"></p>
+                <button>Add to Cart</button>       
+                <br>  
+                <button>More details</details></button>
+
+
             </div>
         </div>
     </div>
+    <footer th:include="../templates/partials/footer.html"></footer>
+
 </body>
 </html>

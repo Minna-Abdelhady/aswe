@@ -12,7 +12,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Lodge</title>
+  <title>about us</title>
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
@@ -28,6 +28,283 @@
   <link href="css/responsive.css" rel="stylesheet" />
 </head>
 
+
+<style>
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul, li, a, img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  text-decoration: none;
+  list-style: none;
+}
+
+/* General body styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+.container-fluid {
+  padding: 0 15px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header styles */
+.header_section {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+}
+
+.navbar-brand img {
+  max-width: 50px;
+  margin-right: 10px;
+}
+
+.navbar-brand span {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #333;
+}
+
+.navbar-nav .nav-item .nav-link {
+  font-size: 1em;
+  padding: 10px 15px;
+  color: #333;
+}
+
+.navbar-nav .nav-item .nav-link:hover,
+.navbar-nav .nav-item.active .nav-link {
+  color: #e3c82e;
+}
+
+/* Hero section styles */
+.hero_area {
+  position: relative;
+  background-color: #f4f4f4;
+  padding: 30px 0;
+}
+
+/* About section styles */
+.about_section {
+  background-color: #fff;
+  padding: 60px 0;
+  position: relative;
+}
+
+.about_section .design-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.about_section .detail-box {
+  margin-top: 30px;
+}
+
+.about_section .heading_container h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #e3c82e;
+}
+
+.about_section p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.about_section .detail-box a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e3c82e;
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.about_section .detail-box a:hover {
+  background-color: #e3c82e;
+}
+
+.about_section .img-box img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* Info section styles */
+.info_section {
+  background-color: #333;
+  color: #fff;
+  padding: 60px 0;
+}
+
+.info_section .info_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.info_section .info_logo a {
+  display: flex;
+  align-items: center;
+}
+
+.info_section .info_logo img {
+  max-width: 50px;
+  margin-right: 10px;
+}
+
+.info_section .info_logo span {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.info_section .info_contact {
+  margin-bottom: 20px;
+}
+
+.info_section .info_contact a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.info_section .info_contact img {
+  max-width: 20px;
+  margin-right: 10px;
+}
+
+.info_section .info_form {
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+}
+
+.info_section .info_form h5 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.info_section .info_form .email_box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.info_section .info_form label {
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.info_section .info_form input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.info_section .info_form button {
+  padding: 10px;
+  background-color: #e3c82e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.info_section .info_form button:hover {
+  background-color: #e3c82e;
+}
+
+.info_section .info_social {
+  margin-top: 30px;
+}
+
+.info_section .info_social .social_box {
+  display: flex;
+  justify-content: center;
+}
+
+.info_section .info_social .social_box a {
+  margin: 0 10px;
+}
+
+.info_section .info_social .social_box a img {
+  max-width: 30px;
+  transition: transform 0.3s ease;
+}
+
+.info_section .info_social .social_box a:hover img {
+  transform: scale(1.1);
+}
+
+/* Footer section styles */
+.footer_section {
+  background-color: #222;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer_section p {
+  margin: 0;
+  font-size: 1em;
+}
+
+.footer_section a {
+  color: #e3c82e;
+  text-decoration: none;
+}
+
+.footer_section a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+
+  .info_section .info_container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info_section .info_contact,
+  .info_section .info_logo,
+  .info_section .info_form {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .info_section .info_social .social_box {
+    justify-content: space-around;
+  }
+}
+
+</style>
+
+<header th:include="../templates/partials/header.html"></header>
+
 <body class="sub_page">
 
   <div class="hero_area">
@@ -35,35 +312,12 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <img src="images/logo.png" alt="">
-            <span>
-              Lodge
-            </span>
-          </a>
+         
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-              <ul class="navbar-nav  ">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="about.html"> About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="jewellery.html">Jewellery </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact us</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Login</a>
-                </li>
-              </ul>
+          
 
             </div>
             <div class="quote_btn-container ">
