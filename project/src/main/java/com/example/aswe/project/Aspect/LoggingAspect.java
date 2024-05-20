@@ -13,4 +13,10 @@ public class LoggingAspect {
     @Pointcut("execution(* com.example.aswe.demo.controllers.*.*(..))")
     public void controllersPointcut(){}
 
+    // Defining an advice to be executed before any method in the controllers package is called
+    @Before("controllersPointcut()")
+    public void beforeMethod(JoinPoint joinPoint){
+        System.out.println("Before method execution: " + joinPoint.getSignature());
+    }
+
 }
