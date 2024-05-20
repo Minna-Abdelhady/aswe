@@ -1,6 +1,6 @@
 $btnColor: #121212;
 $white: #ffffff;
-$black:#000000;
+$black: #000000;
 
 @mixin main-font {
   font-family: "Poppins", sans-serif;
@@ -541,7 +541,6 @@ a:focus {
         color: #fbb534;
       }
 
-      h2 {}
 
       a {
         display: inline-block;
