@@ -1,18 +1,18 @@
 package com.example.aswe.project;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+// import static org.junit.Assert.assertEquals;
+// import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.Test;
-import org.mockito.Mockito;
-import org.springframework.data.repository.ListCrudRepository;
-import org.springframework.web.servlet.ModelAndView;
+// import java.util.ArrayList;
+// import java.util.List;
+// import org.junit.Test;
+// import org.mockito.Mockito;
+// import org.springframework.data.repository.ListCrudRepository;
+// import org.springframework.web.servlet.ModelAndView;
 
-import com.example.aswe.project.controllers.UserController;
-import com.example.aswe.project.models.Product;
-import com.example.aswe.project.repositories.productRepository;
+// import com.example.aswe.project.controllers.UserController;
+// import com.example.aswe.project.models.Product;
+// import com.example.aswe.project.repositories.productRepository;
 
 public class UserTest {
 
