@@ -13,6 +13,10 @@ public class LoggingAspect {
     @Pointcut("execution(* com.example.aswe.demo.controllers.*.*(..))")
     public void controllersPointcut(){}
 
+    // Defining a pointcut for the getUsers method in the controllers package
+    @Pointcut("execution(* com.example.aswe.demo.controllers.*.getUsers(..))")
+    public void getUsersPointcut(){}
+
     // Defining an advice (el howa action) to be executed before any method in the controllers package is called
     @Before("controllersPointcut()")
     public void beforeMethod(JoinPoint joinPoint){
