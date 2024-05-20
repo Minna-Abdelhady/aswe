@@ -2,6 +2,7 @@ package com.example.aswe.project.Aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -24,8 +25,11 @@ public class LoggingAspect {
     public void beforeMethod(JoinPoint joinPoint){
         System.out.println("Before method execution: " + joinPoint.getSignature());
 
-
-
+    }
+    // Defining an advice to be executed after any method in the controllers package is called
+    @After("within(com.example.aswe.demo.controllers.*)")
+    public void afterControllersInGeneral(JoinPoint joinPoint){
+        System.out.println("After controller method: "+joinPoint.getSignature());
     }
 
         // This method measures the time taken for the execution of any method in the controllers package and prints it
