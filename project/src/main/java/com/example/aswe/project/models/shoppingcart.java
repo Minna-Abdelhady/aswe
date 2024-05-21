@@ -25,7 +25,7 @@ public class ShoppingCart {
     private User user;
 
     @ManyToOne
-    Product product;
+    private Product product;
 
     public ShoppingCart() {
     }
@@ -71,13 +71,7 @@ public class ShoppingCart {
         this.cartProductsList =cartProductsList;
     }
 
-    // public CartProducts getCartProducts() {
-    //     return this.cartProducts;
-    // }
-
-    // public void setCartProducts(CartProducts cartProducts ) {
-    //     this.cartProductsList=cartProducts;
-    // }
+    
     public void addProductToCart(CartProducts cartProduct){
         if(cartProductsList==null){
             cartProductsList=new ArrayList<>();
@@ -86,43 +80,33 @@ public class ShoppingCart {
             // CartProducts cartproducts=new CartProducts();
             // cartproducts.setProduct(product);
             // cartproducts.setUser(user);
-            cartProductsList.add(cartProduct);
-        
+            cartProductsList.add(cartProduct);   
     }
-    }
-
-    //public ShoppingCart id(int id) {
-        //setId(id);
-       // return this;
-   // }
-
-    // public ShoppingCart name(String name) {
-    //     setName(name);
-    //     return this;
-    // }
-
-    // @Override
-    // public boolean equals(Object o) {
-    //     if (o == this)
-    //         return true;
-    //     if (!(o instanceof ShoppingCart)) {
-    //         return false;
-    //     }
-    //     ShoppingCart shoppingCart = (ShoppingCart) o;
-    //     return id == shoppingCart.id && Objects.equals(name, shoppingCart.name);
-    // }
-
-    // @Override
-    // public int hashCode() {
-    //     return Objects.hash(id, name);
-    // }
-
-    // @Override
-    // public String toString() {
-    //     return "{" +
-    //         " id='" + getId() + "'" +
-    //         ", name='" + getName() + "'" +
-    //         "}";
-    // }
     
-
+    public boolean editProductInCart(int cartProductId,String action){
+     if(cartProductsList!=null){
+        for(CartProducts CartProduct:cartProductsList){
+            if(CartProduct.getId()==cartProductId){
+                int quantity=CartProduct.getQuantity();
+                if("increase".equals(action)){
+                 quantity++;
+                }
+                else if("decrease".equals(action)&& quantity>1){
+                quantity--;
+                }
+                CartProduct.setQuantity(quantity);
+                return true;
+             }
+         }
+      }
+      return false;
+     }
+ 
+     public void removeProductFromCart(CartProducts cartproduct){
+         if(cartProductsList!=null){
+            cartProductsList.remove(cartproduct);
+         }
+     }
+}    
+ 
+    
