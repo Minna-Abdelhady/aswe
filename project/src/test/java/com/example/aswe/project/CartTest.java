@@ -32,7 +32,7 @@ public class CartTest {
         shoppingcart=new ShoppingCart();
         cartproducts=new CartProducts();
          cartproducts.setId(1);
-         cartproducts.setName("t11");
+        //  cartproducts.setName("t11");
          cartproducts.setPrice(1100);
          cartproducts.setQuantity(5);
          shoppingcart.addProductToCart(cartproducts);

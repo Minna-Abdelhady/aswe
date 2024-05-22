@@ -9,16 +9,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import java.util.Objects;
 
 @Entity
 public class CartProducts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int CartProducts_Id;
-    private String name;
     private double price;
     private int quantity;
-    private int shoppingCartId;
+    //private int shoppingCartId;
     @ManyToOne
     private ShoppingCart shoppingcart;
 
@@ -28,23 +28,20 @@ public class CartProducts {
     @ManyToOne
    private Product product;
 
-    @OneToMany
-    private List<Product>products= new ArrayList<>();
+//     @OneToMany
+//     private List<Product>products= new ArrayList<>();
 
     public CartProducts(){
 
     }
 
-    public CartProducts(int CartProducts_Id, String name, int price, int quantity,ShoppingCart shoppingcart,
-     User user, Product product, int shoppingCartId) {
+    public CartProducts(int CartProducts_Id, double price, int quantity, ShoppingCart shoppingcart, User user, Product product) {
         this.CartProducts_Id = CartProducts_Id;
-        this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.shoppingcart =shoppingcart;
-        this.user=user;
-        this.product=product;
-        this.shoppingCartId=shoppingCartId;
+        this.shoppingcart = shoppingcart;
+        this.user = user;
+        this.product = product;
     }
 
     public int getId() {
@@ -53,19 +50,6 @@ public class CartProducts {
 
     public void setId(int CartProducts_Id) {
         this.CartProducts_Id = CartProducts_Id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-    public int getshoppingCartId(){
- return this.shoppingCartId;
-    }
-    public void setShoppingCartId(int shoppingCartId){
-  this.shoppingCartId=shoppingCartId;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getPrice() {
@@ -84,10 +68,11 @@ public class CartProducts {
         this.quantity = quantity;
     }
 
-    public ShoppingCart getShoppingCart() {
+    public ShoppingCart getShoppingcart() {
         return this.shoppingcart;
     }
-    public void setShoppingCart(ShoppingCart shoppingcart) {
+
+    public void setShoppingcart(ShoppingCart shoppingcart) {
         this.shoppingcart = shoppingcart;
     }
 
@@ -106,17 +91,64 @@ public class CartProducts {
     public void setProduct(Product product) {
         this.product = product;
     }
-    public List<Product>getProducts(){
-        return this.products;
-    }
-    public void setProducts(List<Product> products){
-        this.products=products;
-    }
-    public void addProduct(Product product){
-      products.add(product);
+
+    public CartProducts CartProducts_Id(int CartProducts_Id) {
+        setId(CartProducts_Id);
+        return this;
     }
 
-    // public Object stream() {
-    //     throw new UnsupportedOperationException("Unimplemented method 'stream'");
-    // }
-}
+    public CartProducts price(double price) {
+        setPrice(price);
+        return this;
+    }
+
+    public CartProducts quantity(int quantity) {
+        setQuantity(quantity);
+        return this;
+    }
+
+    public CartProducts shoppingcart(ShoppingCart shoppingcart) {
+        setShoppingcart(shoppingcart);
+        return this;
+    }
+
+    public CartProducts user(User user) {
+        setUser(user);
+        return this;
+    }
+
+    public CartProducts product(Product product) {
+        setProduct(product);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof CartProducts)) {
+            return false;
+        }
+        CartProducts cartProducts = (CartProducts) o;
+        return CartProducts_Id == cartProducts.CartProducts_Id && price == cartProducts.price && quantity == cartProducts.quantity && Objects.equals(shoppingcart, cartProducts.shoppingcart) && Objects.equals(user, cartProducts.user) && Objects.equals(product, cartProducts.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(CartProducts_Id, price, quantity, shoppingcart, user, product);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " CartProducts_Id='" + getId() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", quantity='" + getQuantity() + "'" +
+            ", shoppingcart='" + getShoppingcart() + "'" +
+            ", user='" + getUser() + "'" +
+            ", product='" + getProduct() + "'" +
+            "}";
+    }
+    
+
+    }
