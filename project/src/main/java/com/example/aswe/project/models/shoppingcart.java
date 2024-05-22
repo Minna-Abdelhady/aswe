@@ -76,37 +76,32 @@ public class ShoppingCart {
         if(cartProductsList==null){
             cartProductsList=new ArrayList<>();
         }
-        
-            // CartProducts cartproducts=new CartProducts();
-            // cartproducts.setProduct(product);
-            // cartproducts.setUser(user);
-            cartProductsList.add(cartProduct);   
+        cartProductsList.add(cartProduct);   
     }
     
-    public boolean editProductInCart(int cartProductId,String action){
-     if(cartProductsList!=null){
-        for(CartProducts CartProduct:cartProductsList){
-            if(CartProduct.getId()==cartProductId){
-                int quantity=CartProduct.getQuantity();
-                if("increase".equals(action)){
-                 quantity++;
-                }
-                else if("decrease".equals(action)&& quantity>1){
-                quantity--;
-                }
-                CartProduct.setQuantity(quantity);
-                return true;
-             }
-         }
-      }
-      return false;
-     }
+    // public boolean editProductInCart(int cartProductId,String action){
+    //  if(cartProductsList!=null){
+    //     for(CartProducts CartProduct:cartProductsList){
+    //         if(CartProduct.getId()==cartProductId){
+    //             int quantity=CartProduct.getQuantity();
+    //             if("increase".equals(action)){
+    //              quantity++;
+    //             }
+    //             else if("decrease".equals(action)&& quantity>1){
+    //             quantity--;
+    //             }
+    //             CartProduct.setQuantity(quantity);
+    //             return true;
+    //          }
+    //      }
+    //   }
+    //   return false;
+    //  }
  
      public void removeProductFromCart(CartProducts cartproduct){
          if(cartProductsList!=null){
             cartProductsList.remove(cartproduct);
          }
      }
-}    
+     }
  
-    

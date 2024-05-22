@@ -35,7 +35,8 @@ public class CartProducts {
 
     }
 
-    public CartProducts(int CartProducts_Id, String name, int price, int quantity,ShoppingCart shoppingcart, User user, Product product) {
+    public CartProducts(int CartProducts_Id, String name, int price, int quantity,ShoppingCart shoppingcart,
+     User user, Product product, int shoppingCartId) {
         this.CartProducts_Id = CartProducts_Id;
         this.name = name;
         this.price = price;
@@ -43,6 +44,7 @@ public class CartProducts {
         this.shoppingcart =shoppingcart;
         this.user=user;
         this.product=product;
+        this.shoppingCartId=shoppingCartId;
     }
 
     public int getId() {
@@ -114,7 +116,7 @@ public class CartProducts {
       products.add(product);
     }
 
-    public Object stream() {
-        throw new UnsupportedOperationException("Unimplemented method 'stream'");
-    }
+    // public Object stream() {
+    //     throw new UnsupportedOperationException("Unimplemented method 'stream'");
+    // }
 }
