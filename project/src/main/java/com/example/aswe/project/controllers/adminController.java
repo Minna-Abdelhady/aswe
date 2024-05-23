@@ -72,8 +72,8 @@ public class adminController {
         return new RedirectView("/Admin/List-Users");
     }
 
-    @Autowired
-    private productRepository ProductRepository;
+    // @Autowired
+    // private productRepository ProductRepository;
 
     @GetMapping("Dashboard")
     public ModelAndView dashboard() {
@@ -360,11 +360,12 @@ public class adminController {
     private productRepository productService;
 
     @GetMapping("/products")
-    public RedirectView showAllproducts(Model model) {
+    public ModelAndView showAllproducts() {
+        ModelAndView model = new ModelAndView("html/products/index.html");
         List<Product> products = productService.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
-        model.addAttribute("products", products);
-        return new RedirectView("products/index");
+        model.addObject("products", products);
+        return model;
     }
 
     @GetMapping("/create")
