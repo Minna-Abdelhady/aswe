@@ -7,7 +7,11 @@ import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -18,14 +22,24 @@ import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AdminTest {
+
+    @Mock
+    private adminRepository adminRepo;
+
+    @Mock
+    private UserRepository userRepository;
+
+    @InjectMocks
+    private adminController adminCont;
     
-    private adminRepository adminRepo = mock(adminRepository.class);
-    private adminController adminCont = new adminController(adminRepo);
+    // private adminRepository adminRepo = mock(adminRepository.class);
+    // private adminController adminCont = new adminController(adminRepo);
     // private adminController adminCont = new adminController();
 
-    @Autowired
-    private UserRepository userRepository = mock(UserRepository.class);
+    // @Autowired
+    // private UserRepository userRepository = mock(UserRepository.class);
 
     // @Mock
     // private adminRepository adminRepo = mock(adminRepository.class);;
@@ -36,8 +50,8 @@ public class AdminTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        adminRepo = mock(adminRepository.class);
-        userRepository = mock(UserRepository.class);
+        // adminRepo = mock(adminRepository.class);
+        // userRepository = mock(UserRepository.class);
         // adminCont = new adminController(adminRepo, userRepository);
     }
 
