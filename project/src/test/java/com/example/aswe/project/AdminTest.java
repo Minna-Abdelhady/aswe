@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -41,6 +40,8 @@ public class AdminTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
+    // Test the User CRUD
 
     @Test
     public void testAddUser() {
@@ -130,5 +131,15 @@ public class AdminTest {
         when(userRepository.findById(1)).thenReturn(Optional.empty());
         User deletedUser = userRepository.findById(1).orElse(null);
         assertNull(deletedUser);
+    }
+
+    // Test the Admin CRUD
+
+    @Test
+    public void testAddAdmin() {
+        ModelAndView mav = adminCont.addAdmin();
+        assertNotNull(mav);
+        assertEquals("/html/admin/add-admin.html", mav.getViewName());
+        assertNotNull(mav.getModel().get("admin"));
     }
 }
