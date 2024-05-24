@@ -3,6 +3,7 @@ package com.example.aswe.project;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +27,7 @@ import com.example.aswe.project.repositories.adminRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdminTest {
-    
+
     @Mock
     private adminRepository adminRepo;
 
@@ -44,7 +45,7 @@ public class AdminTest {
     @Test
     public void testAddUser() {
         ModelAndView mav = adminCont.addUser();
-        assertNotNull(mav);        
+        assertNotNull(mav);
         assertEquals("/html/admin/add-user.html", mav.getViewName());
         assertNotNull(mav.getModel().get("user"));
     }
@@ -76,6 +77,7 @@ public class AdminTest {
 
     @Test
     public void testEditUser() {
+        // Step 1: Mock the original user returned by findByid
         User originalUser = new User();
         originalUser.setId(1);
         originalUser.setFName("Minna");
@@ -83,26 +85,33 @@ public class AdminTest {
         originalUser.setEmail("minna.hany@gmail.com");
         originalUser.setPassword("password");
 
-        when(userRepository.findById(1)).thenReturn(Optional.of(originalUser));
-        when(userRepository.save(originalUser)).thenReturn(originalUser);
+        // Mock findByid to return the originalUser
+        when(userRepository.findByid(1)).thenReturn(originalUser);
 
+        // Step 2: Prepare the updated user details
         User updatedUser = new User();
         updatedUser.setFName("Sara");
         updatedUser.setLName("Hany");
         updatedUser.setEmail("sara.hany@gmail.com");
         updatedUser.setPassword("newpassword");
 
+        // Mock the save method to return the updated user
+        when(userRepository.save(any(User.class))).thenReturn(updatedUser);
+
+        // Step 4: Call the saveProfile method
         RedirectView redirectView = adminCont.saveProfile(1, updatedUser);
+        assertNotNull(redirectView);
         assertEquals("/Admin/List-Users", redirectView.getUrl());
 
-        when(userRepository.findById(1)).thenReturn(Optional.of(updatedUser));
-        User savedUser = userRepository.findById(1).orElse(null);
+        // Step 5: Verify the updated user details
+        User savedUser = userRepository.findByid(1);
+        assertNotNull(savedUser);
         assertEquals("Sara", savedUser.getFName());
         assertEquals("Hany", savedUser.getLName());
         assertEquals("sara.hany@gmail.com", savedUser.getEmail());
     }
 
-    @Test 
+    @Test
     public void testDeleteUserAccount() {
         User user = new User();
         user.setId(1);
@@ -111,10 +120,13 @@ public class AdminTest {
         user.setEmail("minna.hany@gmail.com");
         user.setPassword("password");
 
+        // Mock the findById method to return the user
         when(userRepository.findById(1)).thenReturn(Optional.of(user));
+
         RedirectView redirectView = adminCont.deleteUserAccount(1);
         assertEquals("/Admin/List-Users", redirectView.getUrl());
 
+        // Mock the findById method to return empty after the user is deleted
         when(userRepository.findById(1)).thenReturn(Optional.empty());
         User deletedUser = userRepository.findById(1).orElse(null);
         assertNull(deletedUser);
