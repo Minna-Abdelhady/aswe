@@ -47,7 +47,7 @@ public class CartController {
     ModelAndView mav = new ModelAndView("/html/user/list-cart.html");
     List<CartProducts> CartProducts = this.cartItems.findAll();
     if (CartProducts.size() != 0){
-      List<CartProducts> myCartProducts = null;
+      List<CartProducts> myCartProducts = new ArrayList<>();
       Integer userId = (Integer) session.getAttribute("id");
       if (userId != null){
         for (int i =0; i < CartProducts.size(); i++){
@@ -76,9 +76,10 @@ public class CartController {
   //   return CartProducts;
   // }
 
-  @GetMapping("/add-to-cart/{userId}/{productId}")
-  public RedirectView addToCart(@PathVariable("userId") int userId, @PathVariable("productId") int productId) {
+  @GetMapping("/add-to-cart/{productId}")
+  public RedirectView addToCart( @PathVariable("productId") int productId,HttpSession session) {
     ModelAndView mav = new ModelAndView("/html/user/list-products.html");
+    Integer userId = (Integer) session.getAttribute("id");
     User user = this.userRepository.findByid(userId);
     if (user != null) {
       Product product = this.ProductRepository.findByid(productId);
@@ -103,32 +104,7 @@ public class CartController {
   //   this.userRepository.save()
   // }
   
-  // @GetMapping("/edit-cartItem/{userId}/{CartProducts_Id}")
-  // public ModelAndView EditcartItem(@PathVariable("userId") int userId,
-  // @PathVariable("CartProducts_Id") int CartProducts_Id,
-  // @RequestParam("action") String action)
-  // {
-  // ModelAndView mav= new ModelAndView("/html/user/list-cart.html");
-  // User user = this.userRepository.findByid(userId);
-  // if(user !=null){
-  // ShoppingCart shoppingcart= user.getShoppingCart();
-  // if(shoppingcart==null){
-  // mav.addObject("error message", "shoppingcart is empty");
-  // return mav;
-  // }
-  // boolean ProductUpdated=
-  // shoppingcart.editProductInCart(CartProducts_Id,action);
-  // if(ProductUpdated){
-  // mav.addObject("SusccessMessage","ShoppingCart is updtaed Successfully");
-  // }
-  // else{
-  // mav.addObject("errorMessage","Cart item not found ");
-  // }
-  // }
-  // else{
-  // mav.addObject("errorMessage","User not Found");
-  // }
-  // return mav;
+
 
   @GetMapping("/delete-cartItem/{userId}/{CartProducts_Id}")
   public ModelAndView deleteItem(@PathVariable("userId") int userId,
