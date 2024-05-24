@@ -169,4 +169,40 @@ public class AdminTest {
         assertEquals("Admin1", savedUser.getLName());
     }
 
+    @Test
+    public void testEditAdmin() {
+        // Step 1: Mock the original admin returned by findByid
+        User originalAdmin = new User();
+        originalAdmin.setId(1);
+        originalAdmin.setFName("Admin1");
+        originalAdmin.setLName("Admin1");
+        originalAdmin.setEmail("Admin1.Admin1@gmail.com");
+        originalAdmin.setPassword("password");
+
+        // Mock findByid to return the originalAdmin
+        when(userRepository.findByid(1)).thenReturn(originalAdmin);
+
+        // Step 2: Prepare the updated admin details
+        User updatedAdmin = new User();
+        updatedAdmin.setFName("Admin");
+        updatedAdmin.setLName("Admin");
+        updatedAdmin.setEmail("Admin.Admin@gmail.com");
+        updatedAdmin.setPassword("newpassword");
+
+        // Mock the save method to return the updated admin
+        when(userRepository.save(any(User.class))).thenReturn(updatedAdmin);
+
+        // Step 4: Call the saveProfile method
+        RedirectView redirectView = adminCont.saveAdminProfile(1, updatedAdmin);
+        assertNotNull(redirectView);
+        assertEquals("/Admin/List-Admins", redirectView.getUrl());
+
+        // Step 5: Verify the updated user details
+        User savedAdmin = userRepository.findByid(1);
+        assertNotNull(savedAdmin);
+        assertEquals("Admin", savedAdmin.getFName());
+        assertEquals("Admin", savedAdmin.getLName());
+        assertEquals("Admin.Admin@gmail.com", savedAdmin.getEmail());
+    }
+
 }
