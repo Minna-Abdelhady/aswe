@@ -106,6 +106,11 @@ public class User {
         this.shoppingCart=shoppingCart;
     }
 
+    public User orElse(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
+    }
+
     // public List<CartItem> getCart() {
     //     return this.cart;
     // }

@@ -481,7 +481,7 @@ public class adminController {
             return new RedirectView("products");
         } catch (Exception ex) {
             System.out.println("Exception: " + ex.getMessage());
-            return new RedirectView("products");  
+            return new RedirectView("products");
         }
     }
 
