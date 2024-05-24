@@ -205,4 +205,25 @@ public class AdminTest {
         assertEquals("Admin.Admin@gmail.com", savedAdmin.getEmail());
     }
 
+    @Test
+    public void testDeleteAdminAccount() {
+        User admin = new User();
+        admin.setId(1);
+        admin.setFName("Minna");
+        admin.setLName("Hany");
+        admin.setEmail("minna.hany@gmail.com");
+        admin.setPassword("password");
+
+        // Mock the findById method to return the admin
+        when(userRepository.findById(1)).thenReturn(Optional.of(admin));
+
+        RedirectView redirectView = adminCont.deleteAdminAccount(1);
+        assertEquals("/Admin/List-Admins", redirectView.getUrl());
+
+        // Mock the findById method to return empty after the user is deleted
+        when(userRepository.findById(1)).thenReturn(Optional.empty());
+        User deletedAdmin = userRepository.findById(1).orElse(null);
+        assertNull(deletedAdmin);
+    }
+
 }
