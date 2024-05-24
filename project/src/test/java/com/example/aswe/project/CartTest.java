@@ -35,7 +35,7 @@ public class CartTest {
         //  cartproducts.setName("t11");
          cartproducts.setPrice(1100);
          cartproducts.setQuantity(5);
-         shoppingcart.addProductToCart(cartproducts);
+         //shoppingcart.addProductToCart(cartproducts);
 
          //verify that the product was added successfully
          assertEquals(1,shoppingcart.getCartProductsList().size());
@@ -45,8 +45,8 @@ public class CartTest {
         //arrange
         CartProducts cartproducts1=new CartProducts();
         CartProducts cartproducts2= new CartProducts();
-        shoppingcart.addProductToCart(cartproducts1);
-        shoppingcart.addProductToCart(cartproducts2);
+        //shoppingcart.addProductToCart(cartproducts1);
+        //shoppingcart.addProductToCart(cartproducts2);
 
         //act
        //shoppingcart.removeProductFromCart(cartproducts1);

@@ -67,36 +67,19 @@ public class ShoppingCart {
         return cartProductsList;
     }
 
-    public void setCartProductsList(List<CartProducts> cartProductsList) {
+    public void setCartProductsList(CartProducts cartproducts) {
         this.cartProductsList =cartProductsList;
     }
 
     
-    public void addProductToCart(CartProducts cartProduct){
-        if(cartProductsList==null){
-            cartProductsList=new ArrayList<>();
-        }
-        cartProductsList.add(cartProduct);   
-    }
+    // public void addProductToCart(CartProducts cartProduct){
+    //     if(cartProductsList==null){
+    //         cartProductsList=new ArrayList<>();
+    //     }
+    //     cartProductsList.add(cartProduct);   
+    // }
     
-    // public boolean editProductInCart(int cartProductId,String action){
-    //  if(cartProductsList!=null){
-    //     for(CartProducts CartProduct:cartProductsList){
-    //         if(CartProduct.getId()==cartProductId){
-    //             int quantity=CartProduct.getQuantity();
-    //             if("increase".equals(action)){
-    //              quantity++;
-    //             }
-    //             else if("decrease".equals(action)&& quantity>1){
-    //             quantity--;
-    //             }
-    //             CartProduct.setQuantity(quantity);
-    //             return true;
-    //          }
-    //      }
-    //   }
-    //   return false;
-    //  }
+
  
      public void removeProductFromCart(CartProducts cartproduct){
          if(cartProductsList!=null){

@@ -25,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,11 +71,7 @@ public class CartController {
     return mav;
   }
 
-  // @GetMapping("")
-  // public List<CartProducts> getProducts() {
-  //   List<CartProducts> CartProducts = this.cartItems.findAll();
-  //   return CartProducts;
-  // }
+
 
   @GetMapping("/add-to-cart/{productId}")
   public RedirectView addToCart( @PathVariable("productId") int productId,HttpSession session) {
@@ -88,21 +85,29 @@ public class CartController {
         if (shoppingcart == null) {
           shoppingcart = new ShoppingCart();
           user.setShoppingCart(shoppingcart);
-          CartProducts cartProducts = new CartProducts();
-          // cartProducts.setUser(user);
-          // cartProducts.setProduct(product);
-          shoppingcart.addProductToCart(cartProducts);
+        }
+          CartProducts cartproducts = new CartProducts();
+          cartproducts.setUser(user);
+          cartproducts.setProduct(product);
+          List <CartProducts>cartproductsList=new ArrayList<>();
+          shoppingcart.getCartProductsList().add(cartproducts);
           this.userRepository.save(user);
-          mav.addObject("Product Added");
-          return new RedirectView("/Cart");
+          mav.addObject("CartProduct ",cartproducts);
+          return new RedirectView("/html/user/list-cart");
         }
       }
-    }
-      return new RedirectView("/Cart");
+      return new RedirectView("/html/user/registeration");
   }
-  // @PostMapping("/add-to-cart/{userId}/{productId}")
-  //   this.userRepository.save()
-  // }
+  
+  @PostMapping("/add-to-cart")
+    public RedirectView addproduct(@ModelAttribute  List<CartProducts> cartProductsList){
+      for (CartProducts cartproducts : cartProductsList){
+      this.cartItems.save(cartproducts);
+      }
+      return new RedirectView("/html/user/list-cart.html");
+    }
+  
+  
   
 
 
