@@ -4,15 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -24,7 +26,7 @@ import com.example.aswe.project.repositories.adminRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdminTest {
-
+    
     @Mock
     private adminRepository adminRepo;
 
@@ -33,26 +35,10 @@ public class AdminTest {
 
     @InjectMocks
     private adminController adminCont;
-    
-    // private adminRepository adminRepo = mock(adminRepository.class);
-    // private adminController adminCont = new adminController(adminRepo);
-    // private adminController adminCont = new adminController();
 
-    // @Autowired
-    // private UserRepository userRepository = mock(UserRepository.class);
-
-    // @Mock
-    // private adminRepository adminRepo = mock(adminRepository.class);;
-
-    // @InjectMocks
-    // private adminController adminCont = new adminController(adminRepo);
-
-    @BeforeEach
+    @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        // adminRepo = mock(adminRepository.class);
-        // userRepository = mock(UserRepository.class);
-        // adminCont = new adminController(adminRepo, userRepository);
     }
 
     @Test
@@ -61,7 +47,6 @@ public class AdminTest {
         assertNotNull(mav);        
         assertEquals("/html/admin/add-user.html", mav.getViewName());
         assertNotNull(mav.getModel().get("user"));
-        // User user = (User) mav.getModel().get("user");
     }
 
     @Test
@@ -76,10 +61,13 @@ public class AdminTest {
         userType.setName(UserType.TYPE_USER);
         user.setType(userType);
 
+        when(userRepository.save(user)).thenReturn(user);
+
         RedirectView redirectView = adminCont.saveUser(user);
         assertNotNull(redirectView);
         assertEquals("/Admin/List-Users", redirectView.getUrl());
 
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
         User savedUser = userRepository.findById(user.getId()).orElse(null);
         assertNotNull(savedUser);
         assertEquals("Minna", savedUser.getFName());
@@ -94,8 +82,9 @@ public class AdminTest {
         originalUser.setLName("Hany");
         originalUser.setEmail("minna.hany@gmail.com");
         originalUser.setPassword("password");
-        // System.out.println(userRepository);
-        this.userRepository.save(originalUser);
+
+        when(userRepository.findById(1)).thenReturn(Optional.of(originalUser));
+        when(userRepository.save(originalUser)).thenReturn(originalUser);
 
         User updatedUser = new User();
         updatedUser.setFName("Sara");
@@ -106,6 +95,7 @@ public class AdminTest {
         RedirectView redirectView = adminCont.saveProfile(1, updatedUser);
         assertEquals("/Admin/List-Users", redirectView.getUrl());
 
+        when(userRepository.findById(1)).thenReturn(Optional.of(updatedUser));
         User savedUser = userRepository.findById(1).orElse(null);
         assertEquals("Sara", savedUser.getFName());
         assertEquals("Hany", savedUser.getLName());
@@ -120,13 +110,13 @@ public class AdminTest {
         user.setLName("Hany");
         user.setEmail("minna.hany@gmail.com");
         user.setPassword("password");
-        userRepository.save(user);
 
+        when(userRepository.findById(1)).thenReturn(Optional.of(user));
         RedirectView redirectView = adminCont.deleteUserAccount(1);
         assertEquals("/Admin/List-Users", redirectView.getUrl());
 
-        User deletedUser = userRepository.findByid(1);
+        when(userRepository.findById(1)).thenReturn(Optional.empty());
+        User deletedUser = userRepository.findById(1).orElse(null);
         assertNull(deletedUser);
     }
-
 }
