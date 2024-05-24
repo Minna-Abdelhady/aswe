@@ -142,4 +142,31 @@ public class AdminTest {
         assertEquals("/html/admin/add-admin.html", mav.getViewName());
         assertNotNull(mav.getModel().get("admin"));
     }
+
+    @Test
+    public void testSaveAdmin() {
+        User admin = new User();
+        admin.setFName("Admin");
+        admin.setLName("Admin1");
+        admin.setEmail("Admin.Admin1@email.com");
+        admin.setPassword("password");
+        UserType adminType = new UserType();
+        // id 1 corresponds to Admin type
+        adminType.setId(1); 
+        adminType.setName(UserType.TYPE_ADMIN);
+        admin.setType(adminType);
+
+        when(userRepository.save(admin)).thenReturn(admin);
+
+        RedirectView redirectView = adminCont.saveAdmin(admin);
+        assertNotNull(redirectView);
+        assertEquals("/Admin/List-Admins", redirectView.getUrl());
+
+        when(userRepository.findById(admin.getId())).thenReturn(Optional.of(admin));
+        User savedUser = userRepository.findById(admin.getId()).orElse(null);
+        assertNotNull(savedUser);
+        assertEquals("Admin", savedUser.getFName());
+        assertEquals("Admin1", savedUser.getLName());
+    }
+
 }
