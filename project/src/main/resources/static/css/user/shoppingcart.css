@@ -94,58 +94,89 @@ img {
 
 .button:hover {
     background-color: #1d1bb8;
-}
- */
- body {
+} */
+body {
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-}
-
-.cart-container {
-    width: 80%;
+.CartContainer {
+    width: 70%;
+    height: 90%;
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0px 10px 20px #1687d933;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px;
 }
 
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #eee;
+.header {
+    width: 100%;
+    text-align: center;
+    justify-content: first baseline;
 }
 
-.cart-product-details {
-    flex: 1;
+.header h2 {
+    font-size: 24px;
+    font-family: 'Open Sans';
+    font-weight: 700;
+    justify-content: first baseline;
+    color: #2F3841;
 }
 
-.product-name {
-    font-size: 18px;
-    font-weight: bold;
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    justify-content:first baseline;
 }
 
-.product-brand, .product-category, .product-price, .product-description {
-    font-size: 14px;
-    color: #555;
+thead {
+    background-color: #009879;
+    color: #ffffff;
+}
+
+thead th {
+    padding: 10px;
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+td:last-child {
+    text-align: center;
+}
+
+.footer {
+    text-align: center;
+    margin-top: auto;
 }
 
 .button-link {
     display: block;
-    width: 150px;
+    width: 200px;
     margin: 20px auto;
     text-align: center;
     padding: 10px;
@@ -158,14 +189,4 @@ h2 {
 
 .button-link:hover {
     background-color: #0056b3;
-}
-
-footer {
-    margin-top: 20px;
-    padding: 10px;
-    text-align: center;
-    background-color: #f0f0f0;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
 }
