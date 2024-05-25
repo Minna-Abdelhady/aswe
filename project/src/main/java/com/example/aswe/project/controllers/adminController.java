@@ -72,8 +72,8 @@ public class adminController {
         return new RedirectView("/Admin/List-Users");
     }
 
-    // @Autowired
-    // private productRepository ProductRepository;
+    @Autowired
+    private productRepository ProductRepository;
 
     @GetMapping("Dashboard")
     public ModelAndView dashboard() {
@@ -359,33 +359,38 @@ public class adminController {
     @Autowired
     private productRepository productService;
 
-    @GetMapping("/products")
-    public ModelAndView showAllproducts() {
-        ModelAndView model = new ModelAndView("html/products/index.html");
-        List<Product> products = productService.findAll(Sort.by(Sort.Direction.DESC, "id"));
+    
 
-        model.addObject("products", products);
-        return model;
+    @GetMapping("products")
+    public ModelAndView showAllproducts() {
+        ModelAndView mav = new ModelAndView("products/index");
+        List<Product> products = productService.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        mav.addObject("products", products);
+        return mav;
     }
 
     @GetMapping("/create")
-    public RedirectView createProduct(Model model) {
+    public ModelAndView createProduct() {
+        ModelAndView mav = new ModelAndView("products/createProduct");
         productDto ProductDto = new productDto();
-        model.addAttribute("ProductDto", ProductDto);
-        return new RedirectView("products/createProduct");
+        mav.addObject("ProductDto", ProductDto);
+        return mav;
     }
 
     @PostMapping("/create")
-    public RedirectView saveProduct(@Valid @ModelAttribute productDto productDto, BindingResult result) {
+    public ModelAndView saveProduct(@Valid @ModelAttribute productDto productDto, BindingResult result) {
+        ModelAndView mav = new ModelAndView();
         if (result.hasErrors()) {
-            return new RedirectView("products/createProduct");
+            mav.setViewName("products/createProduct");
+            return mav;
         }
 
         // Check if image file is present
         MultipartFile image = productDto.getImagFile();
         if (image == null || image.isEmpty()) {
             result.addError(new FieldError("productDto", "imagFile", "Photo is required"));
-            return new RedirectView("products/createProduct");
+            mav.setViewName("products/createProduct");
+            return mav;
         }
 
         // Generate storage file name
@@ -408,7 +413,8 @@ public class adminController {
             }
         } catch (IOException ex) {
             result.addError(new FieldError("productDto", "imagFile", "Error uploading file"));
-            return new RedirectView("products/createProduct");
+            mav.setViewName("products/createProduct");
+            return mav;
         }
 
         // Create and save product
@@ -421,32 +427,35 @@ public class adminController {
         product.setImgFileName(storageFileName);
         productService.save(product);
 
-        return new RedirectView("products");
+        mav.setViewName("redirect:/products");
+        return mav;
     }
 
     @GetMapping("/edit")
-    public RedirectView edit(@RequestParam int id, Model model) {
+    public ModelAndView edit(@RequestParam int id) {
+        ModelAndView mav = new ModelAndView("products/editproduct");
         Product product = productService.findById(id).get();
-        model.addAttribute("product", product);
+        mav.addObject("product", product);
         productDto ProductDto = new productDto();
         ProductDto.setName(product.getName());
         ProductDto.setBrand(product.getBrand());
         ProductDto.setCategory(product.getCategory());
         ProductDto.setPrice(product.getPrice());
         ProductDto.setDescription(product.getDescription());
-        model.addAttribute("ProductDto", ProductDto);
-        return new RedirectView("products/editproduct");
+        mav.addObject("ProductDto", ProductDto);
+        return mav;
     }
 
     @PostMapping("/edit")
-    public RedirectView updateProduct(Model model, @RequestParam int id, @Valid @ModelAttribute productDto ProductDto,
-            BindingResult result) {
+    public ModelAndView updateProduct(@RequestParam int id, @Valid @ModelAttribute productDto ProductDto, BindingResult result) {
+        ModelAndView mav = new ModelAndView();
         try {
             Product product = productService.findById(id).get();
-            model.addAttribute("product", product);
+            mav.addObject("product", product);
 
             if (result.hasErrors()) {
-                return new RedirectView("products/EditProduct");
+                mav.setViewName("products/EditProduct");
+                return mav;
             }
             if (!ProductDto.getImagFile().isEmpty()) {
                 // Delete old image
@@ -478,33 +487,29 @@ public class adminController {
             // Save the updated product
             productService.save(product);
 
-            return new RedirectView("products");
+            mav.setViewName("redirect:/products");
+            return mav;
         } catch (Exception ex) {
             System.out.println("Exception: " + ex.getMessage());
-            return new RedirectView("products");
+            mav.setViewName("redirect:/products");
+            return mav;
         }
     }
 
     @GetMapping("/delete")
-    public RedirectView deleteproduct(@RequestParam int id) {
+    public ModelAndView deleteproduct(@RequestParam int id) {
+        ModelAndView mav = new ModelAndView();
         try {
             Product prod = productService.findById(id).get();
             Path imagePath = Paths.get("static/" + prod.getImgFileName());
-            try {
-                Files.delete(imagePath);
-            } catch (Exception ex) {
-                System.out.println("Exception: " + ex.getMessage());
-            }
+            Files.delete(imagePath);
             productService.deleteById(id);
-            return new RedirectView("products");// "redirect:/products";
-        }
-
-        catch (Exception ex) {
+            mav.setViewName("redirect:/products");
+            return mav;
+        } catch (Exception ex) {
             System.out.println("Exception: " + ex.getMessage());
-
+            mav.setViewName("redirect:/products");
+            return mav;
         }
-        return new RedirectView("products");
-        // return "redirect:/products";
     }
-
 }
