@@ -67,8 +67,8 @@ public class ShoppingCart {
         return cartProductsList;
     }
 
-    public void setCartProductsList(CartProducts cartproducts) {
-        this.cartProductsList =cartProductsList;
+    public void setCartProductsList(List <CartProducts> cartProductsList) {
+        this.cartProductsList=cartProductsList;
     }
 
     
