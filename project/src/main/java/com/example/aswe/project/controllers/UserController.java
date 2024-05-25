@@ -165,7 +165,8 @@ public class UserController {
         List<Product> Products = this.ProductRepository.findAll();
         mav.addObject("products",Products);
         return mav;
-    }    
+    }   
+     
 
     @GetMapping("profile/{userId}")
     public ModelAndView get1User(@PathVariable("userId") Integer userId) {
