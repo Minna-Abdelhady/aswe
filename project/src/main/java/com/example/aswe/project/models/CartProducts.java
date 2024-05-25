@@ -18,7 +18,6 @@ public class CartProducts {
     private int CartProducts_Id;
     private double price;
     private int quantity;
-    //private int shoppingCartId;
     @ManyToOne
     private ShoppingCart shoppingcart;
 
