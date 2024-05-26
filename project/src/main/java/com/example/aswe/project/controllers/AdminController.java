@@ -281,78 +281,7 @@ public class adminController {
         return new RedirectView("/Admin/List-Admins");
     }
 
-    // Products CRUD
-    // Without images
-
-    // @GetMapping("add-product")
-    // public ModelAndView addproduct() {
-    // ModelAndView mav = new ModelAndView("html/admin/AddProduct.html");
-    // Product newProduct = new Product();
-    // mav.addObject("Product", newProduct);
-    // return mav;
-    // }
-
-    // @PostMapping("add-product")
-    // public RedirectView saveproduct(@ModelAttribute Product newProduct) {
-    // this.ProductRepository.save(newProduct);
-    // return new RedirectView("/Admin/List-products");
-    // }
-
-    // @GetMapping("List-products")
-    // public ModelAndView getproducts() {
-    // ModelAndView mav = new ModelAndView("html/admin/list-products.html");
-    // List<Product> Products = this.ProductRepository.findAll();
-    // mav.addObject("products", Products);
-    // return mav;
-    // }
-
-    // @GetMapping("edit-product/{productId}")
-    // public ModelAndView editProduct(@PathVariable("productId") Integer productId)
-    // {
-    // ModelAndView mav = new ModelAndView("/html/admin/edit-product.html");
-    // Product newProduct = this.ProductRepository.findByid(productId);
-    // if (newProduct != null) {
-    // mav.addObject("product", newProduct);
-    // return mav;
-    // }
-    // ModelAndView errorMav = new ModelAndView("error.html");
-    // errorMav.addObject("errorMessage", "Product not found");
-    // return errorMav;
-    // }
-
-    // @PostMapping("edit-product/{productId}")
-    // public RedirectView saveProduct(@PathVariable("productId") int productId,
-    // @ModelAttribute Product updatedProduct) {
-    // Product product = this.ProductRepository.findByid(productId);
-    // if (!product.getName().equals(updatedProduct.getName())) {
-    // product.setName(updatedProduct.getName());
-    // }
-    // if (!product.getBrand().equals(updatedProduct.getBrand())) {
-    // product.setBrand(updatedProduct.getBrand());
-    // }
-    // if (!product.getCategory().equals(updatedProduct.getCategory())) {
-    // product.setCategory(updatedProduct.getCategory());
-    // }
-    // if (product.getPrice() != updatedProduct.getPrice()) {
-    // product.setPrice(updatedProduct.getPrice());
-    // }
-    // if (!product.getDescription().equals(updatedProduct.getDescription())) {
-    // product.setDescription(updatedProduct.getDescription());
-    // }
-    // this.ProductRepository.save(product);
-    // return new RedirectView("/Admin/List-products");
-    // }
-
-    // @GetMapping("delete-product/{productId}")
-    // public RedirectView deleteAccount(@PathVariable("productId") int ProductId) {
-    // Product Product = this.ProductRepository.findByid(ProductId);
-    // if (ProductId != 0) {
-    // this.ProductRepository.delete(Product);
-    // return new RedirectView("/Admin/List-products");
-    // }
-    // return new RedirectView("/Admin/List-products");
-    // }
-
+    
     // CRUD Products with images
 
     @Autowired
@@ -478,6 +407,7 @@ public class adminController {
             // Update the product with new data from the ProductDto
             product.setName(ProductDto.getName());
             product.setDescription(ProductDto.getDescription());
+            product.setCategory(ProductDto.getCategory());
             product.setBrand(ProductDto.getBrand());
             product.setPrice(ProductDto.getPrice());
 

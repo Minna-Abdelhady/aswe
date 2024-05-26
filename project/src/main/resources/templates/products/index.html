@@ -14,7 +14,7 @@
 
   <div class="container">
     <h1 class="text-center my-4">product</h1>
-    <a class="btn btn-primary" href="/products/create">create products</a>
+    <a class="btn btn-primary" href="/Admin/create">create products</a>
   </div>
   <table class="table">
     <thead>
@@ -38,8 +38,8 @@
         <td><img th:src="@{${prod.ImgFileName}}" alt="..." width="100" /></td>
 
         <td style="white-space: nowrap">
-          <a class="btn btn-primary btn-sm" th:href="@{/products/edit(id=${prod.id})}">Edit</a>
-          <a class="btn btn-danger btn-sm" th:href="@{/products/delete(id=${prod.id})}"
+          <a class="btn btn-primary btn-sm" th:href="@{/Admin/edit(id=${prod.id})}">Edit</a>
+          <a class="btn btn-danger btn-sm" th:href="@{/Admin/delete(id=${prod.id})}"
             onclick="return confirm ('are you sure?')">Delete</a>
         </td>
       </tr>
