@@ -10,6 +10,7 @@ import jakarta.persistence.OneToOne;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class ShoppingCart {
@@ -17,11 +18,12 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartId;
     private String name;
+    private int quantity;
   
-    @OneToMany
-    private List<CartProducts> cartProductsList;
+    // @OneToMany
+    // private List<CartProducts> cartProductsList;
     
-    @OneToOne
+    @ManyToOne
     private User user;
 
     @ManyToOne
@@ -30,30 +32,20 @@ public class ShoppingCart {
     public ShoppingCart() {
     }
 
-    public ShoppingCart(int cartId, String name,List<CartProducts> cartProductsList) {
+    public ShoppingCart(int cartId, String name, int quantity, User user, Product product) {
         this.cartId = cartId;
         this.name = name;
-        this.cartProductsList=cartProductsList;
-    }   
-    public User getUser(){
-        return user;
-    }
-    public void setUser(User user){
-        this.user=user;
-    }
-    public Product getProduct(){
-        return product;
-    }
-    public void setProduct(Product product){
-        this.product=product;
+        this.quantity = quantity;
+        this.user = user;
+        this.product = product;
     }
 
-    public int getId() {
+    public int getCartId() {
         return this.cartId;
     }
 
-    public void setId(int id) {
-        this.cartId = id;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
     public String getName() {
@@ -63,28 +55,142 @@ public class ShoppingCart {
     public void setName(String name) {
         this.name = name;
     }
-    public List<CartProducts> getCartProductsList() {
-        return cartProductsList;
+
+    public int getQuantity() {
+        return this.quantity;
     }
 
-    public void setCartProductsList(List <CartProducts> cartProductsList) {
-        this.cartProductsList=cartProductsList;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public ShoppingCart cartId(int cartId) {
+        setCartId(cartId);
+        return this;
+    }
+
+    public ShoppingCart name(String name) {
+        setName(name);
+        return this;
+    }
+
+    public ShoppingCart quantity(int quantity) {
+        setQuantity(quantity);
+        return this;
+    }
+
+    public ShoppingCart user(User user) {
+        setUser(user);
+        return this;
+    }
+
+    public ShoppingCart product(Product product) {
+        setProduct(product);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof ShoppingCart)) {
+            return false;
+        }
+        ShoppingCart shoppingCart = (ShoppingCart) o;
+        return cartId == shoppingCart.cartId && Objects.equals(name, shoppingCart.name) && quantity == shoppingCart.quantity && Objects.equals(user, shoppingCart.user) && Objects.equals(product, shoppingCart.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cartId, name, quantity, user, product);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " cartId='" + getCartId() + "'" +
+            ", name='" + getName() + "'" +
+            ", quantity='" + getQuantity() + "'" +
+            ", user='" + getUser() + "'" +
+            ", product='" + getProduct() + "'" +
+            "}";
+    }
+}
+
+    // public ShoppingCart() {
+    // }
+
+    // public ShoppingCart(int cartId, String name,List<CartProducts> cartProductsList) {
+    //     this.cartId = cartId;
+    //     this.name = name;
+    //     this.cartProductsList=cartProductsList;
+    // }   
+    // public User getUser(){
+    //     return user;
+    // }
+    // public void setUser(User user){
+    //     this.user=user;
+    // }
+    // public Product getProduct(){
+    //     return product;
+    // }
+    // public void setProduct(Product product){
+    //     this.product=product;
+    // }
+
+    // public int getId() {
+    //     return this.cartId;
+    // }
+
+    // public void setId(int id) {
+    //     this.cartId = id;
+    // }
+
+    // public String getName() {
+    //     return this.name;
+    // }
+
+    // public void setName(String name) {
+    //     this.name = name;
+    // }
+    // public List<CartProducts> getCartProductsList() {
+    //     return cartProductsList;
+    // }
+
+    // public void setCartProductsList(List <CartProducts> cartProductsList) {
+    //     this.cartProductsList=cartProductsList;
+    // }
 
     
-    // public void addProductToCart(CartProducts cartProduct){
-    //     if(cartProductsList==null){
-    //         cartProductsList=new ArrayList<>();
-    //     }
-    //     cartProductsList.add(cartProduct);   
-    // }
+    // // public void addProductToCart(CartProducts cartProduct){
+    // //     if(cartProductsList==null){
+    // //         cartProductsList=new ArrayList<>();
+    // //     }
+    // //     cartProductsList.add(cartProduct);   
+    // // }
     
 
  
-     public void removeProductFromCart(CartProducts cartproduct){
-         if(cartProductsList!=null){
-            cartProductsList.remove(cartproduct);
-         }
-     }
-     }
+    //  public void removeProductFromCart(CartProducts cartproduct){
+    //      if(cartProductsList!=null){
+    //         cartProductsList.remove(cartproduct);
+    //      }
+    //  }
+    //  }
  

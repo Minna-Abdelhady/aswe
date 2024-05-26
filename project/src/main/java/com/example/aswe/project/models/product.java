@@ -1,10 +1,18 @@
 package com.example.aswe.project.models;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+// import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
-@Table(name = "product")
+// @Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +21,13 @@ public class Product {
     private String brand;
     private String category;
     private double price;
-    @Column(columnDefinition = "TEXT")
+    // @Column(columnDefinition = "TEXT")
     private String description;
     // private Date createdAt; // Will be added in the reports
     private String ImgFileName;
+    // @OneToMany
+    // private List<CartProducts> cartproducts=new ArrayList<>();
+
 
     public Product() {
     }
@@ -87,18 +98,23 @@ public class Product {
     public void setImgFileName(String ImgFileName) {
         this.ImgFileName = ImgFileName;
     }
-
-    @Override
-    public String toString() {
-        return "{" +
-                " id='" + getId() + "'" +
-                ", name='" + getName() + "'" +
-                ", brand='" + getBrand() + "'" +
-                ", category='" + getCategory() + "'" +
-                ", price='" + getPrice() + "'" +
-                ", description='" + getDescription() + "'" +
-                ", ImgFileName='" + getImgFileName() + "'" +
-                "}";
-    }
+    // public void setCartProductsList(List<CartProducts> cartproducts){
+    //     this.cartproducts=cartproducts;
+    // }
+    // public List <CartProducts> getCartProducts(){
+    //     return cartproducts;
+    // }
+    // @Override
+    // public String toString() {
+    //     return "{" +
+    //             " id='" + getId() + "'" +
+    //             ", name='" + getName() + "'" +
+    //             ", brand='" + getBrand() + "'" +
+    //             ", category='" + getCategory() + "'" +
+    //             ", price='" + getPrice() + "'" +
+    //             ", description='" + getDescription() + "'" +
+    //             ", ImgFileName='" + getImgFileName() + "'" +
+    //             "}";
+    // }
 
 }

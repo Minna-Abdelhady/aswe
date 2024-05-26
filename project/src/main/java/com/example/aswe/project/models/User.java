@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import java.util.Objects;
 
 @Entity
 public class User {
@@ -39,8 +40,22 @@ public class User {
     // @OneToMany
     // private productRepository ProductRepository;
 
-    @OneToOne
-    private ShoppingCart shoppingCart;
+    // @OneToOne
+    // private ShoppingCart shoppingCart;
+
+    public User() {
+    }
+
+    public User(int id, String FName, String LName, String Email, String Password, UserType type, ShoppingCart shoppingCart) {
+        this.id = id;
+        this.FName = FName;
+        this.LName = LName;
+        this.Email = Email;
+        this.Password = Password;
+        this.type = type;
+        // this.shoppingCart = shoppingCart;
+    }
+    
 
     public int getId() {
         return this.id;
@@ -98,13 +113,13 @@ public class User {
     //     this.ProductRepository=ProductRepository;
     // }
 
-    public ShoppingCart getShoppingCart(){
-        return this.shoppingCart;
-    }
+    // public ShoppingCart getShoppingCart(){
+    //     return this.shoppingCart;
+    // }
 
-    public void setShoppingCart(ShoppingCart shoppingCart){
-        this.shoppingCart=shoppingCart;
-    }
+    // public void setShoppingCart(ShoppingCart shoppingCart){
+    //     this.shoppingCart=shoppingCart;
+    // }
 
     public User orElse(Object object) {
         // TODO Auto-generated method stub

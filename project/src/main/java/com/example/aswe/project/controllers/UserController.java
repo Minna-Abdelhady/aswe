@@ -110,7 +110,7 @@ public class UserController {
         String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
         user.setPassword(encoddedPassword);
         // user.setType();
-        UserType userType = new UserType();
+        UserType userType = new UserType();//model
         userType.setId(2); // id 2 corresponds to User type
         userType.setName(UserType.TYPE_USER);
         user.setType(userType);
