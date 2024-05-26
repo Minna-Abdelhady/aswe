@@ -13,12 +13,9 @@ import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +28,6 @@ import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.models.productDto;
 import com.example.aswe.project.models.Product;
-// import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.productRepository;
@@ -286,6 +282,7 @@ public class adminController {
     }
 
     // Products CRUD
+    // Without images
 
     // @GetMapping("add-product")
     // public ModelAndView addproduct() {
@@ -356,10 +353,10 @@ public class adminController {
     // return new RedirectView("/Admin/List-products");
     // }
 
+    // CRUD Products with images
+
     @Autowired
     private productRepository productService;
-
-    
 
     @GetMapping("products")
     public ModelAndView showAllproducts() {
