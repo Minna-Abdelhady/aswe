@@ -242,6 +242,10 @@ public class AdminTest<ProductRepository> {
 
     }
 
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     // @Test
     // public void testEditproduct() {
            
@@ -257,6 +261,7 @@ public class AdminTest<ProductRepository> {
 
     //     // Mock findByid to return the originalUser
     //     when(productRepository.findByid(1)).thenReturn(firstdata);
+        
 
     //     // Step 2: Prepare the updated user details
     //     Product updatedata = new Product();
@@ -270,7 +275,7 @@ public class AdminTest<ProductRepository> {
     //     when(productRepository.findByid(1)).thenReturn(updatedata);
 
     //     // Step 4: Call the saveProfile method
-    //     RedirectView redirectView = adminCont.saveProfile(1, updatedata);
+    //     RedirectView redirectView = adminCont.saveProduct(null, null);
     //     assertNotNull(redirectView);
     //     assertEquals("/Admin/List-Users", redirectView.getUrl());
 
@@ -284,4 +289,24 @@ public class AdminTest<ProductRepository> {
 
 
 
+    @Test
+    public void testDeleteproduct() {
+     Product product = new Product();
+      
+        product.setName(null);
+        product.setBrand(null);
+        product.setCategory(null);
+        product.setPrice(0);
+        product.setImgFileName(null);
+        // Mock the findById method to return the admin
+-
+
+        ModelAndView modelandview = adminCont.deleteproduct(0);
+        assertEquals("/products", modelandview.getView());
+
+        // Mock the findById method to return empty after the user is deleted
+        when(userRepository.findById(1)).thenReturn(Optional.empty());
+        User deletedAdmin = userRepository.findById(1).orElse(null);
+        assertNull(deletedAdmin);
+    }
 }
