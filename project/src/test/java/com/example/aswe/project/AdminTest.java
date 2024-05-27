@@ -22,10 +22,8 @@ import com.example.aswe.project.controllers.adminController;
 import com.example.aswe.project.models.Product;
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserType;
-import com.example.aswe.project.models.productDto;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
-import com.example.aswe.project.repositories.productRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdminTest<ProductRepository> {
@@ -299,7 +297,6 @@ public class AdminTest<ProductRepository> {
         product.setPrice(0);
         product.setImgFileName(null);
         // Mock the findById method to return the admin
--
 
         ModelAndView modelandview = adminCont.deleteproduct(0);
         assertEquals("/products", modelandview.getView());
