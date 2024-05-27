@@ -100,36 +100,6 @@ public class User {
     public void setType(UserType type) {
         this.type = type;
     }
-     
-    // public productRepository getProductRepository(){
-    //     return this.ProductRepository;
-    // }
-
-    // public void setProductRepository(productRepository ProductRepository){
-    //     this.ProductRepository=ProductRepository;
-    // }
-
-    // public ShoppingCart getShoppingCart(){
-    //     return this.shoppingCart;
-    // }
-
-    // public void setShoppingCart(ShoppingCart shoppingCart){
-    //     this.shoppingCart=shoppingCart;
-    // }
-
-    public User orElse(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
-    }
-
-    // public List<CartItem> getCart() {
-    //     return this.cart;
-    // }
-
-    // public void setCart(List<CartItem> cart) {
-    //     this.cart = cart;
-    // }
- 
 
 }
 
