@@ -1,0 +1,61 @@
+<html xmlns :th="http://www.thymleaf.org">
+    <head>
+        <title>
+            list of Shopping Cart
+        </title>
+        <link rel="stylesheet" href="../../../css/user/shoppingcart.css">
+    </head>
+    <body>
+    <div class="CartContainer"> 
+        <div class="header">
+        <h2> List of ShoppingCart</h2>
+        </div>
+    <table class="styled-table" >
+        <thead>
+        <tr>
+            <th>Product-Id</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product: ${products}">
+            <td th:text="${product.id}"/>
+            <td th:text="${product.name}"/>
+            <td  th:text="${product.price}"/>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="footer">
+    <a href="/html/user/index.html" class="button-link">Go to Home</a>
+</div>
+</body> 
+ </html>
+ <!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="../../../css/user/shoppingcart.css">
+</head>
+ <header th:include="../templates/partials/header.html"></header>  
+
+ <body>
+    <h2>Shopping Cart</h2>
+
+    <div class="cart-container">
+        <div class="cart-item" th:each="cartproduct : ${cartproducts}">
+            <div class="cart-product-details">
+                <p class="product-id" th:text="${cartproduct.product.id}"></p>
+                <p class="product-price" th:text="'Price: ' + ${cartproduct.product.price}"></p>
+                <p class="product-quantity" th:text="'Quantity: ' + ${cartproduct.product.quantity}"></p>
+            </div>
+             <a th:href="@{/remove-from-cart/{productId}(productId=${cartProduct.product.id})}" class="button-link">Remove</a> 
+        </div>
+    </div>
+
+    <a href="/html/user/index.html" class="button-link">Go to Home</a>
+
+    <footer th:include="../templates/partials/footer.html"></footer>
+</body>
+</html>   -->

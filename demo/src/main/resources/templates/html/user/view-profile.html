@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+    <!-- <link rel="stylesheet" href="../../../css/user/view-profile.css"> -->
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        .button-link {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-link:hover {
+            background-color: #0056b3;
+        }
+    
+     </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>My Profile</h2>
+        <label for="firstName">First Name:</label>
+        <p><span th:text="${user.FName}"></span></p>
+
+        <label for="lastName">Last Name:</label>
+        <p><span th:text="${user.LName}"></span></p>
+
+        <label for="email">Email:</label>
+        <p><span th:text="${user.Email}"></span></p>
+
+        <a th:href="@{/User/edit-profile/{userId}(userId=${user.getId()})}" class="button-link">Edit Profile</a>
+        <a th:href="@{/User/sign-out}" class="button-link">Sign out</a>
+        <a th:href="@{/User/delete-account/{userId}(userId=${user.getId()})}" class="button-link">Delete Account</a>
+    </div>
+</body>
+
+</html>
