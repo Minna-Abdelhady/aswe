@@ -1,4 +1,4 @@
-package com.example.aswe.microservice.models;
+package com.example.aswe.demo.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
