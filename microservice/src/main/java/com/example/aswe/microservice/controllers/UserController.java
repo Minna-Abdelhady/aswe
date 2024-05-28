@@ -5,11 +5,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.aswe.microservice.models.Product;
 import com.example.aswe.microservice.models.User;
 import com.example.aswe.microservice.repositories.UserRepository;
+import com.example.aswe.microservice.repositories.productRepository;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.web.servlet.ModelAndView;
+
 
 @RestController
 @RequestMapping("/users")
@@ -17,6 +22,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private productRepository ProductRepository;
 
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {
@@ -29,6 +37,22 @@ public class UserController {
         Optional<User> user = userRepository.findById(id);
         return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                    .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/email")
+    public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
+        List<User> users = userRepository.findAll();
+        User dbUser = new User();
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                dbUser = user;
+                break;
+            }
+        }
+        if (dbUser != null) {
+            return new ResponseEntity<>(dbUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -54,4 +78,11 @@ public class UserController {
         userRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/List-products")
+    public ResponseEntity<List<Product>> getProducts() {
+        List<Product> products = ProductRepository.findAll();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+    
 }

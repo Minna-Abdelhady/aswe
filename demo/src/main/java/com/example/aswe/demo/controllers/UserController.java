@@ -2,7 +2,9 @@ package com.example.aswe.demo.controllers;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,10 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.aswe.demo.models.Product;
 import com.example.aswe.demo.models.User;
+import com.example.aswe.demo.models.UserType;
+import com.example.aswe.demo.services.ProductService;
 import com.example.aswe.demo.services.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/User")
@@ -24,6 +30,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("")
     public ModelAndView getUsers() {
@@ -66,9 +75,42 @@ public class UserController {
     }
 
     @PostMapping("/Registration")
-    public RedirectView saveUser(@Validated @ModelAttribute User user) {
+    public RedirectView saveUser(@Validated @ModelAttribute User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return new RedirectView("/User/Registration");
+        }
+        String encodedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+        user.setPassword(encodedPassword);
+
+        // Set the user type
+        UserType userType = new UserType();
+        userType.setId(2); // id 2 corresponds to User type
+        userType.setName(UserType.TYPE_USER);
+        user.setType(userType);
+
         userService.save(user);
         return new RedirectView("/User/Home");
+    }
+
+    @GetMapping("/Login")
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView("/html/user/login.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
+
+    @PostMapping("/Login")
+    public RedirectView loginProcess(@RequestParam("Email") String email, @RequestParam("Password") String password){
+        User user = userService.findByEmail(email);
+        if(user != null&& BCrypt.checkpw(password, user.getPassword())){
+            if (user.getType().getId() == 1){
+                return new RedirectView("/Admin/Dashboard");
+            } else {
+                return new RedirectView("/User/Home");
+            }            
+        }
+        return new RedirectView("/User/error");
     }
 
     @GetMapping("/profile/{userId}")
@@ -83,7 +125,7 @@ public class UserController {
     public ModelAndView editProfile(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
         User newUser = userService.findById(userId);
-        if(newUser != null) {
+        if (newUser != null) {
             mav.addObject("user", newUser);
             return mav;
         }
@@ -91,7 +133,6 @@ public class UserController {
         errorMav.addObject("errorMessage", "User not found");
         return errorMav;
     }
-    
 
     @PostMapping("/edit-profile/{userId}")
     public RedirectView saveProfile(@PathVariable("userId") int userId, @ModelAttribute User updatedUser) {
@@ -103,6 +144,23 @@ public class UserController {
     public RedirectView deleteAccount(@PathVariable("userId") int userId) {
         userService.delete(userId);
         return new RedirectView("/User/Registration");
+    }
+
+    @GetMapping("/List-products")
+    public ModelAndView getProducts() {
+        ModelAndView mav = new ModelAndView("/html/user/list-products.html");
+        List<Product> products = productService.findAllProducts();
+        mav.addObject("products", products);
+        return mav;
+    }
+
+
+    @GetMapping("/error")
+    public ModelAndView error() {
+        ModelAndView mav = new ModelAndView("/html/user/about.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
     }
 
 }

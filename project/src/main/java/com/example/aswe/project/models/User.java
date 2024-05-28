@@ -20,6 +20,7 @@ public class User {
 
     @NotBlank(message = "First name is required")
     @Size(min = 2, max = 30, message = "First name must be between 2 and 30 characters long")
+    
     private String FName;
 
     @NotBlank(message = "Last name is required")

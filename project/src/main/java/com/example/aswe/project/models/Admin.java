@@ -9,7 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -19,18 +19,21 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotEmpty(message = "First name cannot be empty")
+    @NotBlank(message = "First name is required")
+    @Size(min = 2, message = "First name must have at least 2 characters")
     private String FName;
-    
-    @NotEmpty(message = "Last name cannot be empty")
+
+
+    @NotBlank(message = "Last name is required")
+    @Size(min = 2, message = "Last name must have at least 2 characters")
     private String LName;
-   
-    @NotEmpty(message = "Email cannot be empty")
-    @Email(message = "Email should be valid")
+
+    @NotBlank(message = "Email is required")
+    @jakarta.validation.constraints.Email(message = "Email should be valid")
     private String Email;
-   
-    @NotEmpty(message = "Password cannot be empty")
-    @Size(min = 8, message = "Password must be at least 8 characters")
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, message = "Password must have at least 6 characters")
     private String Password;
 
     @Valid
