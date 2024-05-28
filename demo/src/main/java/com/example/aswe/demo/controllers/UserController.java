@@ -19,7 +19,7 @@ import com.example.aswe.demo.services.UserService;
 @RestController
 @RequestMapping("/User")
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
 
@@ -28,6 +28,30 @@ public class UserController {
         ModelAndView mav = new ModelAndView("/html/user/list-users.html");
         List<User> users = userService.findAll();
         mav.addObject("users", users);
+        return mav;
+    }
+
+    @GetMapping("/Home")
+    public ModelAndView home() {
+        ModelAndView mav = new ModelAndView("/html/user/index.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
+
+    @GetMapping("/about")
+    public ModelAndView about() {
+        ModelAndView mav = new ModelAndView("/html/user/TRY.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
+
+    @GetMapping("/about-us")
+    public ModelAndView aboutus() {
+        ModelAndView mav = new ModelAndView("/html/user/about.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
         return mav;
     }
 
@@ -64,5 +88,5 @@ public class UserController {
         userService.delete(userId);
         return new RedirectView("/User/Registration");
     }
-    
+
 }
