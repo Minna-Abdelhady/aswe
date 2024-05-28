@@ -3,28 +3,30 @@
 <head>
     <title>List Products</title>
     <link rel="stylesheet" href="../../../css/user/cards.css">
+    <link rel="stylesheet" href="../../../css/user/list_Product.css">
+
 </head>
-<header th:include="../templates/partials/header.html"></header>
+<header th:insert ="../templates/partials/header.html"></header>
 
 <body>
 
     <div class="product-container">
         <div class="product-card" th:each="product: ${products}">
-            <!-- <img class="product-image" th:src="${product.imageUrl}" alt="Product Image"> -->
+
             <div class="product-details">
-                <p class="product-name" th:text="${product.name}"></p>
+                <p><img th:src="@{'/images/' + ${product.ImgFileName}}" alt="Product Image" style="display: block; margin: 0 auto;" width="300" /></p>
+                <p class="product-name" th:text="'Name: ' + ${product.name}"></p>
                 <p class="product-brand" th:text="'Brand: ' + ${product.brand}"></p>
                 <p class="product-category" th:text="'Category: ' + ${product.category}"></p>
                 <p class="product-price" th:text="'Price: ' + ${product.price}"></p>
                 <p class="product-description" th:text="'Description: ' + ${product.description}"></p>       
                 <br>  
-                <button>More details</details></button>
-                
-                <a th:href="@{/Cart/add-to-cart/{productId}(productId=${product.getId()})}" class="button-link">Add To Cart</a>
+                <a  th:href="@{/Cart/add-to-cart/{productId}(productId=${product.getId()})}" class="button-link">Add To Cart</a>
             </div>
+            
         </div>
     </div>
-    <footer th:include="../templates/partials/footer.html"></footer>
+    <footer th:insert ="../templates/partials/footer.html"></footer>
 
 </body>
 </html>
