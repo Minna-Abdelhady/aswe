@@ -19,7 +19,6 @@
                 <p class="product-brand" th:text="'Brand: ' + ${product.brand}"></p>
                 <p class="product-category" th:text="'Category: ' + ${product.category}"></p>
                 <p class="product-price" th:text="'Price: ' + ${product.price}"></p>
-                <p class="product-description" th:text="'Description: ' + ${product.description}"></p>       
                 <br>  
                 <a  th:href="@{/Cart/add-to-cart/{productId}(productId=${product.getId()})}" class="button-link">Add To Cart</a>
             </div>
