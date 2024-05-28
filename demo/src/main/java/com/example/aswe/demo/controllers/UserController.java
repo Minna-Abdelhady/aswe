@@ -2,7 +2,9 @@ package com.example.aswe.demo.controllers;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,9 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.demo.models.User;
+import com.example.aswe.demo.models.UserType;
 import com.example.aswe.demo.services.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("/User")
@@ -66,7 +68,19 @@ public class UserController {
     }
 
     @PostMapping("/Registration")
-    public RedirectView saveUser(@Validated @ModelAttribute User user) {
+    public RedirectView saveUser(@Validated @ModelAttribute User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return new RedirectView("/User/Registration");
+        }
+        String encodedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+        user.setPassword(encodedPassword);
+
+        // Set the user type
+        UserType userType = new UserType();
+        userType.setId(2); // id 2 corresponds to User type
+        userType.setName(UserType.TYPE_USER);
+        user.setType(userType);
+
         userService.save(user);
         return new RedirectView("/User/Home");
     }
@@ -83,7 +97,7 @@ public class UserController {
     public ModelAndView editProfile(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
         User newUser = userService.findById(userId);
-        if(newUser != null) {
+        if (newUser != null) {
             mav.addObject("user", newUser);
             return mav;
         }
@@ -91,7 +105,6 @@ public class UserController {
         errorMav.addObject("errorMessage", "User not found");
         return errorMav;
     }
-    
 
     @PostMapping("/edit-profile/{userId}")
     public RedirectView saveProfile(@PathVariable("userId") int userId, @ModelAttribute User updatedUser) {
