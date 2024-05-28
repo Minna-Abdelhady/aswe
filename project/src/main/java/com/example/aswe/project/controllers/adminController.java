@@ -124,7 +124,7 @@ public class adminController {
     }
 
     // User CRUD
-//val
+
     @GetMapping("Add-User")
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/html/admin/add-user.html");
