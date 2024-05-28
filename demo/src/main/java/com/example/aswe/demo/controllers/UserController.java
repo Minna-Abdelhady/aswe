@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.aswe.demo.models.Product;
 import com.example.aswe.demo.models.User;
 import com.example.aswe.demo.models.UserType;
+import com.example.aswe.demo.services.ProductService;
 import com.example.aswe.demo.services.UserService;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
@@ -28,6 +30,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("")
     public ModelAndView getUsers() {
@@ -140,6 +145,15 @@ public class UserController {
         userService.delete(userId);
         return new RedirectView("/User/Registration");
     }
+
+    @GetMapping("/List-products")
+    public ModelAndView getProducts() {
+        ModelAndView mav = new ModelAndView("/html/user/list-products.html");
+        List<Product> products = productService.findAllProducts();
+        mav.addObject("products", products);
+        return mav;
+    }
+
 
     @GetMapping("/error")
     public ModelAndView error() {
