@@ -158,7 +158,7 @@ public class adminController {
         mav.addObject("users", users);
         return mav;
     }
-//va
+
     @GetMapping("edit-user/{userId}")
     public ModelAndView editProfile(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/admin/edit-user.html");
