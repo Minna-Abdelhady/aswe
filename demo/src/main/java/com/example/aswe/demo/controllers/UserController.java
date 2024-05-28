@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping("/about")
     public ModelAndView about() {
-        ModelAndView mav = new ModelAndView("/html/user/about.html");
+        ModelAndView mav = new ModelAndView("/html/user/TRY.html");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;
