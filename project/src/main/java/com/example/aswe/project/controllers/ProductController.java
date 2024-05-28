@@ -70,7 +70,7 @@ public class ProductController {
     String storageFileName = createdAt.getTime() + "-" + StringUtils.cleanPath(image.getOriginalFilename());
 
     // Define upload directory
-    String uploadDir = "static/";
+    String uploadDir = "C:\\Users\\Egy Sky\\Documents\\GitHub\\SWE-project\\aswe\\project\\src\\main\\resources\\static\\images";
 
     // Create upload path
     Path uploadPath = Paths.get(uploadDir);
@@ -127,7 +127,7 @@ public String updateProduct(Model model, @RequestParam int id, @Valid @ModelAttr
         }
         if (!ProductDto.getImagFile().isEmpty()) {
             // Delete old image
-            String uploadDir = "static/";
+            String uploadDir = "C:\\\\Users\\\\Egy Sky\\\\Documents\\\\GitHub\\\\SWE-project\\\\aswe\\\\project\\\\src\\\\main\\\\resources\\\\static\\\\images";
             Path oldImagePath = Paths.get(uploadDir + product.getImgFileName());
         
             try {
@@ -142,7 +142,7 @@ Date createdAt = new Date();
 String storageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
 
 try (InputStream inputStream = image.getInputStream()) {
-    Files.copy(inputStream, Paths.get("static/" + storageFileName), StandardCopyOption.REPLACE_EXISTING);
+    Files.copy(inputStream, Paths.get("C:\\Users\\Egy Sky\\Documents\\GitHub\\SWE-project\\aswe\\project\\src\\main\\resources\\static\\images/" + storageFileName), StandardCopyOption.REPLACE_EXISTING);
     product.setImgFileName(storageFileName);
 }
 
@@ -166,7 +166,7 @@ try (InputStream inputStream = image.getInputStream()) {
 public String deleteproduct(@RequestParam int id){
 try{
 Product prod=productService.findById(id).get();
- Path imagePath=Paths.get("static/" + prod.getImgFileName());
+ Path imagePath=Paths.get("C:\\Users\\Egy Sky\\Documents\\GitHub\\SWE-project\\aswe\\project\\src\\main\\resources\\static\\images" + prod.getImgFileName());
 try{
     Files.delete(imagePath);
 }

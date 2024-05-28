@@ -166,6 +166,7 @@ public class UserController {
         mav.addObject("products",Products);
         return mav;
     }   
+    
      
 
     @GetMapping("profile/{userId}")
@@ -270,10 +271,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("/store")
-    public ModelAndView homePage() {
-        ModelAndView modelAndView = new ModelAndView("store.html"); 
-        return modelAndView;
-    }
+
 
 }

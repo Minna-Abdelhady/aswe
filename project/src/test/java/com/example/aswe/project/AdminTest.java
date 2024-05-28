@@ -299,7 +299,7 @@ public class AdminTest<ProductRepository> {
         product.setPrice(0);
         product.setImgFileName(null);
         // Mock the findById method to return the admin
--
+
 
         ModelAndView modelandview = adminCont.deleteproduct(0);
         assertEquals("/products", modelandview.getView());

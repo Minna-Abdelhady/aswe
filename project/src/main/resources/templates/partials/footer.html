@@ -1,37 +1,244 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="../../../css/user/footer.css">
-</head>
-<body>
-    <!-- Header code here -->
+<style>
+/* Footer */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 30px 0;
+  text-align: center;
+}
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-left">
-                <h3>Categories</h3>
-                <ul>
-                    <li><a href="#">Electronics</a></li>
-                    <li><a href="#">Fashion</a></li>
-                    <li><a href="#">Home & Garden</a></li>
-                    <li><a href="#">Sports</a></li>
-                    <li><a href="#">Health & Beauty</a></li>
-                </ul>
+/* Info Section */
+.info_section {
+  background-color: #333;
+  padding: 30px 0;
+}
+
+.info_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col-md-3 {
+  width: 25%;
+  padding: 20px;
+}
+
+.info_logo {
+  margin-bottom: 20px;
+}
+
+.info_logo img {
+  width: 60px; /* Increased size */
+  height: 60px; /* Increased size */
+  margin-right: 10px;
+}
+
+.info_contact {
+  margin-bottom: 20px;
+}
+
+.info_contact img {
+  width: 25px; /* Increased size */
+  height: 25px; /* Increased size */
+  margin-right: 10px;
+}
+
+.info_form {
+  margin-top: 40px;
+}
+
+.info_heading {
+  font-weight: bold;
+  font-size: 20px; /* Increased font size */
+  margin-bottom: 15px; /* Increased margin */
+  color: #fff; /* White color */
+}
+
+.email_box {
+  margin-bottom: 20px;
+}
+
+.email_box label {
+  display: block;
+  margin-bottom: 10px;
+  color: #fff; /* White color */
+}
+
+.email_box input[type="text"] {
+  width: 100%;
+  padding: 12px; /* Increased padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333; /* Text color */
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 12px 24px; /* Increased padding */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; /* Increased font size */
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+.info_social {
+  margin-top: 40px;
+}
+
+.social_box {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social_box img {
+  width: 40px; /* Increased size */
+  height: 40px; /* Increased size */
+  margin: 0 15px; /* Increased margin */
+}
+
+/* Footer Section */
+.footer_section {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #444;
+}
+
+.footer_section p {
+  margin-bottom: 15px; /* Increased margin */
+  font-size: 18px; /* Increased font size */
+  color: #fff; /* White color */
+}
+
+.footer_section a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer_section a:hover {
+  color: #ccc;
+}
+
+
+</style>
+<body>
+ <footer>
+    <section class="info_section ">
+        <div class="container">
+          <div class="info_container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="info_logo">
+                  <a href="">
+                    <img src="images/logo.png" alt="logo">
+                    <span>
+                      Lodge
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="info_contact">
+                  <a href="">
+                    <img src="images/location.png" alt="location">
+                    <span>
+                      Address
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="info_contact">
+                  <a href="">
+                    <img src="images/phone.png" alt="phone">
+                    <span>
+                      +01 1234567890
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="info_contact">
+                  <a href="">
+                    <img src="images/mail.png" alt="mail">
+                    <span>
+                      demo@gmail.com
+                    </span>
+                  </a>
+                </div>
+              </div>
             </div>
-            <div class="footer-middle">
-                <h3>About Us</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.</p>
+            <div class="info_form">
+              
+              <form action="">
+                <div class="email_box">
+                  <label for="email2">Enter Your Email</label>
+                  <input type="text" id="email2">
+                </div>
+                <div>
+                  <button>
+                    subscribe
+                  </button>
+                </div>
+              </form>
             </div>
-            <div class="footer-right">
-                <h3>Copyright</h3>
-                <p>© 2023 My Website. All rights reserved.</p>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
+            <div class="info_social">
+              <div class="d-flex justify-content-center">
+                <h5 class="info_heading">
+                  Follow Us
+                </h5>
+              </div>
+              <div class="social_box">
+                <a href="">
+                    <img src="images/fb.png" alt="fb">
+                </a>
+                <a href="">
+                    <img src="images/twitter.png" alt="twitter">
+                </a>
+                <img src="images/logo.png" alt="logo">
+
+                <a href="">
+                    <img src="images/linkedin.png" alt="linkedin">
+                </a>
+                <a href="">
+                    <img src="images/insta.png" alt="insta">
+                </a>
+              </div>
             </div>
+          </div>
         </div>
+      </section>
+    
+      <!-- end info_section -->
+    
+      <!-- footer section -->
+      <section class="container-fluid footer_section">
+        <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved By
+            <a href="">lodge Jewellery</a>
+          </p>
+      </section>
+      <!-- footer section -->
+    
+      <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.js"></script>
+      <script type="text/javascript" src="js/custom.js"></script>
     </footer>
 </body>
 </html>
