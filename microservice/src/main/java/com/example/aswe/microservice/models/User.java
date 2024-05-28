@@ -1,6 +1,4 @@
-package com.example.aswe.project.models;
-
-import javax.validation.constraints.NotBlank;
+package com.example.aswe.microservice.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,21 +13,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotBlank(message = "First name is required")
-    @Size(min = 2, max = 30, message = "First name must be between 2 and 30 characters long")
+    // @NotBlank(message = "First name is required")
+    // @Size(min = 2, max = 30, message = "First name must be between 2 and 30 characters long")
     private String FName;
 
-    @NotBlank(message = "Last name is required")
-    @Size(min = 2, max = 30, message = "Last name must be between 2 and 30 characters long")
+    // @NotBlank(message = "Last name is required")
+    // @Size(min = 2, max = 30, message = "Last name must be between 2 and 30 characters long")
     private String LName;
 
-    @NotBlank(message = "Email is required")
-    @javax.validation.constraints.Email(message = "Email must be a valid email address")
+    // @NotBlank(message = "Email is required")
+    // @javax.validation.constraints.Email(message = "Email must be a valid email address")
     private String Email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 8, max = 30, message = "Password must be between 8 and 30 characters long")
+    // @NotBlank(message = "Password is required")
+    // @Size(min = 8, max = 30, message = "Password must be between 8 and 30 characters long")
     private String Password;
+    // private List<CartItem> cart;
 
     @ManyToOne
     private UserType type;
@@ -101,6 +100,36 @@ public class User {
     public void setType(UserType type) {
         this.type = type;
     }
+     
+    // public productRepository getProductRepository(){
+    //     return this.ProductRepository;
+    // }
+
+    // public void setProductRepository(productRepository ProductRepository){
+    //     this.ProductRepository=ProductRepository;
+    // }
+
+    // public ShoppingCart getShoppingCart(){
+    //     return this.shoppingCart;
+    // }
+
+    // public void setShoppingCart(ShoppingCart shoppingCart){
+    //     this.shoppingCart=shoppingCart;
+    // }
+
+    public User orElse(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
+    }
+
+    // public List<CartItem> getCart() {
+    //     return this.cart;
+    // }
+
+    // public void setCart(List<CartItem> cart) {
+    //     this.cart = cart;
+    // }
+ 
 
 }
 

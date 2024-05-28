@@ -1,5 +1,6 @@
 package com.example.aswe.project.controllers;
 
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -151,7 +152,7 @@ public class adminController {
         List<User> users = new ArrayList<>();
 
         for (User person : persons) {
-            if (person.getType().getId() == 2) {
+            if (person.getType() != null && person.getType().getId() == 2) {
                 users.add(person);
             }
         }
@@ -225,12 +226,12 @@ public class adminController {
 
     @GetMapping("List-Admins")
     public ModelAndView getAdmins() {
-        ModelAndView mav = new ModelAndView("html/admin/list-admins.html");
+        ModelAndView mav = new ModelAndView("/html/admin/list-admins.html");
         List<User> persons = this.userRepository.findAll();
         List<User> admins = new ArrayList<>();
 
         for (User person : persons) {
-            if (person.getType().getId() == 1) {
+            if (person.getType() != null && person.getType().getId() == 1) {
                 admins.add(person);
             }
         }
@@ -281,7 +282,6 @@ public class adminController {
         return new RedirectView("/Admin/List-Admins");
     }
 
-    
     // CRUD Products with images
 
     @Autowired
@@ -373,7 +373,8 @@ public class adminController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView updateProduct(@RequestParam int id, @Valid @ModelAttribute productDto ProductDto, BindingResult result) {
+    public ModelAndView updateProduct(@RequestParam int id, @Valid @ModelAttribute productDto ProductDto,
+            BindingResult result) {
         ModelAndView mav = new ModelAndView();
         try {
             Product product = productService.findById(id).get();

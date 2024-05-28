@@ -1,0 +1,25 @@
+<html xmlns:th="https://www.thymleaf.org">
+    <head>
+        <title>
+            Edit my profile
+        </title>
+        <link rel="stylesheet" href="../../../css/user/edit-profile.css">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Edit my profile</h2>
+            <form th:action="@{/User/edit-profile/{userId}(userId=${user.getId()})}" th:object="${user}" method="POST">
+                <input type="text" th:field="*{FName}" placeholder="Enter First Name">
+                <br>
+                <input type="text" th:field="*{LName}" placeholder="Enter Last Name">
+                <br>
+                <input type="text" th:field="*{Email}" placeholder="Enter Email">
+                <br>
+                <input type="password" th:field="*{Password}" placeholder="Enter Password">
+                <br>
+
+                <input type="submit">
+            </form>
+        </div>
+    </body>
+</html>
