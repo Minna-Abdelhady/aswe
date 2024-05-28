@@ -2,6 +2,9 @@ package com.example.aswe.project.models;
 
 import javax.validation.constraints.NotBlank;
 
+import com.example.aswe.project.controllers.Valid;
+import com.example.aswe.project.controllers.validated;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +34,7 @@ public class User {
     @Size(min = 8, max = 30, message = "Password must be between 8 and 30 characters long")
     private String Password;
 
+    @Valid
     @ManyToOne
     private UserType type;
     
