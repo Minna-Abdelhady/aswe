@@ -15,6 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.demo.models.User;
 import com.example.aswe.demo.services.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/User")
@@ -76,6 +78,20 @@ public class UserController {
         mav.addObject("user", user);
         return mav;
     }
+
+    @GetMapping("/edit-profile/{userId}")
+    public ModelAndView editProfile(@PathVariable("userId") Integer userId) {
+        ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
+        User newUser = userService.findById(userId);
+        if(newUser != null) {
+            mav.addObject("user", newUser);
+            return mav;
+        }
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "User not found");
+        return errorMav;
+    }
+    
 
     @PostMapping("/edit-profile/{userId}")
     public RedirectView saveProfile(@PathVariable("userId") int userId, @ModelAttribute User updatedUser) {
