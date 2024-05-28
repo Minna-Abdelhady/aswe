@@ -18,6 +18,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.example.aswe.demo.models.User;
 import com.example.aswe.demo.models.UserType;
 import com.example.aswe.demo.services.UserService;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -85,6 +87,27 @@ public class UserController {
         return new RedirectView("/User/Home");
     }
 
+    @GetMapping("/Login")
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView("/html/user/login.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
+    }
+
+    @PostMapping("/Login")
+    public RedirectView loginProcess(@RequestParam("Email") String email, @RequestParam("Password") String password){
+        User user = userService.findByEmail(email);
+        if(user != null&& BCrypt.checkpw(password, user.getPassword())){
+            if (user.getType().getId() == 1){
+                return new RedirectView("/Admin/Dashboard");
+            } else {
+                return new RedirectView("/User/Home");
+            }            
+        }
+        return new RedirectView("/User/error");
+    }
+
     @GetMapping("/profile/{userId}")
     public ModelAndView getUser(@PathVariable("userId") Integer userId) {
         ModelAndView mav = new ModelAndView("/html/user/view-profile.html");
@@ -116,6 +139,14 @@ public class UserController {
     public RedirectView deleteAccount(@PathVariable("userId") int userId) {
         userService.delete(userId);
         return new RedirectView("/User/Registration");
+    }
+
+    @GetMapping("/error")
+    public ModelAndView error() {
+        ModelAndView mav = new ModelAndView("/html/user/about.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
+        return mav;
     }
 
 }

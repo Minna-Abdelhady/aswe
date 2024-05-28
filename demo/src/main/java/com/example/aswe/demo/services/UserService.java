@@ -35,6 +35,10 @@ public class UserService {
         return restTemplate.getForObject(baseUrl + "/" + id, User.class);
     }
 
+    public User findByEmail(String email) {
+        return restTemplate.getForObject(baseUrl + "/email?email=" + email, User.class);
+    }
+
     public void save(User user) {
         restTemplate.postForObject(baseUrl, user, User.class);
     }

@@ -31,6 +31,22 @@ public class UserController {
                    .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/email")
+    public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
+        List<User> users = userRepository.findAll();
+        User dbUser = new User();
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                dbUser = user;
+                break;
+            }
+        }
+        if (dbUser != null) {
+            return new ResponseEntity<>(dbUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User savedUser = userRepository.save(user);
