@@ -30,15 +30,15 @@
                     <form th:action="@{/Admin/edit-product/{productId}(productId=${product.getId()})}"
                         th:object="${product}" method="POST">
                         <h6>Product Name</h6>
-                        <input type="text" th:field="*{name}" placeholder="Enter Product Name" class="form-control">
+                        <input type="text" th:field="*{name}" placeholder="Enter Product Name" class="form-control"  required pattern="[A-Za-z]{2,30}" title="Product name must contain only letters and be between 2 and 30 characters long.">
                         <h6>Product Brand</h6>
-                        <input type="text" th:field="*{brand}" placeholder="Enter Product Brand" class="form-control">
+                        <input type="text" th:field="*{brand}" placeholder="Enter Product Brand" class="form-control" required pattern="[A-Za-z]{2,30}" title="Product brand must contain only letters and be between 2 and 30 characters long.">
                         <h6>Product Category</h6>
-                        <input type="text" th:field="*{category}" placeholder="Enter Product Category" class="form-control">
+                        <input type="text" th:field="*{category}" placeholder="Enter Product Category" class="form-control" required pattern="[A-Za-z]{2,30}" title="Product category must contain only letters and be between 2 and 30 characters long.">
                         <h6>Product Price</h6>
-                        <input type="text" th:field="*{price}" placeholder="Enter Product Price" class="form-control">
+                        <input type="text" th:field="*{price}" placeholder="Enter Product Price" class="form-control" required>
                         <h6>Product Description</h6>
-                        <input type="text" th:field="*{description}" placeholder="Enter Product Description" class="form-control">
+                        <input type="text" th:field="*{description}" placeholder="Enter Product Description" class="form-control" required pattern="[A-Za-z]{2,30}" title="Product description must contain only letters and be between 2 and 30 characters long.">
                         
                         <input type="submit" class="btn btn-primary">
                     </form>

@@ -28,15 +28,15 @@
 
                 <form th:action="@{/Admin/add-product}" th:object="${Product}" method="POST">
                     <h6>Product Name</h6>
-                    <input type="text" th:field="*{name}" placeholder="Enter the Product Name">
+                    <input type="text" th:field="*{name}" placeholder="Enter the Product Name"  required pattern="[A-Za-z]{2,30}" title="Product name must contain only letters and be between 2 and 30 characters long.">
                     <h6>Product Brand</h6>
-                    <input type="text" th:field="*{brand}" placeholder="Enter brand for the product">
+                    <input type="text" th:field="*{brand}" placeholder="Enter brand for the product"  required pattern="[A-Za-z]{2,30}" title="Product brand must contain only letters and be between 2 and 30 characters long.">
                     <h6>Product Category</h6>
-                    <input type="text" th:field="*{category}" placeholder="Enter product category">
+                    <input type="text" th:field="*{category}" placeholder="Enter product category"  required pattern="[A-Za-z]{2,30}" title="Product category must contain only letters and be between 2 and 30 characters long.">
                     <h6>Product Price</h6>
-                    <input type="text" th:field="*{price}" placeholder="Enter product price">
+                    <input type="text" th:field="*{price}" placeholder="Enter product price" required>
                     <h6>Product Description</h6>
-                    <input type="text" th:field="*{description}" placeholder="Enter product description">
+                    <input type="text" th:field="*{description}" placeholder="Enter product description"  required pattern="[A-Za-z]{2,30}" title="Product description must contain only letters and be between 2 and 30 characters long.">
                     <!-- <input type="file" th:field="*{ImgFileName}" placeholder="Enter product image" name="imageFile" class="form-control mb-3"> -->
 
                     <input type="submit">

@@ -40,28 +40,28 @@
                         <div>
                             <h6>First Name</h6>
                             <input type="text" th:field="*{FName}" th:errorclass="error-input" placeholder="Enter the Admin's First Name"
-                                class="form-control" />
+                                class="form-control"  required pattern="[A-Za-z]{2,30}" title="First name must contain only letters and be between 2 and 30 characters long."/>
                             <span th:if="${#fields.hasErrors('FName')}" class="error-message"
                                 th:errors="*{FName}">First name is required</span>
                         </div>
                         <div>
                             <h6>Last Name</h6>
                             <input type="text" th:field="*{LName}" th:errorclass="error-input" placeholder="Enter the Admin's Last Name"
-                                class="form-control" />
+                                class="form-control"  required pattern="[A-Za-z]{2,30}" title="Last name must contain only letters and be between 2 and 30 characters long."/>
                             <span th:if="${#fields.hasErrors('LName')}" class="error-message"
                                 th:errors="*{LName}">Last name is required</span>
                         </div>
                         <div>
                             <h6>E-mail</h6>
                             <input type="text" th:field="*{Email}" th:errorclass="error-input" placeholder="Enter the Admin's E-mail"
-                                class="form-control" />
+                                class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter a valid email address."/>
                             <span th:if="${#fields.hasErrors('Email')}" class="error-message"
                                 th:errors="*{Email}">Email is required</span>
                         </div>
                         <div>
                             <h6>Password</h6>
                             <input type="password" th:field="*{Password}" th:errorclass="error-input" placeholder="Enter the Admin's Password"
-                                class="form-control" />
+                                class="form-control" required/>
                             <span th:if="${#fields.hasErrors('Password')}" class="error-message"
                                 th:errors="*{Password}">Password is required and must be at least 8 characters</span>
                         </div>

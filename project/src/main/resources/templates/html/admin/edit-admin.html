@@ -30,11 +30,11 @@
                     <h2>Edit Admin profile</h2>
                     <form th:action="@{/Admin/edit-admin/{adminId}(adminId=${admin.getId()})}" th:object="${admin}" method="POST">
                         <h6>First Name</h6>
-                        <input type="text" th:field="*{FName}" placeholder="Enter First Name">
+                        <input type="text" th:field="*{FName}" placeholder="Enter First Name"  required pattern="[A-Za-z]{2,30}" title="First name must contain only letters and be between 2 and 30 characters long.">
                         <h6>Last Name</h6>
-                        <input type="text" th:field="*{LName}" placeholder="Enter Last Name">
+                        <input type="text" th:field="*{LName}" placeholder="Enter Last Name"  required pattern="[A-Za-z]{2,30}" title="Last name must contain only letters and be between 2 and 30 characters long.">
                         <h6>E-mail</h6>
-                        <input type="text" th:field="*{Email}" placeholder="Enter Email">
+                        <input type="text" th:field="*{Email}" placeholder="Enter Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter a valid email address.">
 
                         <input type="submit">
                     </form>

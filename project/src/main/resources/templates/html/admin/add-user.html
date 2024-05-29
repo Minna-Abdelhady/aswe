@@ -30,13 +30,13 @@
                     <h2>Add a User profile</h2>
                     <form th:action="@{/Admin/Save-User}" th:object="${user}" method="POST">
                         <h6>First Name</h6>
-                        <input type="text" th:field="*{FName}" placeholder="Enter the User's First Name">
+                        <input type="text" th:field="*{FName}" placeholder="Enter the User's First Name"  required pattern="[A-Za-z]{2,30}" title="First name must contain only letters and be between 2 and 30 characters long.">
                         <h6>Last Name</h6>
-                        <input type="text" th:field="*{LName}" placeholder="Enter the User's Last Name">
+                        <input type="text" th:field="*{LName}" placeholder="Enter the User's Last Name"  required pattern="[A-Za-z]{2,30}" title="Last name must contain only letters and be between 2 and 30 characters long.">
                         <h6>E-mail</h6>
-                        <input type="text" th:field="*{Email}" placeholder="Enter the User's E-mail">
+                        <input type="text" th:field="*{Email}" placeholder="Enter the User's E-mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter a valid email address.">
                         <h6>Password</h6>
-                        <input type="text" th:field="*{Password}" placeholder="Enter the User's Password">
+                        <input type="text" th:field="*{Password}" placeholder="Enter the User's Password" required>
 
                         <input type="submit" class="btn btn-primary">
                     </form>
