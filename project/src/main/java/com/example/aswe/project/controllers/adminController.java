@@ -37,6 +37,7 @@ import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.productRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -156,6 +157,32 @@ public class adminController {
         }
         this.userRepository.save(user);
         return new RedirectView("/Admin/Profile");
+    }
+
+    @GetMapping("/sign-out")
+    public RedirectView signOut(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return new RedirectView("/User/Login");
+    }
+
+    @GetMapping("delete-account/{adminId}")
+    public RedirectView deleteAccount(@PathVariable("adminId") int adminId) {
+        User admin = this.userRepository.findByid(adminId);
+        if (admin != null) {
+            this.userRepository.delete(admin);
+            return new RedirectView("/User/Registration");
+        }
+        return new RedirectView("/User/error");
+    }
+
+    @GetMapping("error")
+    public ModelAndView errorPage() {
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "Admin not found");
+        return errorMav;
     }
 
     // User CRUD
