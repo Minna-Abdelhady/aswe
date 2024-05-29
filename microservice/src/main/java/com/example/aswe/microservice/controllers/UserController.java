@@ -13,9 +13,6 @@ import com.example.aswe.microservice.repositories.productRepository;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.web.servlet.ModelAndView;
-
-
 @RestController
 @RequestMapping("/users")
 public class UserController {

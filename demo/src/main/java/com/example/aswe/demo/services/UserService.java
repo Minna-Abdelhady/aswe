@@ -50,5 +50,14 @@ public class UserService {
     public void delete(int id) {
         restTemplate.delete(baseUrl + "/" + id);
     }
+
+    // public List<Product> findAllProducts() {
+    //     return restTemplate.exchange(
+    //         baseUrl,
+    //         HttpMethod.GET,
+    //         null,
+    //         new ParameterizedTypeReference<List<Product>>() {}
+    //     ).getBody();
+    // }
 }
 
