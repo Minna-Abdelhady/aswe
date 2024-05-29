@@ -125,6 +125,39 @@ public class adminController {
         return errorMav;
     }
 
+    @GetMapping("edit-profile/{adminId}")
+    public ModelAndView editMyProfile(@PathVariable("adminId") Integer adminId) {
+        ModelAndView mav = new ModelAndView("/html/user/edit-profile.html");
+        User newUser = this.userRepository.findByid(adminId);
+        if (newUser != null) {
+            mav.addObject("user", newUser);
+            return mav;
+        }
+        ModelAndView errorMav = new ModelAndView("error.html");
+        errorMav.addObject("errorMessage", "User not found");
+        return errorMav;
+    }
+
+    @PostMapping("edit-profile/{adminId}")
+    public RedirectView saveMyProfile(@PathVariable("adminId") int adminId, @ModelAttribute User updatedAdmin) {
+        User user = this.userRepository.findByid(adminId);
+        if (!user.getFName().equals(updatedAdmin.getFName())) {
+            user.setFName(updatedAdmin.getFName());
+        }
+        if (!user.getLName().equals(updatedAdmin.getLName())) {
+            user.setLName(updatedAdmin.getLName());
+        }
+        if (!user.getEmail().equals(updatedAdmin.getEmail())) {
+            user.setEmail(updatedAdmin.getEmail());
+        }
+        if (!user.getPassword().equals(updatedAdmin.getPassword())) {
+            String encoddedPassword = BCrypt.hashpw(updatedAdmin.getPassword(), BCrypt.gensalt(12));
+            user.setPassword(encoddedPassword);
+        }
+        this.userRepository.save(user);
+        return new RedirectView("/Admin/Profile");
+    }
+
     // User CRUD
 
     @GetMapping("Add-User")
