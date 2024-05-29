@@ -214,16 +214,6 @@ public class adminController {
         return mav;
     }
 
-    // @PostMapping("Save-Admin")
-    // public RedirectView saveAdmin(@ModelAttribute User admin) {
-    // // Setting the user type
-    // UserType userType = new UserType();
-    // userType.setId(1); // id 1 corresponds to Admin type
-    // userType.setName(UserType.TYPE_USER);
-    // admin.setType(userType);
-    // this.userRepository.save(admin);
-    // return new RedirectView("/Admin/List-Admins");
-    // }
     @PostMapping("Save-Admin")
     public RedirectView saveAdmin(@ModelAttribute @Valid User admin) {
         // Setting the user type
