@@ -40,7 +40,6 @@ import com.example.aswe.project.repositories.productRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-
 @validated
 @RestController
 @RequestMapping("/Admin")
@@ -217,30 +216,24 @@ public class adminController {
 
     // @PostMapping("Save-Admin")
     // public RedirectView saveAdmin(@ModelAttribute User admin) {
-    //     // Setting the user type
-    //     UserType userType = new UserType();
-    //     userType.setId(1); // id 1 corresponds to Admin type
-    //     userType.setName(UserType.TYPE_USER);
-    //     admin.setType(userType);
-    //     this.userRepository.save(admin);
-    //     return new RedirectView("/Admin/List-Admins");
+    // // Setting the user type
+    // UserType userType = new UserType();
+    // userType.setId(1); // id 1 corresponds to Admin type
+    // userType.setName(UserType.TYPE_USER);
+    // admin.setType(userType);
+    // this.userRepository.save(admin);
+    // return new RedirectView("/Admin/List-Admins");
     // }
     @PostMapping("Save-Admin")
-public ModelAndView saveAdmin(@ModelAttribute @Valid User admin, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-        ModelAndView mav = new ModelAndView("/html/admin/add-admin.html");
-        mav.addObject("admin", admin);
-        return mav;
+    public RedirectView saveAdmin(@ModelAttribute @Valid User admin) {
+        // Setting the user type
+        UserType userType = new UserType();
+        userType.setId(1); // id 1 corresponds to Admin type
+        userType.setName(UserType.TYPE_USER);
+        admin.setType(userType);
+        this.userRepository.save(admin);
+        return new RedirectView("/Admin/List-Admins");
     }
-
-    // Setting the user type
-    UserType userType = new UserType();
-    userType.setId(1); // id 1 corresponds to Admin type
-    userType.setName(UserType.TYPE_USER);
-    admin.setType(userType);
-    this.userRepository.save(admin);
-    return new ModelAndView("redirect:/Admin/List-Admins");
-}
 
     @GetMapping("List-Admins")
     public ModelAndView getAdmins() {

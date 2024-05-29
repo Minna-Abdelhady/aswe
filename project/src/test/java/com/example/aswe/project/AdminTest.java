@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -20,20 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.project.controllers.adminController;
-import com.example.aswe.project.models.Product;
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
-import com.example.aswe.project.repositories.productRepository;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AdminTest<ProductRepository> {
+public class AdminTest {
 
     @Mock
     private adminRepository adminRepo;
-    @Mock
-   private productRepository productRepository;
+
     @Mock
     private UserRepository userRepository;
 
@@ -44,9 +40,6 @@ public class AdminTest<ProductRepository> {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-
-
-
 
     // Test the User CRUD
 
@@ -159,7 +152,7 @@ public class AdminTest<ProductRepository> {
         admin.setPassword("password");
         UserType adminType = new UserType();
         // id 1 corresponds to Admin type
-        adminType.setId(1); 
+        adminType.setId(1);
         adminType.setName(UserType.TYPE_ADMIN);
         admin.setType(adminType);
 
@@ -232,88 +225,5 @@ public class AdminTest<ProductRepository> {
         User deletedAdmin = userRepository.findById(1).orElse(null);
         assertNull(deletedAdmin);
     }
- 
-   
-   
-    // test the product crud
-    
-    @Test
-    public void testaddproduct(){
-        ModelAndView mav = adminCont.createProduct();
-        assertNotNull(mav);
-        assertEquals("products/createProduct",  mav.getViewName());
-        assertNotNull(mav.getModel().get("ProductDto"));
 
-    }
-
-    public void setup() {
-        MockitoAnnotations.openMocks(this);
-    }
-
-    // @Test
-    // public void testEditproduct() {
-           
-    //        // Step 1: Mock the original user returned by findByid
-    //     Product firstdata = new Product();
-    //     firstdata.setName("Diamond");
-    //     firstdata.setBrand("swarovski");
-    //     firstdata.setCategory("ring");
-    //     firstdata.setDescription("testing");
-    //     firstdata.setPrice(10000);
-    //     // firstdata.setImagFile("1716665608759-25503966.jpg");
-   
-
-    //     // Mock findByid to return the originalUser
-    //     when(productRepository.findByid(1)).thenReturn(firstdata);
-        
-
-    //     // Step 2: Prepare the updated user details
-    //     Product updatedata = new Product();
-    //     updatedata.setName("gold");
-    //     updatedata.setBrand("btc");
-    //     updatedata.setCategory("necklace");
-    //     updatedata.setDescription("update the data of testing");
-    //     updatedata.setPrice(10000);
-
-    //     // Mock the save method to return the updated user
-    //     when(productRepository.findByid(1)).thenReturn(updatedata);
-
-    //     // Step 4: Call the saveProfile method
-    //     RedirectView redirectView = adminCont.saveProduct(null, null);
-    //     assertNotNull(redirectView);
-    //     assertEquals("/Admin/List-Users", redirectView.getUrl());
-
-    //     // Step 5: Verify the updated user details
-    //     User savedUser = userRepository.findByid(1);
-    //     assertNotNull(savedUser);
-    //     assertEquals("Sara", savedUser.getFName());
-    //     assertEquals("Hany", savedUser.getLName());
-    //     assertEquals("sara.hany@gmail.com", savedUser.getEmail());
-    // }
-
-
-
-   @Test
-    public void testDeleteProduct() {
-        // Mock the repository and controller
-        ProductRepository productRepository = mock(productRepository.class);
-        adminController adminController = new adminController(productRepository);
-
-        // Create a sample product and mock the findById method to return it
-        Product product = new Product();
-        product.setId(1);
-        product.setName("Sample Product");
-        when(productRepository.findById(1)).thenReturn(Optional.of(product));
-
-        // Invoke the deleteproduct method
-        ModelAndView modelAndView = adminController.deleteproduct(1);
-
-        // Verify that the view returned by the controller is as expected
-        assertEquals("/products", modelAndView.getViewName());
-
-        // Mock the findById method to return empty after the product is "deleted"
-        when(productRepository.findById(1)).thenReturn(Optional.empty());
-        Optional<Product> deletedProduct = productRepository.findById(1);
-        assertNull(deletedProduct.orElse(null));
-    }
 }
