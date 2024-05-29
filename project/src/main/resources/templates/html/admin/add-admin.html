@@ -4,14 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        List Admins
-    </title>
+    <title>add admin </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="../../../css/user/edit-profile.css">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+        }
+
+        .error-input {
+            border: 1px solid red !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,22 +37,38 @@
                 <div class="container">
                     <h2>Add an Admin profile</h2>
                     <form th:action="@{/Admin/Save-Admin}" th:object="${admin}" method="POST">
-                        <h6>First Name</h6>
-                        <input type="text" th:field="*{FName}" placeholder="Enter the Admin's First Name">
-                        <h6>Last Name</h6>
-                        <input type="text" th:field="*{LName}" placeholder="Enter the Admin's Last Name">
-                        <h6>E-mail</h6>
-                        <input type="text" th:field="*{Email}" placeholder="Enter the Admin's E-mail">
-                        <h6>Password</h6>
-                        <input type="text" th:field="*{Password}" placeholder="Enter the Admin's Password">
-
-                        <input type="submit" class="btn btn-primary">
+                        <div>
+                            <h6>First Name</h6>
+                            <input type="text" th:field="*{FName}" th:errorclass="error-input" placeholder="Enter the Admin's First Name"
+                                class="form-control" />
+                            <span th:if="${#fields.hasErrors('FName')}" class="error-message"
+                                th:errors="*{FName}">First name is required</span>
+                        </div>
+                        <div>
+                            <h6>Last Name</h6>
+                            <input type="text" th:field="*{LName}" th:errorclass="error-input" placeholder="Enter the Admin's Last Name"
+                                class="form-control" />
+                            <span th:if="${#fields.hasErrors('LName')}" class="error-message"
+                                th:errors="*{LName}">Last name is required</span>
+                        </div>
+                        <div>
+                            <h6>E-mail</h6>
+                            <input type="text" th:field="*{Email}" th:errorclass="error-input" placeholder="Enter the Admin's E-mail"
+                                class="form-control" />
+                            <span th:if="${#fields.hasErrors('Email')}" class="error-message"
+                                th:errors="*{Email}">Email is required</span>
+                        </div>
+                        <div>
+                            <h6>Password</h6>
+                            <input type="password" th:field="*{Password}" th:errorclass="error-input" placeholder="Enter the Admin's Password"
+                                class="form-control" />
+                            <span th:if="${#fields.hasErrors('Password')}" class="error-message"
+                                th:errors="*{Password}">Password is required and must be at least 8 characters</span>
+                        </div>
+                        <input type="submit" class="btn btn-primary mt-3" value="Save" />
                     </form>
-
                 </div>
-
             </main>
-
         </div>
     </div>
 

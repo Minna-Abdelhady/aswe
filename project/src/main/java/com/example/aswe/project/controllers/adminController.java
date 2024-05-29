@@ -1,6 +1,5 @@
 package com.example.aswe.project.controllers;
 
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -17,29 +16,32 @@ import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.aswe.project.models.Admin;
+import com.example.aswe.project.models.Product;
 import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.models.productDto;
-import com.example.aswe.project.models.Product;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
 import com.example.aswe.project.repositories.productRepository;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
+@validated
 @RestController
 @RequestMapping("/Admin")
 public class adminController {
@@ -213,16 +215,32 @@ public class adminController {
         return mav;
     }
 
+    // @PostMapping("Save-Admin")
+    // public RedirectView saveAdmin(@ModelAttribute User admin) {
+    //     // Setting the user type
+    //     UserType userType = new UserType();
+    //     userType.setId(1); // id 1 corresponds to Admin type
+    //     userType.setName(UserType.TYPE_USER);
+    //     admin.setType(userType);
+    //     this.userRepository.save(admin);
+    //     return new RedirectView("/Admin/List-Admins");
+    // }
     @PostMapping("Save-Admin")
-    public RedirectView saveAdmin(@ModelAttribute User admin) {
-        // Setting the user type
-        UserType userType = new UserType();
-        userType.setId(1); // id 1 corresponds to Admin type
-        userType.setName(UserType.TYPE_USER);
-        admin.setType(userType);
-        this.userRepository.save(admin);
-        return new RedirectView("/Admin/List-Admins");
+public ModelAndView saveAdmin(@ModelAttribute @Valid User admin, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+        ModelAndView mav = new ModelAndView("/html/admin/add-admin.html");
+        mav.addObject("admin", admin);
+        return mav;
     }
+
+    // Setting the user type
+    UserType userType = new UserType();
+    userType.setId(1); // id 1 corresponds to Admin type
+    userType.setName(UserType.TYPE_USER);
+    admin.setType(userType);
+    this.userRepository.save(admin);
+    return new ModelAndView("redirect:/Admin/List-Admins");
+}
 
     @GetMapping("List-Admins")
     public ModelAndView getAdmins() {

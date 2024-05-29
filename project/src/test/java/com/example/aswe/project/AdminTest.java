@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -24,13 +25,15 @@ import com.example.aswe.project.models.User;
 import com.example.aswe.project.models.UserType;
 import com.example.aswe.project.repositories.UserRepository;
 import com.example.aswe.project.repositories.adminRepository;
+import com.example.aswe.project.repositories.productRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdminTest<ProductRepository> {
 
     @Mock
     private adminRepository adminRepo;
-
+    @Mock
+   private productRepository productRepository;
     @Mock
     private UserRepository userRepository;
 
@@ -41,6 +44,9 @@ public class AdminTest<ProductRepository> {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
+
+
 
     // Test the User CRUD
 
@@ -287,23 +293,27 @@ public class AdminTest<ProductRepository> {
 
 
 
-    @Test
-    public void testDeleteproduct() {
-     Product product = new Product();
-      
-        product.setName(null);
-        product.setBrand(null);
-        product.setCategory(null);
-        product.setPrice(0);
-        product.setImgFileName(null);
-        // Mock the findById method to return the admin
+   @Test
+    public void testDeleteProduct() {
+        // Mock the repository and controller
+        ProductRepository productRepository = mock(productRepository.class);
+        adminController adminController = new adminController(productRepository);
 
-        ModelAndView modelandview = adminCont.deleteproduct(0);
-        assertEquals("/products", modelandview.getView());
+        // Create a sample product and mock the findById method to return it
+        Product product = new Product();
+        product.setId(1);
+        product.setName("Sample Product");
+        when(productRepository.findById(1)).thenReturn(Optional.of(product));
 
-        // Mock the findById method to return empty after the user is deleted
-        when(userRepository.findById(1)).thenReturn(Optional.empty());
-        User deletedAdmin = userRepository.findById(1).orElse(null);
-        assertNull(deletedAdmin);
+        // Invoke the deleteproduct method
+        ModelAndView modelAndView = adminController.deleteproduct(1);
+
+        // Verify that the view returned by the controller is as expected
+        assertEquals("/products", modelAndView.getViewName());
+
+        // Mock the findById method to return empty after the product is "deleted"
+        when(productRepository.findById(1)).thenReturn(Optional.empty());
+        Optional<Product> deletedProduct = productRepository.findById(1);
+        assertNull(deletedProduct.orElse(null));
     }
 }
