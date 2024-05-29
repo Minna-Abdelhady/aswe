@@ -107,8 +107,9 @@ public class UserController {
         if (result.hasErrors()) {
             return new RedirectView("/User/Registration");
         }
-        String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
-        user.setPassword(encoddedPassword);
+        // Hashing code 
+        // String encoddedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+        // user.setPassword(encoddedPassword);
         // user.setType();
         UserType userType = new UserType();//model
         userType.setId(2); // id 2 corresponds to User type
@@ -143,7 +144,8 @@ public class UserController {
         //     // User not found
         //     return new RedirectView("/User/Login");
         // }
-        Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
+        // Boolean isPasswordMatched = BCrypt.checkpw(Password, dbUser.getPassword());
+        Boolean isPasswordMatched = Password.equals(dbUser.getPassword());
         if (isPasswordMatched) {
             // session.setAttribute(Email, dbUser.getEmail());
             session.setAttribute("id", dbUser.getId());
